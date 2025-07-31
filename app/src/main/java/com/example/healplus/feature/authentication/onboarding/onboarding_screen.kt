@@ -1,5 +1,4 @@
 package com.example.healplus.feature.authentication.onboarding
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,18 +17,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
 
 @Composable
-fun OnboardingScreen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
+fun OnboardingScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,14 +47,24 @@ fun OnboardingScreen(modifier: Modifier = Modifier, navController: NavController
                 .fillMaxWidth()
                 .padding(top = 120.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.logo_app),
-                contentDescription = "Shopping Bag",
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(246.dp)
-            )
+        ) {
+            val semantics = Modifier.semantics {
+                        contentDescription = "Shopping Bag"
+                        role = Role.Image
+                    }
+            Layout(
+                Modifier
+                            .width(200.dp)
+                            .height(246.dp)
+                    .then(semantics)
+                    .clipToBounds()
+                    .paint(
+                        painter = painterResource(id = R.drawable.logo_app),
+                        contentScale = ContentScale.Fit
+                    )
+            ) { _, constraints ->
+                layout(constraints.minWidth, constraints.minHeight) {}
+            }
 
             Spacer(modifier = Modifier.height(18.dp))
 

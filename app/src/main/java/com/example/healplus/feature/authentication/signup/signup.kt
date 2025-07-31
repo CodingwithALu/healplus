@@ -1,4 +1,7 @@
 package com.example.healplus.feature.authentication.signup
+import com.example.healplus.common.widgets.TAvatarImage
+import com.example.healplus.common.widgets.WidgetButtonAuth
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -8,7 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,12 +20,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -39,9 +39,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -54,7 +52,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
 import com.example.core.viewmodel.authviewmodel.AuthSate
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
@@ -63,6 +60,7 @@ import com.example.healplus.acitivity.MainActivity
 import com.example.healplus.feature.shop.managers.uploadImageToServer
 import kotlinx.coroutines.launch
 
+@SuppressLint("ResourceType")
 @Composable
 fun CreateAccountScreen(
     navController: NavController,
@@ -156,19 +154,13 @@ fun CreateAccountScreen(
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            Image(
-                painter = if (uploadedImageUrls != null) rememberAsyncImagePainter(uploadedImageUrls)
-                else painterResource(R.drawable.icon_camera),
-                contentDescription = "Chọn ảnh",
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .clickable { imagePickerLauncher.launch("image/*") },
-                contentScale = ContentScale.Crop
+            // Up Load Image and Show
+            TAvatarImage(
+                uploadedImageUrls = uploadedImageUrls,
+                imagePickerLauncher = imagePickerLauncher,
+                label = R.drawable.icon_camera
             )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -249,7 +241,6 @@ fun CreateAccountScreen(
                             start.linkTo(tvIcon.end, margin = 2.dp)
                         }
                 )
-
                 BasicTextField(
                     value = phoneNumber,
                     onValueChange = { phoneNumber = it },
@@ -270,36 +261,27 @@ fun CreateAccountScreen(
                     )
                 )
             }
-            Button(
-                onClick = {
-                    authViewModel.signupAuthState(
-                        name = fullName,
-                        email = email,
-                        password = password,
-                        phoneNumber = phoneNumber,
-                        uploadedImageUrls!!,
-                        role.toString()
-                    ){ message ->
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                    }
-
-                },
-                enabled = authSate.value != AuthSate.Loading,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .fillMaxWidth()
-                    .height(61.dp),
-                shape = RoundedCornerShape(16.dp)
+            // Signup button
+            WidgetButtonAuth(
+                authValue = authSate.value != AuthSate.Loading,
+                title = R.string.done,
             ) {
-                Text(
-                    text = stringResource(id = R.string.done),
-                    color = Color.White,
-                    fontSize = 22.sp
-                )
+                authViewModel.signupAuthState(
+                    name = fullName,
+                    email = email,
+                    password = password,
+                    phoneNumber = phoneNumber,
+                    uploadedImageUrls!!,
+                    role.toString()
+                ){ message ->
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
             }
+            // Cancel button
             TextButton(onClick = { navController.popBackStack() }) {
                 Text(text = stringResource(id = R.string.cancel), color = Color.Gray)
             }
         }
     }
 }
+

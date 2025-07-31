@@ -66,4 +66,9 @@
     <string name="tax">Thuế:</string>
     <string name="delivery">Vận chuyển:</string>
     <string name="add">Email</string>
+    <string name="information_acconut">Thông tin tài khoản</string>
+    <string name="add_category">Thêm mới doanh mục</string>
+    <string name="edit_catebories">Chỉnh sửa danh mục</string>
+    <string name="update_account">Cập nhật thoong tin tài khoản</string>
+    <string name="change_button">Thay đổi</string>
 </resources>

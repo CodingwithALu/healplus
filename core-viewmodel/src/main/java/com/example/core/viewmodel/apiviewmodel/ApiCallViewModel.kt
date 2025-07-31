@@ -22,12 +22,11 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class ApiCallViewModel : ViewModel() {
-    private val _banner = MutableLiveData<List<BannersModel>>()
     private val _category = MutableLiveData<MutableList<CategoryModel>>()
     private val _ingredient = MutableLiveData<MutableList<IngredientsModel>>()
     private val _recommended = MutableLiveData<MutableList<ProductsModel>>()
     private val _element = MutableLiveData<MutableList<ElementsModel>>()
-    val banners: LiveData<List<BannersModel>> = _banner
+
     val categories: LiveData<MutableList<CategoryModel>> = _category
     val ingredient: LiveData<MutableList<IngredientsModel>> = _ingredient
     val recommended: LiveData<MutableList<ProductsModel>> = _recommended
@@ -483,27 +482,7 @@ class ApiCallViewModel : ViewModel() {
             })
     }
 
-    fun loadBanners() {
-        RetrofitClient.instance.getBanners().enqueue(object : Callback<List<BannersModel>> {
-            override fun onResponse(
-                call: Call<List<BannersModel>>,
-                response: Response<List<BannersModel>>
-            ) {
-                if (response.isSuccessful) {
-                    
-                    _banner.value = response.body() ?: emptyList()
-                    _banner.value?.forEachIndexed { index, banner ->
-                    }
-                } else {
-                    Log.e("API_ERROR", "Lỗi Response Code: ${response.code()}")
-                }
-            }
 
-            override fun onFailure(call: Call<List<BannersModel>>, t: Throwable) {
-                Log.e("API_ERROR", "Lỗi khi gọi API: ${t.message}")
-            }
-        })
-    }
 
     fun loadElement() {
         RetrofitClient.instance.getElement()

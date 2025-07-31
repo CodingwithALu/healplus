@@ -1,4 +1,5 @@
 [versions]
+accompanistFlowlayout = "0.31.1-alpha"
 agp = "8.8.2"
 commonsCodec = "1.14"
 composeVersion = "1.6.0"
@@ -11,7 +12,7 @@ espressoCore = "3.6.1"
 landscapistGlide = "2.2.8"
 lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
-composeBom = "2025.06.00"
+composeBom = "2025.06.01"
 googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 appcompat = "1.7.1"
@@ -32,16 +33,17 @@ lottieCompose = "6.1.0"
 gson = "2.10.1"
 navigationCompose = "2.9.0"
 retrofit = "2.9.0"
-material = "1.6.0"
+material = "1.12.0"
 constraintlayout = "2.2.1"
 firebaseCommonKtx = "21.0.0"
 zalopaySdk = "2.2.4"
-uiTextAndroid = "1.8.2"
+uiTextAndroid = "1.8.3"
 protoliteWellKnownTypes = "18.0.1"
 supportAnnotations = "28.0.0"
 composeMaterial = "1.4.1"
 
 [libraries]
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtxVersion" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commonsCodec" }

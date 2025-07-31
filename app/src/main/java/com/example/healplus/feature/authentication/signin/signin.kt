@@ -1,8 +1,7 @@
 package com.example.healplus.feature.authentication.signin
-import WidgetButtonAuth
+import com.example.healplus.common.widgets.WidgetButtonAuth
 import android.content.Intent
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,10 +24,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -65,50 +72,93 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-    ){
-        val (imgTop, imgEnd, tvImgStart, tvImgBottom, tvColunm)  = createRefs()
-        Image(
-            painter = painterResource(R.drawable.bubble_04),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .constrainAs(imgTop){
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
+    ) {
+        val (imgTop, imgEnd, tvImgStart, tvImgBottom, tvColunm) = createRefs()
+        val semantics =
+                Modifier.semantics {
+                    contentDescription = null.toString()
+                    role = Role.Image
                 }
-        )
-        Image(
-            painter = painterResource(R.drawable.bubble_03),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth(0.7f)
-                .constrainAs(tvImgStart){
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
+        Layout(
+            Modifier
+                    .fillMaxWidth(0.9f)
+                    .constrainAs(imgTop) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                .then(semantics)
+                .clipToBounds()
+                .paint(
+                    painter = painterResource(R.drawable.bubble_04),
+                    contentScale = ContentScale.Fit
+                )
+        ) { _, constraints ->
+            layout(constraints.minWidth, constraints.minHeight) {}
+        }
+        val semantics1 =
+                Modifier.semantics {
+                    contentDescription = null.toString()
+                    role = Role.Image
                 }
-        )
-        Image(
-            painter = painterResource(R.drawable.bubble_06),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth(0.6f)
-                .constrainAs(tvImgBottom){
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
+        Layout(
+            Modifier
+                    .fillMaxWidth(0.7f)
+                    .constrainAs(tvImgStart) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                .then(semantics1)
+                .clipToBounds()
+                .paint(
+                    painter = painterResource(R.drawable.bubble_03),
+                    contentScale = ContentScale.Fit
+                )
+        ) { _, constraints ->
+            layout(constraints.minWidth, constraints.minHeight) {}
+        }
+        val semantics2 =
+                Modifier.semantics {
+                    contentDescription = null.toString()
+                    role = Role.Image
                 }
-        )
+        Layout(
+            Modifier
+                    .fillMaxWidth(0.6f)
+                    .constrainAs(tvImgBottom) {
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }
+                .then(semantics2)
+                .clipToBounds()
+                .paint(
+                    painter = painterResource(R.drawable.bubble_06),
+                    contentScale = ContentScale.Fit
+                )
+        ) { _, constraints ->
+            layout(constraints.minWidth, constraints.minHeight) {}
+        }
         val horizontalGuidelineImg = createGuidelineFromTop(0.2f)
         val horizontalGuideline = createGuidelineFromTop(0.4f)
-        Image(
-            painter = painterResource(R.drawable.bubblle_05),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth(0.3f)
-                .constrainAs(imgEnd){
-                    top.linkTo(horizontalGuidelineImg)
-                    end.linkTo(parent.end)
+        val semantics3 = Modifier.semantics {
+                    contentDescription = null.toString()
+                    role = Role.Image
                 }
-        )
+        Layout(
+            Modifier
+                    .fillMaxWidth(0.3f)
+                    .constrainAs(imgEnd) {
+                        top.linkTo(horizontalGuidelineImg)
+                        end.linkTo(parent.end)
+                    }
+                .then(semantics3)
+                .clipToBounds()
+                .paint(
+                    painter = painterResource(R.drawable.bubblle_05),
+                    contentScale = ContentScale.Fit
+                )
+        ) { _, constraints ->
+            layout(constraints.minWidth, constraints.minHeight) {}
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -116,8 +166,7 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
                 .constrainAs(tvColunm) {
                     top.linkTo(horizontalGuideline)
                     start.linkTo(parent.start)
-                }
-            ,
+                },
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -136,24 +185,29 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
                 text = stringResource(id = R.string.good_to_see),
                 style = TextStyle(
                     fontSize = 19.sp,
-                    lineHeight = 35.sp),
+                    lineHeight = 35.sp
+                ),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .align(Alignment.Start)
             )
-            Spacer(modifier = Modifier
-                .height(8.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(8.dp)
+            )
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text (stringResource(id = R.string.email)) },
+                label = { Text(stringResource(id = R.string.email)) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
                 singleLine = true
             )
-            Spacer(modifier = Modifier
-                .height(8.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(8.dp)
+            )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -165,14 +219,18 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
                 trailingIcon = {
                     IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
                         Icon(
-                            painter = if (isPasswordVisible) painterResource(R.drawable.visibility_24px) else painterResource(R.drawable.visibility_off_24px),
+                            painter = if (isPasswordVisible) painterResource(R.drawable.visibility_24px) else painterResource(
+                                R.drawable.visibility_off_24px
+                            ),
                             contentDescription = "Toggle Password Visibility"
                         )
                     }
                 }
             )
-            Spacer(modifier = Modifier
-                .height(37.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(37.dp)
+            )
             // Button signIn
             WidgetButtonAuth(
                 title = R.string.login,

@@ -15,7 +15,7 @@ import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
-import com.example.healplus.feature.personalization.settings.UpdateProfileScreen
+import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
 import com.example.healplus.feature.shop.cart.CheckOutScreen
@@ -23,7 +23,7 @@ import com.example.healplus.feature.shop.category.CategoryScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
 import com.example.healplus.feature.shop.home.AllReviewsScreen
 import com.example.healplus.feature.shop.home.DetailScreen
-import com.example.healplus.feature.shop.home.MainActivityScreen
+import com.example.healplus.feature.shop.home.HomeScreen
 import com.example.healplus.feature.shop.home.ProductDetailScreen
 import com.example.healplus.feature.shop.home.WriteReviewScreen
 import com.example.healplus.feature.shop.order.UsersOder
@@ -38,7 +38,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            MainActivityScreen(
+            HomeScreen(
                 navController = navController
             )
         }

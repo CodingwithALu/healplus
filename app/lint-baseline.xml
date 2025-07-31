@@ -1,0 +1,1616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.8.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.8.2)" variant="all" version="8.8.2">
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.library than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.library than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.library than 8.8.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.8.2&quot;"
+        errorLine2="      ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="3"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose:compose-bom than 2025.06.00 is available: 2025.06.01"
+        errorLine1="composeBom = &quot;2025.06.00&quot;"
+        errorLine2="             ~~~~~~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="15"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose:compose-bom than 2025.06.00 is available: 2025.06.01"
+        errorLine1="composeBom = &quot;2025.06.00&quot;"
+        errorLine2="             ~~~~~~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="15"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose:compose-bom than 2025.06.00 is available: 2025.06.01"
+        errorLine1="composeBom = &quot;2025.06.00&quot;"
+        errorLine2="             ~~~~~~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="15"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.runtime:runtime-livedata than 1.8.2 is available: 1.8.3"
+        errorLine1="runtimeLiveData = &quot;1.8.2&quot;"
+        errorLine2="                  ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="31"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.runtime:runtime-livedata than 1.8.2 is available: 1.8.3"
+        errorLine1="runtimeLiveData = &quot;1.8.2&quot;"
+        errorLine2="                  ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="31"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.runtime:runtime-livedata than 1.8.2 is available: 1.8.3"
+        errorLine1="runtimeLiveData = &quot;1.8.2&quot;"
+        errorLine2="                  ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="31"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.6.0 is available: 1.12.0"
+        errorLine1="material = &quot;1.6.0&quot;"
+        errorLine2="           ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="36"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.6.0 is available: 1.12.0"
+        errorLine1="material = &quot;1.6.0&quot;"
+        errorLine2="           ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="36"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.6.0 is available: 1.12.0"
+        errorLine1="material = &quot;1.6.0&quot;"
+        errorLine2="           ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="36"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-text-android than 1.8.2 is available: 1.8.3"
+        errorLine1="uiTextAndroid = &quot;1.8.2&quot;"
+        errorLine2="                ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="40"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-text-android than 1.8.2 is available: 1.8.3"
+        errorLine1="uiTextAndroid = &quot;1.8.2&quot;"
+        errorLine2="                ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="40"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-text-android than 1.8.2 is available: 1.8.3"
+        errorLine1="uiTextAndroid = &quot;1.8.2&quot;"
+        errorLine2="                ~~~~~~~">
+        <location
+            file="../gradle/libs.versions.toml"
+            line="40"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ModifierParameter"
+        message="Modifier parameter should be the first optional parameter"
+        errorLine1="fun UserChatScreen(viewModel: AuthViewModel = viewModel(), modifier: Modifier = Modifier) {"
+        errorLine2="                                                           ~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/chat/UserChatScreen.kt"
+            line="42"
+            column="60"/>
+    </issue>
+
+    <issue
+        id="MutableCollectionMutableState"
+        message="Creating a MutableState object with a mutable collection type"
+        errorLine1="    val cartItems = remember { mutableStateOf(managementCart.getListCart() ?: arrayListOf()) }"
+        errorLine2="                               ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/cart_screen.kt"
+            line="74"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="MutableCollectionMutableState"
+        message="Creating a MutableState object with a mutable collection type"
+        errorLine1="    val selectedItems = remember { mutableStateOf(mutableSetOf&lt;ProductsModel>()) }"
+        errorLine2="                                   ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/cart_screen.kt"
+            line="75"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="MutableCollectionMutableState"
+        message="Creating a MutableState object with a mutable collection type"
+        errorLine1="    var addressItems = remember { mutableStateOf(address.getListAddressOder() ?: arrayListOf()) }"
+        errorLine2="                                  ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/checkout_screen.kt"
+            line="84"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;pay&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;pay&quot;>Mua ngay&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="68"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;check&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;check&quot;>Kiểm tra đặt hàng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="69"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;manager&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;manager&quot;>Sản phẩm&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="70"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;oder&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;oder&quot;>Đơn hàng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="71"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;odermanages&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;odermanages&quot;>Quản lí đơn hàng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="72"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;managerappbar&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;managerappbar&quot;>Quản lý sản phẩm&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="73"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;userodermanages&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;userodermanages&quot;>Đơn hàng của tôi&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="74"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;revenue&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;revenue&quot;>Doanh thu và các khoảng thanh toán khác&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="75"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;expiry&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;expiry&quot;>Hạn sử dụng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="76"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;cachdung&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;cachdung&quot;>Cách dùng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="77"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;congdung&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;congdung&quot;>Công dụng&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="78"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;tacdungphu&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;tacdungphu&quot;>Tác dụng phụ&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="79"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;baoquan&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;baoquan&quot;>Bảo quản&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="80"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;product_reviews_title&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;product_reviews_title&quot;>Đánh giá sản phẩm&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="81"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;notable_reviews&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;notable_reviews&quot;>Đánh giá nổi bật&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="82"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;see_all_reviews&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;see_all_reviews&quot;>Xem tất cả (%d) đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="83"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;no_reviews_yet&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;no_reviews_yet&quot;>Chưa có đánh giá nào.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="84"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;write_a_review&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;write_a_review&quot;>Viết đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="85"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;based_on_reviews&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;based_on_reviews&quot;>Dựa trên %d đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="86"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;loading_reviews_error&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;loading_reviews_error&quot;>Không thể tải đánh giá. Vui lòng thử lại.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="87"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;write_your_review_title&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;write_your_review_title&quot;>Viết đánh giá của bạn&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="88"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;back_button_desc&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;back_button_desc&quot;>Quay lại&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="89"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;how_would_you_rate_product&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;how_would_you_rate_product&quot;>Bạn đánh giá sản phẩm này thế nào?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="90"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;review_title_optional&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;review_title_optional&quot;>Tiêu đề (tùy chọn)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="91"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;your_comment_label&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;your_comment_label&quot;>Bình luận của bạn*&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="92"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;share_your_thoughts_placeholder&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;share_your_thoughts_placeholder&quot;>Chia sẻ cảm nghĩ của bạn về sản phẩm...&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="93"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;min_characters_required&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;min_characters_required&quot;>*Tối thiểu %d ký tự&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="94"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;please_select_rating_toast&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;please_select_rating_toast&quot;>Vui lòng chọn số sao đánh giá.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="95"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;comment_too_short_toast&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;comment_too_short_toast&quot;>Bình luận cần ít nhất %d ký tự.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="96"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;submit_review_button&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;submit_review_button&quot;>Gửi đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="97"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;rate_star_desc&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;rate_star_desc&quot;>Đánh giá %d sao&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="98"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;review_submitted_successfully&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;review_submitted_successfully&quot;>Đánh giá của bạn đã được gửi!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="99"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;review_submission_failed&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;review_submission_failed&quot;>Gửi đánh giá thất bại. Vui lòng thử lại.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="100"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;all_reviews_for_product_title&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;all_reviews_for_product_title&quot;>Đánh giá cho %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="101"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;filter_reviews_desc&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;filter_reviews_desc&quot;>Lọc đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;sort_reviews_desc&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;sort_reviews_desc&quot;>Sắp xếp đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="103"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;failed_to_load_reviews_error&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;failed_to_load_reviews_error&quot;>Không thể tải danh sách đánh giá: %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="104"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;no_reviews_for_this_product_yet&quot; is not translated in &quot;vi&quot; (Vietnamese)"
+        errorLine1="    &lt;string name=&quot;no_reviews_for_this_product_yet&quot;>Sản phẩm này chưa có đánh giá nào.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="105"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="Typos"
+        message="&quot;Seach&quot; is a common misspelling; did you mean &quot;Search&quot;?"
+        errorLine1="    &lt;string name=&quot;seach&quot;>Seach&lt;/string>"
+        errorLine2="                         ^">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="28"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="PluralsCandidate"
+        message="Formatting %d followed by words (&quot;sao&quot;): This should probably be a plural rather than a string"
+        errorLine1="    &lt;string name=&quot;rate_star_desc&quot;>Đánh giá %d sao&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="98"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/main/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (818 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M480,440Q513,440 536.5,416.5Q560,393 560,360Q560,327 536.5,303.5Q513,280 480,280Q447,280 423.5,303.5Q400,327 400,360Q400,393 423.5,416.5Q447,440 480,440ZM280,840L280,760L440,760L440,636Q391,625 352.5,594.5Q314,564 296,518Q221,509 170.5,452.5Q120,396 120,320L120,280Q120,247 143.5,223.5Q167,200 200,200L280,200L280,120L680,120L680,200L760,200Q793,200 816.5,223.5Q840,247 840,280L840,320Q840,396 789.5,452.5Q739,509 664,518Q646,564 607.5,594.5Q569,625 520,636L520,760L680,760L680,840L280,840ZM280,432L280,280L200,280L200,320Q200,358 222,388.5Q244,419 280,432ZM480,560Q530,560 565,525Q600,490 600,440L600,200L360,200L360,440Q360,490 395,525Q430,560 480,560ZM680,432Q716,419 738,388.5Q760,358 760,320L760,280L680,280L680,432ZM480,380Q480,380 480,380Q480,380 480,380L480,380L480,380L480,380Q480,380 480,380Q480,380 480,380Z&quot;/>"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/rewarded_ads_24px.xml"
+            line="9"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1388 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M370,880L354,752Q341,747 329.5,740Q318,733 307,725L188,775L78,585L181,507Q180,500 180,493.5Q180,487 180,480Q180,473 180,466.5Q180,460 181,453L78,375L188,185L307,235Q318,227 330,220Q342,213 354,208L370,80L590,80L606,208Q619,213 630.5,220Q642,227 653,235L772,185L882,375L779,453Q780,460 780,466.5Q780,473 780,480Q780,487 780,493.5Q780,500 778,507L881,585L771,775L653,725Q642,733 630,740Q618,747 606,752L590,880L370,880ZM440,800L519,800L533,694Q564,686 590.5,670.5Q617,655 639,633L738,674L777,606L691,541Q696,527 698,511.5Q700,496 700,480Q700,464 698,448.5Q696,433 691,419L777,354L738,286L639,328Q617,305 590.5,289.5Q564,274 533,266L520,160L441,160L427,266Q396,274 369.5,289.5Q343,305 321,327L222,286L183,354L269,418Q264,433 262,448Q260,463 260,480Q260,496 262,511Q264,526 269,541L183,606L222,674L321,632Q343,655 369.5,670.5Q396,686 427,694L440,800ZM482,620Q540,620 581,579Q622,538 622,480Q622,422 581,381Q540,340 482,340Q423,340 382.5,381Q342,422 342,480Q342,538 382.5,579Q423,620 482,620ZM480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480Q480,480 480,480L480,480L480,480L480,480Q480,480 480,480Q480,480 480,480L480,480Z&quot;/>"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/settings_24px.xml"
+            line="9"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (897 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M240,880Q207,880 183.5,856.5Q160,833 160,800L160,320Q160,287 183.5,263.5Q207,240 240,240L320,240L320,240Q320,174 367,127Q414,80 480,80Q546,80 593,127Q640,174 640,240L640,240L720,240Q753,240 776.5,263.5Q800,287 800,320L800,800Q800,833 776.5,856.5Q753,880 720,880L240,880ZM240,800L720,800Q720,800 720,800Q720,800 720,800L720,320Q720,320 720,320Q720,320 720,320L640,320L640,400Q640,417 628.5,428.5Q617,440 600,440Q583,440 571.5,428.5Q560,417 560,400L560,320L400,320L400,400Q400,417 388.5,428.5Q377,440 360,440Q343,440 331.5,428.5Q320,417 320,400L320,320L240,320Q240,320 240,320Q240,320 240,320L240,800Q240,800 240,800Q240,800 240,800ZM400,240L560,240L560,240Q560,207 536.5,183.5Q513,160 480,160Q447,160 423.5,183.5Q400,207 400,240ZM240,800L240,800Q240,800 240,800Q240,800 240,800L240,320Q240,320 240,320Q240,320 240,320L240,320Q240,320 240,320Q240,320 240,320L240,800Q240,800 240,800Q240,800 240,800Z&quot;/>"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/shopping_bag_24px.xml"
+            line="9"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (999 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M644,532L586,474Q595,427 559,386Q523,345 466,354L408,296Q425,288 442.5,284Q460,280 480,280Q555,280 607.5,332.5Q660,385 660,460Q660,480 656,497.5Q652,515 644,532ZM772,658L714,602Q752,573 781.5,538.5Q811,504 832,460Q782,359 688.5,299.5Q595,240 480,240Q451,240 423,244Q395,248 368,256L306,194Q347,177 390,168.5Q433,160 480,160Q631,160 749,243.5Q867,327 920,460Q897,519 859.5,569.5Q822,620 772,658ZM792,904L624,738Q589,749 553.5,754.5Q518,760 480,760Q329,760 211,676.5Q93,593 40,460Q61,407 93,361.5Q125,316 166,280L56,168L112,112L848,848L792,904ZM222,336Q193,362 169,393Q145,424 128,460Q178,561 271.5,620.5Q365,680 480,680Q500,680 519,677.5Q538,675 558,672L522,634Q511,637 501,638.5Q491,640 480,640Q405,640 352.5,587.5Q300,535 300,460Q300,449 301.5,439Q303,429 306,418L222,336ZM541,429L541,429Q541,429 541,429Q541,429 541,429Q541,429 541,429Q541,429 541,429Q541,429 541,429Q541,429 541,429ZM390,504Q390,504 390,504Q390,504 390,504L390,504Q390,504 390,504Q390,504 390,504Q390,504 390,504Q390,504 390,504Z&quot;/>"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/visibility_off_24px.xml"
+            line="9"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableDoubleStateOf` instead of `mutableStateOf`"
+        errorLine1="    val rating by remember { mutableStateOf(5.0) }"
+        errorLine2="                             ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/managers/AddproductScreen.kt"
+            line="78"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var selectedIndex by rememberSaveable  { mutableStateOf(0) }"
+        errorLine2="                                             ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/category/CategoryScreen.kt"
+            line="285"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var selectedIndex by remember { mutableStateOf(-1) }"
+        errorLine2="                                    ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/home/HomeScreen.kt"
+            line="299"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var selectedIndex by remember { mutableStateOf(-1) }"
+        errorLine2="                                    ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/home/HomeScreen.kt"
+            line="607"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    val itemCount by remember { mutableStateOf(managmentCart.getItemCount()) }"
+        errorLine2="                                ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/home/ProductScreen.kt"
+            line="104"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var selectedIndex by remember { mutableStateOf(-1) }"
+        errorLine2="                                    ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/managers/UpdateScreen.kt"
+            line="69"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var selectedIndex by remember { mutableStateOf(-1) }"
+        errorLine2="                                    ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/managers/UpdateScreen.kt"
+            line="273"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var rating by remember { mutableStateOf(0) }"
+        errorLine2="                             ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/home/WriteReviewScreen.kt"
+            line="62"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableDoubleStateOf` instead of `mutableStateOf`"
+        errorLine1="    val tax = remember { mutableStateOf(0.0) }"
+        errorLine2="                         ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/cart_screen.kt"
+            line="76"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var saleAmount by remember { mutableStateOf(0) }"
+        errorLine2="                                 ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/checkout_screen.kt"
+            line="92"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableIntStateOf` instead of `mutableStateOf`"
+        errorLine1="    var discountAmount by remember { mutableStateOf(0) }"
+        errorLine2="                                     ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/checkout_screen.kt"
+            line="309"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="AutoboxingStateCreation"
+        message="Prefer `mutableDoubleStateOf` instead of `mutableStateOf`"
+        errorLine1="    val points by remember(totalSelected) { mutableStateOf(totalSelected / 1000) }"
+        errorLine2="                                            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/cart/checkout_screen.kt"
+            line="363"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.back` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/back.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.btn_1` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/btn_1.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.btn_2` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/btn_2.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.btn_3` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/btn_3.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.btn_4` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/btn_4.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.btn_5` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/btn_5.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.button` appears to be unused">
+        <location
+            file="src/main/res/drawable/button.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.cat2` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/cat2.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.clothes_5` appears to be unused">
+        <location
+            file="src/main/res/drawable/clothes_5.jpg"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.teal_200` appears to be unused"
+        errorLine1="    &lt;color name=&quot;teal_200&quot;>#FF03DAC5&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="6"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.teal_700` appears to be unused"
+        errorLine1="    &lt;color name=&quot;teal_700&quot;>#FF018786&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="7"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.black` appears to be unused"
+        errorLine1="    &lt;color name=&quot;black&quot;>#FF000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="8"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.padding_colum` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;padding_colum&quot;>16dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="3"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.padding_spacer` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;padding_spacer&quot;>32dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="4"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.padding_image_top` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;padding_image_top&quot;>40dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="5"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.eye_slash` appears to be unused">
+        <location
+            file="src/main/res/drawable/eye_slash.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.fav_icon` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/fav_icon.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_launcher_foreground` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_launcher_foreground.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.icon_manager_der` appears to be unused">
+        <location
+            file="src/main/res/drawable/icon_manager_der.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.icon_mesager` appears to be unused">
+        <location
+            file="src/main/res/drawable/icon_mesager.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.intro_logo` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/intro_logo.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.mail_24px` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/mail_24px.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.manager_porduct` appears to be unused">
+        <location
+            file="src/main/res/drawable/manager_porduct.jpg"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.on_delivery` appears to be unused">
+        <location
+            file="src/main/res/drawable/on_delivery.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.phone_iphone_24px` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/phone_iphone_24px.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.rewarded_ads_24px` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/rewarded_ads_24px.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.search_icon` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/search_icon.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.intro_title` appears to be unused"
+        errorLine1="    &lt;string name=&quot;intro_title&quot;>Welcome to &lt;font color=&quot;#39c7a5&quot;>Digital Store&lt;/font>\na &lt;font color=&quot;#39c7a5&quot;>Gateway&lt;/font> to the Latest Tech&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.intro_sub_title` appears to be unused"
+        errorLine1="    &lt;string name=&quot;intro_sub_title&quot;>Sign in to explore a wide range of cutting-edge digital\nproducts. Don\&apos;t have an account yet? Register now and \nenjoy a seamless and secure shopping experience&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="4"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.new_account_sign_in` appears to be unused"
+        errorLine1="    &lt;string name=&quot;new_account_sign_in&quot;>Already have an account? Sign in&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.next` appears to be unused"
+        errorLine1="    &lt;string name=&quot;next&quot;>Next&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="11"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.chat` appears to be unused"
+        errorLine1="    &lt;string name=&quot;chat&quot;>Chat&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="19"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.welcome_back` appears to be unused"
+        errorLine1="    &lt;string name=&quot;welcome_back&quot;>Welcome Back&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.recently_viewed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;recently_viewed&quot;>Recently viewed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="25"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.seach` appears to be unused"
+        errorLine1="    &lt;string name=&quot;seach&quot;>Seach&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="28"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.SlectModel` appears to be unused"
+        errorLine1="    &lt;string name=&quot;SlectModel&quot;>Select models&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="33"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.currency` appears to be unused"
+        errorLine1="    &lt;string name=&quot;currency&quot;>Currensy&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="43"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.size` appears to be unused"
+        errorLine1="    &lt;string name=&quot;size&quot;>Size&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="44"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.tax` appears to be unused"
+        errorLine1="    &lt;string name=&quot;tax&quot;>Tax:&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="50"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.notification` appears to be unused"
+        errorLine1="    &lt;string name=&quot;notification&quot;>Notification&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="55"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.buynow` appears to be unused"
+        errorLine1="    &lt;string name=&quot;buynow&quot;>🏥 Buy now&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="57"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.Specification` appears to be unused"
+        errorLine1="    &lt;string name=&quot;Specification&quot;>Specification&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="60"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.Registrationnumber` appears to be unused"
+        errorLine1="    &lt;string name=&quot;Registrationnumber&quot;>Registration number&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="66"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.add` appears to be unused"
+        errorLine1="    &lt;string name=&quot;add&quot;>Add&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="67"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.loading_reviews_error` appears to be unused"
+        errorLine1="    &lt;string name=&quot;loading_reviews_error&quot;>Không thể tải đánh giá. Vui lòng thử lại.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="87"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.review_title_optional` appears to be unused"
+        errorLine1="    &lt;string name=&quot;review_title_optional&quot;>Tiêu đề (tùy chọn)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="91"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.review_submitted_successfully` appears to be unused"
+        errorLine1="    &lt;string name=&quot;review_submitted_successfully&quot;>Đánh giá của bạn đã được gửi!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="99"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.review_submission_failed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;review_submission_failed&quot;>Gửi đánh giá thất bại. Vui lòng thử lại.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="100"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.filter_reviews_desc` appears to be unused"
+        errorLine1="    &lt;string name=&quot;filter_reviews_desc&quot;>Lọc đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.sort_reviews_desc` appears to be unused"
+        errorLine1="    &lt;string name=&quot;sort_reviews_desc&quot;>Sắp xếp đánh giá&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="103"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.failed_to_load_reviews_error` appears to be unused"
+        errorLine1="    &lt;string name=&quot;failed_to_load_reviews_error&quot;>Không thể tải danh sách đánh giá: %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="104"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tooltip_2_24px` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tooltip_2_24px.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UseOfNonLambdaOffsetOverload"
+        message="State backed values should use the lambda overload of Modifier.offset"
+        errorLine1="                .offset(y = offsetY.dp)"
+        errorLine2="                 ~~~~~~">
+        <location
+            file="src/main/java/com/example/healplus/feature/shop/home/ProductScreen.kt"
+            line="317"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="TypographyEllipsis"
+        message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?"
+        errorLine1="    &lt;string name=&quot;share_your_thoughts_placeholder&quot;>Chia sẻ cảm nghĩ của bạn về sản phẩm...&lt;/string>"
+        errorLine2="                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="93"
+            column="52"/>
+    </issue>
+
+    <issue
+        id="IconXmlAndPng"
+        message="The following images appear both as density independent `.xml` files and as bitmap files: src\main\res\drawable\ic_launcher_foreground.xml, src\main\res\mipmap-hdpi\ic_launcher_foreground.webp">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp"/>
+        <location
+            file="src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp"/>
+        <location
+            file="src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp"/>
+        <location
+            file="src/main/res/mipmap-mdpi/ic_launcher_foreground.webp"/>
+        <location
+            file="src/main/res/mipmap-hdpi/ic_launcher_foreground.webp"/>
+        <location
+            file="src/main/res/drawable/ic_launcher_foreground.xml"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive icon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive roundIcon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubble_01.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubble_01.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubble_02.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubble_02.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubble_03.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubble_03.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubble_04.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubble_04.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubble_06.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubble_06.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/bubblle_05.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/bubblle_05.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/button.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/button.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/clothes_5.jpg` in densityless folder">
+        <location
+            file="src/main/res/drawable/clothes_5.jpg"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/connect.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/connect.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/contacts_24dp.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/contacts_24dp.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/eye_slash.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/eye_slash.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/flag.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/flag.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/free_shipping.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/free_shipping.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/genuine.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/genuine.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/icon_camera.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/icon_camera.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/icon_manager_der.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/icon_manager_der.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/icon_mesager.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/icon_mesager.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/icon_point.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/icon_point.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/logo_app.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/logo_app.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/logo_group_app1.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/logo_group_app1.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/manager_porduct.jpg` in densityless folder">
+        <location
+            file="src/main/res/drawable/manager_porduct.jpg"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/on_delivery.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/on_delivery.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/pay_momo.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/pay_momo.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/pay_zalo.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/pay_zalo.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/return_of_investment.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/return_of_investment.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/tag.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/tag.png"/>
+    </issue>
+
+</issues>

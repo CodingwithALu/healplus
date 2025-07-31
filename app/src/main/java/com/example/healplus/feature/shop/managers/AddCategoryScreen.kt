@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.healplus.feature.personalization.profiles.ProfileTopAppBar
+import com.example.healplus.R
+import com.example.healplus.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -40,7 +41,10 @@ fun AddCategoryScreen(navController: NavController, apiCallViewModel: ApiCallVie
 
     Scaffold(
         topBar = {
-            ProfileTopAppBar("Thêm mới doanh mục", navController)
+            TAppBar(
+                title = R.string.add_category,
+                onClick = { navController.popBackStack() }
+            )
         },
         snackbarHost = { SnackbarHost(snackbarHostState,
             modifier = Modifier
@@ -113,7 +117,10 @@ fun AddCategoryScreen(navController: NavController, apiCallViewModel: ApiCallVie
 fun AddIngredientsScreen(navController: NavController, apiCallViewModel: ApiCallViewModel) {
     Scaffold(
         topBar = {
-            ProfileTopAppBar("Thêm mới doanh mục sản phẩm", navController)
+            TAppBar(
+                title = R.string.add_category,
+                onClick = { navController.popBackStack() }
+            )
         }
 
     ){paddingValues ->

@@ -19,12 +19,12 @@ import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
-import com.example.healplus.feature.personalization.settings.UpdateProfileScreen
+import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.shop.category.CategoryScreen
 import com.example.healplus.feature.shop.chat.AdminChatScreen
 import com.example.healplus.feature.shop.chat.ChatDetailScreen
 import com.example.healplus.feature.shop.home.DetailScreen
-import com.example.healplus.feature.shop.home.MainActivityScreen
+import com.example.healplus.feature.shop.home.HomeScreen
 import com.example.healplus.feature.shop.home.ProductDetailScreen
 import com.example.healplus.feature.shop.managers.AddCategoryScreen
 import com.example.healplus.feature.shop.managers.AddIngredientsScreen
@@ -45,7 +45,7 @@ fun AdminNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
     val apiCallAdd: ApiCallAdd = viewModel()
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            MainActivityScreen(
+            HomeScreen(
                 navController = navController
             )
         }

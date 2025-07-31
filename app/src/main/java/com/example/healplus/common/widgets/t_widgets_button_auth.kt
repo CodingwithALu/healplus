@@ -1,3 +1,5 @@
+package com.example.healplus.common.widgets
+
 import android.support.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

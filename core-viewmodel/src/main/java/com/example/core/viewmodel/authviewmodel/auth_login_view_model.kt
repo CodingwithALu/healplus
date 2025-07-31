@@ -301,7 +301,6 @@ class AuthViewModel : ViewModel() {
                         _authState.value = AuthSate.Error("Thiếu thông tin người dùng")
                         return@addOnCompleteListener
                     }
-                    apiCallViewModel.updateIdAuth(email, userId)
                     val userModel =
                         UserAuthModel(
                             idauth = userId,

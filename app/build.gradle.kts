@@ -38,8 +38,8 @@ android {
     buildFeatures {
         compose = true
     }
-    lint{
-        abortOnError = false
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 
@@ -49,7 +49,7 @@ dependencies {
     implementation(project(":core-room"))
     implementation(libs.androidx.core.ktx)
     implementation (libs.mpandroidchart)
-    implementation("com.google.accompanist:accompanist-flowlayout:0.31.1-alpha")
+    implementation(libs.accompanist.flowlayout)
     implementation(libs.glide)
     implementation(libs.landscapist.glide)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,6 +41,10 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
+import com.example.healplus.common.widgets.TAppBar
+import com.example.healplus.common.widgets.TAvatarImage
+import com.example.healplus.feature.personalization.profiles.widgets.TEditButtonApp
+import com.example.healplus.feature.personalization.profiles.widgets.TRowItemProfile
 import com.google.gson.Gson
 
 @Composable
@@ -50,7 +55,10 @@ fun ProfileScreen(viewModel: AuthViewModel, navController: NavController) {
     }
     Scaffold(
         topBar = {
-            ProfileTopAppBar("Thông tin tài khoản", navController)
+            TAppBar(
+                title = R.string.information_acconut,
+                onClick = { navController.popBackStack() },
+            )
         }
 
     ) {paddingValues ->
@@ -61,94 +69,21 @@ fun ProfileScreen(viewModel: AuthViewModel, navController: NavController) {
                     .fillMaxWidth()
                     .padding(vertical = 40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(
-                        painter = rememberAsyncImagePainter(userData.url),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(CircleShape)
-                            .border(2.dp, Color.Gray),
-                        contentScale = ContentScale.Crop
+                    // Image Profile
+                    TAvatarImage(
+                        showChangeImage = false,
+                        uploadedImageUrls = userData.url,
                     )
                 }
-                InfoRow(label = "Họ và tên", value = userData.name)
-                InfoRow(label = "Số điện thoại", value = userData.phone)
-                InfoRow(label = "Giới tính", value = userData.gender)
-                InfoRow(label = "Ngày sinh", value = userData.dateBirth)
+                TRowItemProfile(label = "Họ và tên", value = userData.name)
+                TRowItemProfile(label = "Số điện thoại", value = userData.phone)
+                TRowItemProfile(label = "Giới tính", value = userData.gender)
+                TRowItemProfile(label = "Ngày sinh", value = userData.dateBirth)
                 Spacer(modifier = Modifier.weight(1f))
-                ProfileBottomAppBar(onClick = {
+                TEditButtonApp(onClick = {
                     navController.navigate("editProfile/${Uri.encode(Gson().toJson(userData))}")
                 })
             } ?: Text(text = "Không có dữ liệu người dùng")
-        }
-    }
-}
-
-@Composable
-fun ProfileBottomAppBar(onClick: () -> Unit) {
-        IconButton(
-            onClick = {
-                onClick()
-            },
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .height(56.dp),
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.edit_24px),
-                contentDescription = null
-            )
-        }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ProfileTopAppBar(title: String, navController: NavController) {
-    TopAppBar(
-        title = {
-            Text(
-                text = title,
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold,
-                fontSize = 26.sp
-            )
-        },
-        navigationIcon = {
-            IconButton(
-                onClick = {
-                    navController.popBackStack()
-                }
-            ) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                    contentDescription = null)
-            }
-        }
-    )
-}
-
-@Composable
-fun InfoRow(label: String, value: String) {
-    Column (
-        modifier = Modifier
-            .height(50.dp)
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-    ){
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = label, fontWeight = FontWeight.Bold)
-            Text(text = value, fontWeight = FontWeight.Light)
-        }
-        Box{
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(Color.Gray)
-            )
         }
     }
 }

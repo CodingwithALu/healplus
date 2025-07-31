@@ -52,7 +52,8 @@ import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.healplus.feature.personalization.profiles.ProfileTopAppBar
+import com.example.healplus.R
+import com.example.healplus.common.widgets.TAppBar
 import com.example.healplus.ui.theme.inversePrimaryDark
 import com.example.healplus.ui.theme.tertiaryDarkHighContrast
 import kotlinx.coroutines.launch
@@ -195,7 +196,12 @@ fun EditCategoryScreen(
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        topBar = { ProfileTopAppBar("Chỉnh sửa danh mục", navController) },
+        topBar = {
+            TAppBar(
+                title = R.string.edit_catebories,
+                onClick = { navController.popBackStack() }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState,
             modifier = Modifier
                 .fillMaxSize()  

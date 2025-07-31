@@ -56,7 +56,6 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.address.PaymentMethod
 import com.example.core.model.products.ProductsModel
-import com.example.core.tinydb.helper.AddAddress
 import com.example.core.tinydb.helper.ChangeNumberItemsListener
 import com.example.core.tinydb.helper.ManagmentCart
 import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
@@ -79,9 +78,9 @@ fun CheckOutScreen(
 ) {
     val userId = authViewModel.getUserId().toString()
     val context = LocalContext.current
-    var address = remember { AddAddress(context, userId) }
+//    var address = remember { AddAddress(context, userId) }
     val managementCart = remember { ManagmentCart(context, userId) }
-    var addressItems = remember { mutableStateOf(address.getListAddressOder() ?: arrayListOf()) }
+//    var addressItems = remember { mutableStateOf(address.getListAddressOder() ?: arrayListOf()) }
     val paymentMethods = listOf(
         PaymentMethod("Thanh toán tiền mặt khi nhận hàng", R.drawable.payments_24px),
         PaymentMethod("Thanh toán bằng ví ZaloPay", R.drawable.pay_zalo),

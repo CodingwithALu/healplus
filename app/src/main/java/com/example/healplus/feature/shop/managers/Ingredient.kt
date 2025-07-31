@@ -42,7 +42,8 @@ import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.healplus.feature.personalization.profiles.ProfileTopAppBar
+import com.example.healplus.R
+import com.example.healplus.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -83,7 +84,12 @@ fun EditIngredientScreen(
     }
     Log.d("YourScreen", "Selected Image URI: $selectedImageUri")
     Scaffold(
-        topBar = { ProfileTopAppBar("Chỉnh sửa danh mục", navController) },
+        topBar = {
+            TAppBar(
+                title = R.string.edit_catebories,
+                onClick = { navController.popBackStack() }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState,
             modifier = Modifier
                 .fillMaxSize()
