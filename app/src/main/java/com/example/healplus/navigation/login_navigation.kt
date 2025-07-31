@@ -12,10 +12,10 @@ import com.example.healplus.feature.authentication.signup.CreateAccountScreen
 
 @Composable
 fun LoginNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "introApp") {
+    NavHost(navController = navController, startDestination = "login") {
         composable("introApp") { LottieLoadingAnimation(modifier, navController, authViewModel) }
         composable("onboarding") { OnboardingScreen(navController) }
         composable("signup") { CreateAccountScreen(navController, authViewModel) }
-        composable("login") { SignInScreen(navController, authViewModel) }
+        composable("login") { SignInScreen() }
     }
 }

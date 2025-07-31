@@ -13,7 +13,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.navigation.LoginNavigation
 import com.example.healplus.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

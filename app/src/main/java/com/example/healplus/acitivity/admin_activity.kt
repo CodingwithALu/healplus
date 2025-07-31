@@ -6,19 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +18,9 @@ import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.healplus.navigation.AdminNavigation
 import com.example.healplus.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AdminActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +42,16 @@ class AdminActivity : BaseActivity() {
 fun AdminMain(modifier: Modifier = Modifier, authViewModel: AuthViewModel){
     val navController = rememberNavController()
     val navItemList = listOf(
-        NavItemModel.DrawableResItem(route = "home", label = stringResource(id = R.string.home), R.drawable.home_24px, badgeCount = 0),
-        NavItemModel.DrawableResItem(route = "point", label = stringResource(id = R.string.manager), R.drawable.shopping_bag_24px, badgeCount = 0),
-        NavItemModel.DrawableResItem(route = "add", label = "Liên hệ", R.drawable.connect, badgeCount = 0),
-        NavItemModel.DrawableResItem(route = "oder", label = stringResource(R.string.oder), R.drawable.orders_24px, badgeCount = 0),
-        NavItemModel.DrawableResItem(route = "settings", label = stringResource(R.string.settings), R.drawable.settings_24px, badgeCount = 0),
+        NavItemModel.DrawableResItem(route = "home", label = stringResource(id = R.string.home),
+            R.drawable.home_24px, badgeCount = 0),
+        NavItemModel.DrawableResItem(route = "point", label = stringResource(id = R.string.manager),
+            R.drawable.shopping_bag_24px, badgeCount = 0),
+        NavItemModel.DrawableResItem(route = "add", label = "Liên hệ",
+            R.drawable.connect, badgeCount = 0),
+        NavItemModel.DrawableResItem(route = "oder", label = stringResource(R.string.oder),
+            R.drawable.orders_24px, badgeCount = 0),
+        NavItemModel.DrawableResItem(route = "settings", label = stringResource(R.string.settings),
+            R.drawable.settings_24px, badgeCount = 0),
     )
     var selectedIndex by remember {
         mutableIntStateOf(0)

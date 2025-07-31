@@ -86,7 +86,7 @@ fun EditIngredientScreen(
     Scaffold(
         topBar = {
             TAppBar(
-                title = R.string.edit_catebories,
+                title = R.string.edit_Category,
                 onClick = { navController.popBackStack() }
             )
         },

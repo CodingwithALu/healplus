@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.hilt.android.gradle.plugin)
 }
 
 android {
     namespace = "com.example.core.viewmodel"
     compileSdk = 35
-
     defaultConfig {
         minSdk = 26
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -30,7 +31,6 @@ android {
         jvmTarget = "11"
     }
 }
-
 dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
@@ -45,4 +45,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // Hilt core
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    // Room (nếu dùng Room)
 }

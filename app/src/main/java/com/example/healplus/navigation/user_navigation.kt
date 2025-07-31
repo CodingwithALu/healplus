@@ -14,11 +14,10 @@ import com.example.core.model.users.UserAuthModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
-import com.example.healplus.feature.personalization.settings.SettingScreen
 import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
+import com.example.healplus.feature.personalization.settings.SettingScreen
 import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
-import com.example.healplus.feature.shop.cart.CheckOutScreen
 import com.example.healplus.feature.shop.category.CategoryScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
 import com.example.healplus.feature.shop.home.AllReviewsScreen
@@ -88,18 +87,18 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
             navController
             )
         }
-        composable("order_screen/{selectedProducts}/{itemTotal}/{tax}/{quantity}") { backStackEntry ->
-            val selectedProductsJson = backStackEntry.arguments?.getString("selectedProducts") ?: "[]"
-            val totalAmount = backStackEntry.arguments?.getString("itemTotal")?.toDoubleOrNull() ?: 0.0
-            val tax = backStackEntry.arguments?.getString("tax")?.toDoubleOrNull() ?: 0.0
-            val quantity = backStackEntry.arguments?.getString("quantity")?.toInt() ?: 0
-            val selectedProducts: List<ProductsModel> = Gson().fromJson(
-                URLDecoder.decode(selectedProductsJson, "UTF-8"),
-                object : TypeToken<List<ProductsModel>>() {}.type
-            )
-
-            CheckOutScreen(navController, selectedProducts, totalAmount, tax, quantity)
-        }
+//        composable("order_screen/{selectedProducts}/{itemTotal}/{tax}/{quantity}") { backStackEntry ->
+//            val selectedProductsJson = backStackEntry.arguments?.getString("selectedProducts") ?: "[]"
+//            val totalAmount = backStackEntry.arguments?.getString("itemTotal")?.toDoubleOrNull() ?: 0.0
+//            val tax = backStackEntry.arguments?.getString("tax")?.toDoubleOrNull() ?: 0.0
+//            val quantity = backStackEntry.arguments?.getString("quantity")?.toInt() ?: 0
+//            val selectedProducts: List<ProductsModel> = Gson().fromJson(
+//                URLDecoder.decode(selectedProductsJson, "UTF-8"),
+//                object : TypeToken<List<ProductsModel>>() {}.type
+//            )
+//
+//            CheckOutScreen(navController, selectedProducts, totalAmount, tax, quantity)
+//        }
         composable("address"){
             AddressScreen(navController)
         }

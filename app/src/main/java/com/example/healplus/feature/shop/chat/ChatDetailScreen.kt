@@ -40,7 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.model.chat.Message
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
-import com.example.healplus.feature.shop.cart.OderTopAppBar
+//import com.example.healplus.feature.shop.cart.OderTopAppBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -64,9 +64,9 @@ fun ChatDetailScreen(
     }
 
     Scaffold(
-        topBar = {
-            OderTopAppBar(navController = navController)
-        },
+//        topBar = {
+//            OderTopAppBar(navController = navController)
+//        },
         bottomBar = {
             Row(
                 modifier = Modifier
