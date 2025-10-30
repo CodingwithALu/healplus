@@ -1,4 +1,4 @@
-package com.example.healplus.common.widgets
+package com.example.healplus.feature.common.widgets
 
 import android.support.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth

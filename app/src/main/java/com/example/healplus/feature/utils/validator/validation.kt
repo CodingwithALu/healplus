@@ -1,4 +1,4 @@
-package com.example.healplus.utils.validator
+package com.example.healplus.feature.utils.validator
 import android.util.Patterns
 import java.util.regex.Pattern
 

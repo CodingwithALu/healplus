@@ -1,4 +1,4 @@
-package com.example.healplus.common.widgets
+package com.example.healplus.feature.common.widgets
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable

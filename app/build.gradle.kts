@@ -9,11 +9,11 @@ plugins {
 
 android {
     namespace = "com.example.healplus"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.healplus"
-        minSdk = 26
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -48,7 +48,7 @@ android {
 dependencies {
     implementation(project(":core-viewmodel"))
     implementation(project(":core-model"))
-    implementation(project(":core-room"))
+    implementation(project(":core-data"))
     implementation(libs.androidx.core.ktx)
     implementation (libs.mpandroidchart)
     implementation(libs.accompanist.flowlayout)

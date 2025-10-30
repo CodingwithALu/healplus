@@ -41,8 +41,8 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.common.widgets.TAppBar
-import com.example.healplus.common.widgets.TAvatarImage
+import com.example.core_utils.common.widgets.TAppBar
+import com.example.core_utils.common.widgets.TAvatarImage
 import com.example.healplus.feature.personalization.profiles.widgets.TEditButtonApp
 import com.example.healplus.feature.personalization.profiles.widgets.TRowItemProfile
 import com.google.gson.Gson
@@ -55,7 +55,7 @@ fun ProfileScreen(viewModel: AuthViewModel, navController: NavController) {
     }
     Scaffold(
         topBar = {
-            TAppBar(
+            com.example.core_utils.common.widgets.TAppBar(
                 title = R.string.information_acconut,
                 onClick = { navController.popBackStack() },
             )
@@ -70,7 +70,7 @@ fun ProfileScreen(viewModel: AuthViewModel, navController: NavController) {
                     .padding(vertical = 40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally) {
                     // Image Profile
-                    TAvatarImage(
+                    com.example.core_utils.common.widgets.TAvatarImage(
                         showChangeImage = false,
                         uploadedImageUrls = userData.url,
                     )

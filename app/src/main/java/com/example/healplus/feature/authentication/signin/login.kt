@@ -1,41 +1,40 @@
 package com.example.healplus.feature.authentication.signin
-import FormDivider
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.core.viewmodel.authviewmodel.AuthState
-import com.example.core.viewmodel.authviewmodel.LoginViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.healplus.R
-import com.example.healplus.common.widgets.login_signup.SocialButtons
 import com.example.healplus.feature.authentication.signin.widgets.LoginForm
 import com.example.healplus.feature.authentication.signin.widgets.LoginHeader
-import com.example.healplus.utils.constants.TSizes
+import com.example.healplus.feature.utils.constants.TSizes
+import com.example.healplus.feature.utils.constants.AuthState
 
 @Composable
 fun SignInScreen(
     onNavigateToSignup: () -> Unit = {},
     onNavigateToForgetPassword: () -> Unit = {},
     onLoginSuccess: () -> Unit = {},
-    viewModel: LoginViewModel = hiltViewModel()
+//    viewModel: LoginViewModel = hiltViewModel()
 ) {
-    val authState by viewModel.authState.collectAsState()
+//    val authState by viewModel.authState.collectAsState()
     LaunchedEffect(authState) {
         when (authState) {
             is AuthState.Success -> {
                 onLoginSuccess()
             }
             is AuthState.Error -> {
-                // Show error message (you can use SnackbarHost here)
+
             }
             else -> {}
         }
@@ -75,9 +74,9 @@ fun SignInScreen(
             Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))
 
             // Footer - Social Buttons
-            SocialButtons(
-                onGoogleSignIn = {  },
-                onFacebookSignIn = {  }
+            com.example.core_utils.common.widgets.login_signup.SocialButtons(
+                onGoogleSignIn = { },
+                onFacebookSignIn = { }
             )
 
             Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))

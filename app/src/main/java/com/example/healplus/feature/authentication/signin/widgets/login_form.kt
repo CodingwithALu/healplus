@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -36,10 +35,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.healplus.R
-import com.example.healplus.utils.constants.TSizes
-import com.example.healplus.utils.validator.ValidationUtils
+import com.example.core_utils.utils.constants.TSizes
+import com.example.core_utils.utils.validator.ValidationUtils
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginForm(
     onEmailAndPasswordSignIn: (String, String, Boolean) -> Unit,
@@ -100,7 +98,7 @@ fun LoginForm(
                 IconButton(onClick = { hidePassword = !hidePassword }) {
                     Icon(
                         painter = painterResource(
-                            id = if (hidePassword) R.drawable.visibility_24px else R.drawable.visibility_off_24px
+                            id = if (hidePassword) R.drawable.visibility_off_24px else R.drawable.visibility_24px
                         ),
                         contentDescription = if (hidePassword) "Show password" else "Hide password"
                     )

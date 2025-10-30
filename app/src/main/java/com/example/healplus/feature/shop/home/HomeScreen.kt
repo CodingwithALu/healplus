@@ -64,7 +64,7 @@ import com.example.core.viewmodel.authviewmodel.AuthSate
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.core.viewmodel.homeViewmodel
 import com.example.healplus.R
-import com.example.healplus.common.widgets.texts.TSectionHeading
+import com.example.core_utils.common.widgets.texts.TSectionHeading
 import com.example.healplus.feature.shop.home.widgets.CategoryList
 import com.example.healplus.feature.shop.home.widgets.DrugStoreInfoScreen
 import com.example.healplus.feature.shop.home.widgets.ListItems
@@ -205,7 +205,7 @@ fun HomeScreen(
                                 .fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            TSectionHeading(R.string.recommended)
+                            com.example.core_utils.common.widgets.texts.TSectionHeading(R.string.recommended)
                             ListItems(recommended, navController)
                             Spacer(modifier = Modifier.height(16.dp))
                         }
@@ -285,7 +285,10 @@ fun IngredientScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            TSectionHeading(R.string.prominment_category, showSubtitle = false)
+            com.example.core_utils.common.widgets.texts.TSectionHeading(
+                R.string.prominment_category,
+                showSubtitle = false
+            )
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

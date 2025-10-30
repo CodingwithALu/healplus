@@ -35,10 +35,10 @@ import androidx.navigation.NavController
 import com.example.core.model.users.UserAuthModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.common.styles.TSpacerStyle
-import com.example.healplus.common.widgets.TAppBar
-import com.example.healplus.common.widgets.rememberDatePickerDialog
-import com.example.healplus.common.widgets.rememberImagePickerLauncher
+import com.example.core_utils.common.styles.TSpacerStyle
+import com.example.core_utils.common.widgets.TAppBar
+import com.example.core_utils.common.widgets.rememberDatePickerDialog
+import com.example.core_utils.common.widgets.rememberImagePickerLauncher
 
 @Composable
 fun UpdateProfileScreen(
@@ -54,15 +54,16 @@ fun UpdateProfileScreen(
     var birthDate by remember { mutableStateOf(item.dateBirth) }
     var showDatePicker by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val datePicker = rememberDatePickerDialog{ date ->
+    val datePicker = com.example.core_utils.common.widgets.rememberDatePickerDialog { date ->
         birthDate = date
     }
-    val imagePickerLauncher = rememberImagePickerLauncher { url ->
-        urlimg = url
-    }
+    val imagePickerLauncher =
+        com.example.core_utils.common.widgets.rememberImagePickerLauncher { url ->
+            urlimg = url
+        }
     Scaffold(
             topBar = {
-                TAppBar(
+                com.example.core_utils.common.widgets.TAppBar(
                     title = R.string.account,
                     onClick = { navController.popBackStack() }
                 )
@@ -78,14 +79,14 @@ fun UpdateProfileScreen(
                 urlimg = urlimg,
                 imagePickerLauncher = imagePickerLauncher,
                 title = "Chọn ảnh đại diện")
-            TSpacerStyle(16.dp)
+            com.example.core_utils.common.styles.TSpacerStyle(16.dp)
             OutlinedTextField(
                     value = fullName,
                     onValueChange = { fullName = it },
                     label = { Text("Họ và tên") },
                     modifier = Modifier.fillMaxWidth()
             )
-            TSpacerStyle(16.dp)
+            com.example.core_utils.common.styles.TSpacerStyle(16.dp)
             Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()

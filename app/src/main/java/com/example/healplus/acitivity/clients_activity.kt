@@ -1,15 +1,19 @@
 package com.example.healplus.acitivity
+import TNavigationBar
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +36,7 @@ class MainActivity : BaseActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
-                    MainApp(authViewModel = authViewModel,
+                    ClientApp(authViewModel = authViewModel,
                         modifier = Modifier
                             .padding(innerPadding))
                 }
@@ -41,7 +45,7 @@ class MainActivity : BaseActivity() {
     }
 }
 @Composable
-fun MainApp(modifier: Modifier = Modifier, authViewModel: AuthViewModel){
+fun ClientApp(modifier: Modifier = Modifier, authViewModel: AuthViewModel){
     val navController = rememberNavController()
     val userId = authViewModel.getUserId().toString()
     val context = LocalContext.current
@@ -78,31 +82,17 @@ fun MainApp(modifier: Modifier = Modifier, authViewModel: AuthViewModel){
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             if (currentRoute !in routesToHideBottomBar) {
-                NavigationBar {
-                    navItemList.forEachIndexed { index, navItem ->
-                        NavigationBarItem(
-                            selected = selectedIndex == index,
-                            onClick = {
-                                selectedIndex = index
-                                Log.d("Navigation", "Click vào: ${navItem.route}, selectedIndex: $selectedIndex")
-                                navController.navigate(navItem.route) {
-                                    popUpTo("cart") { inclusive = false }
-                                    launchSingleTop = true
-                                }
-                            },
-                            icon = {
-                                BadgedBox(badge = {
-                                    if (navItem.badgeCount > 0)
-                                        Badge { Text(text = navItem.badgeCount.toString()) }
-                                }) {
-                                    Icon(painterResource(id = navItem.iconResId), contentDescription = navItem.label)
-                                }
-                            },
-                            label = { Text(text = navItem.label)
-                            }
-                        )
+                TNavigationBar(
+                    navItemList = navItemList,
+                    selectedIndex = selectedIndex,
+                    onItemSelected = { index ->
+                        selectedIndex = index
+                        navController.navigate(navItemList[index].route) {
+                            popUpTo("cart") { inclusive = false }
+                            launchSingleTop = true
+                        }
                     }
-                }
+                )
             }
         }
     ) { innerPadding ->

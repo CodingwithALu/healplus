@@ -7,9 +7,9 @@ plugins {
 
 android {
     namespace = "com.example.core.viewmodel"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
-        minSdk = 26
+        minSdk = 29
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -42,6 +42,9 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

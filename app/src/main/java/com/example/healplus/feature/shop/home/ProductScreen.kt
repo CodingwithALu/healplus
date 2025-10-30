@@ -81,7 +81,7 @@ import com.example.core.tinydb.helper.ManagmentCart
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.common.styles.TSpacerStyle
+import com.example.core_utils.common.styles.TSpacerStyle
 import com.google.gson.Gson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -194,9 +194,9 @@ fun DetailScreen(
                 )
             }
 
-            TSpacerStyle(4.dp)
+            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
             ProductInfoView(item, navController, apiCallViewModel)
-            TSpacerStyle(4.dp)
+            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
             ProductReviewsSection(
                 averageRating = item.rating.toFloat(),
                 totalReviews = item.review,

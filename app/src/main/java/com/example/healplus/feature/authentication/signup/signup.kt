@@ -1,6 +1,6 @@
 package com.example.healplus.feature.authentication.signup
-import com.example.healplus.common.widgets.TAvatarImage
-import com.example.healplus.common.widgets.WidgetButtonAuth
+import com.example.core_utils.common.widgets.TAvatarImage
+import com.example.core_utils.common.widgets.WidgetButtonAuth
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
@@ -155,7 +155,7 @@ fun CreateAccountScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
             // Up Load Image and Show
-            TAvatarImage(
+            com.example.core_utils.common.widgets.TAvatarImage(
                 uploadedImageUrls = uploadedImageUrls,
                 imagePickerLauncher = imagePickerLauncher,
                 label = R.drawable.icon_camera
@@ -262,7 +262,7 @@ fun CreateAccountScreen(
                 )
             }
             // Signup button
-            WidgetButtonAuth(
+            com.example.core_utils.common.widgets.WidgetButtonAuth(
                 authValue = authSate.value != AuthSate.Loading,
                 title = R.string.done,
             ) {
@@ -273,7 +273,7 @@ fun CreateAccountScreen(
                     phoneNumber = phoneNumber,
                     uploadedImageUrls!!,
                     role.toString()
-                ){ message ->
+                ) { message ->
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 }
             }

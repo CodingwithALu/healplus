@@ -2,7 +2,7 @@ package com.example.healplus.feature.personalization.settings
 import com.example.healplus.feature.personalization.settings.widgets.SettingsItem
 import com.example.healplus.feature.personalization.settings.widgets.TDeleteAccountButton
 import com.example.healplus.feature.personalization.settings.widgets.TSectionTitle
-import com.example.healplus.common.widgets.TButtonLogOut
+import com.example.core_utils.common.widgets.TButtonLogOut
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,7 @@ import androidx.navigation.NavController
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.healplus.acitivity.LoginActivity
-import com.example.healplus.common.widgets.TAppBar
+import com.example.core_utils.common.widgets.TAppBar
 
 @Composable
 fun SettingScreen(
@@ -36,7 +36,7 @@ fun SettingScreen(
     val context = LocalContext.current
     Scaffold (
         topBar = {
-            TAppBar(
+            com.example.core_utils.common.widgets.TAppBar(
                 title = R.string.settings,
                 onClick = { navController.popBackStack() },
             )
@@ -95,7 +95,7 @@ fun SettingScreen(
                  }
              ) }
              item {
-                 TButtonLogOut(
+                 com.example.core_utils.common.widgets.TButtonLogOut(
                      title = R.string.logout,
                      onClick = {
                          authViewModel.signOut()

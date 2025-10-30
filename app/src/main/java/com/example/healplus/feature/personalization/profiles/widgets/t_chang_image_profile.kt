@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.healplus.R
-import com.example.healplus.common.styles.TSpacerStyle
-import com.example.healplus.common.widgets.TAvatarImage
+import com.example.core_utils.common.styles.TSpacerStyle
+import com.example.core_utils.common.widgets.TAvatarImage
 
 @Composable
 fun ChangImageProfile(
@@ -22,10 +22,10 @@ fun ChangImageProfile(
 ) {
     Box(contentAlignment = Alignment.Center) {
         Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-            TAvatarImage(
+            com.example.core_utils.common.widgets.TAvatarImage(
                 uploadedImageUrls = urlimg
             )
-            TSpacerStyle(4.dp)
+            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
             Text(
                 text = title,
                 color = Color.Blue,

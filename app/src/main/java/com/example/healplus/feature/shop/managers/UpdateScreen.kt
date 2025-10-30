@@ -53,7 +53,7 @@ import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.healplus.R
-import com.example.healplus.common.widgets.TAppBar
+import com.example.core_utils.common.widgets.TAppBar
 import com.example.healplus.ui.theme.inversePrimaryDark
 import com.example.healplus.ui.theme.tertiaryDarkHighContrast
 import kotlinx.coroutines.launch
@@ -197,7 +197,7 @@ fun EditCategoryScreen(
 
     Scaffold(
         topBar = {
-            TAppBar(
+            com.example.core_utils.common.widgets.TAppBar(
                 title = R.string.edit_Category,
                 onClick = { navController.popBackStack() }
             )

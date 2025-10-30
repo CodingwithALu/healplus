@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.healplus.R
-import com.example.healplus.utils.constants.TSizes
+import com.example.core_utils.utils.constants.TSizes
 
 @Composable
 fun LoginHeader(){
