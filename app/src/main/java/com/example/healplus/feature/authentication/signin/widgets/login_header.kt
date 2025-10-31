@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.healplus.R
-import com.example.core_utils.utils.constants.TSizes
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
 fun LoginHeader(){
@@ -41,9 +41,7 @@ fun LoginHeader(){
             ),
             textAlign = TextAlign.Start
         )
-
         Spacer(modifier = Modifier.height(TSizes.SM))
-
         // Subtitle
         Text(
             text = "Khám phá vo vàng lựa chọn và sự tiện lợi vượt trội.",

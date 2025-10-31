@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.model.chat.Message
-import com.example.core.model.users.UserAuthModel
+import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -21,10 +21,10 @@ class AuthViewModel : ViewModel() {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val _authState = MutableLiveData<AuthSate>()
-    private val _user = MutableLiveData<UserAuthModel?>()
+    private val _user = MutableLiveData<UserModel?>()
     private val _messages = MutableStateFlow<List<Message>>(emptyList())
     val authSate: LiveData<AuthSate> = _authState
-    val user: LiveData<UserAuthModel?> = _user
+    val user: LiveData<UserModel?> = _user
     val messages: StateFlow<List<Message>> = _messages
     private val _adminChatRoomsLiveData = MutableLiveData<List<String>>()
     val adminChatRoomsLiveData: LiveData<List<String>> = _adminChatRoomsLiveData
@@ -50,21 +50,17 @@ class AuthViewModel : ViewModel() {
         val userRole = userDoc.getString("role")
 
         if (userRole == "admin") {
-            
+
             loadAdminChatRooms()
         } else {
-            
-            
             val chatRoomsRef = db.collection("chat_rooms")
             val query = chatRoomsRef.whereArrayContains("users", userId)
             val querySnapshot = query.get().await()
-
             chatRoomId = querySnapshot.documents.firstOrNull {
                 (it.get("users") as? List<*>)?.contains(adminId) == true && it.getString("adminId") == adminId
             }?.id
-
             if (chatRoomId == null) {
-                
+
                 val newChatRoom = hashMapOf(
                     "users" to listOf(userId, adminId),
                     "adminId" to adminId
@@ -74,7 +70,6 @@ class AuthViewModel : ViewModel() {
             }
         }
     }
-
     private fun loadAdminChatRooms() {
         viewModelScope.launch {
             db.collection("chat_rooms")
@@ -91,7 +86,6 @@ class AuthViewModel : ViewModel() {
                 }
         }
     }
-
     fun loadMessages() {
         val userId = auth.currentUser?.uid ?: return
         viewModelScope.launch {
@@ -106,7 +100,7 @@ class AuthViewModel : ViewModel() {
                         .orderBy("timestamp")
                         .addSnapshotListener { snapshot, e ->
                             if (e != null) {
-                                
+
                                 return@addSnapshotListener
                             }
 
@@ -114,18 +108,18 @@ class AuthViewModel : ViewModel() {
                                 val messageList = snapshot.documents.map { doc ->
                                     doc.toObject(Message::class.java) ?: Message()
                                 }
-                                
+
                                 _messages.value = messageList.reversed()
                             } else {
                                 _messages.value = emptyList()
                             }
                         }
                 } ?: run {
-                    
+
                     _messages.value = emptyList()
                 }
             } else {
-                
+
                 chatRoomId?.let { roomId ->
                     db.collection("chat_rooms")
                         .document(roomId)
@@ -133,7 +127,7 @@ class AuthViewModel : ViewModel() {
                         .orderBy("timestamp")
                         .addSnapshotListener { snapshot, e ->
                             if (e != null) {
-                                
+
                                 return@addSnapshotListener
                             }
 
@@ -141,7 +135,7 @@ class AuthViewModel : ViewModel() {
                                 val messageList = snapshot.documents.map { doc ->
                                     doc.toObject(Message::class.java) ?: Message()
                                 }
-                                
+
                                 _messages.value = messageList.reversed()
                             } else {
                                 _messages.value = emptyList()
@@ -151,15 +145,12 @@ class AuthViewModel : ViewModel() {
             }
         }
     }
-
     fun sendMessage(text: String) {
         val userId = auth.currentUser?.uid ?: return
         viewModelScope.launch {
             val userDoc = db.collection("users").document(userId).get().await()
             val userRole = userDoc.getString("role")
-
             if (userRole == "admin") {
-                
                 chatRoomId?.let { roomId ->
                     val message = Message(senderId = userId, text = text)
                     db.collection("chat_rooms")
@@ -167,10 +158,10 @@ class AuthViewModel : ViewModel() {
                         .collection("messages")
                         .add(message)
                         .addOnSuccessListener {
-                            
+
                         }
                         .addOnFailureListener { e ->
-                            
+
                         }
                 }
             } else {
@@ -181,10 +172,10 @@ class AuthViewModel : ViewModel() {
                         .collection("messages")
                         .add(message)
                         .addOnSuccessListener {
-                            
+
                         }
                         .addOnFailureListener { e ->
-                            
+
                         }
                 }
             }
@@ -193,7 +184,7 @@ class AuthViewModel : ViewModel() {
     fun sendMessage1(roomId: String, text: String) {
         val userId = auth.currentUser?.uid
         if (userId == null || text.isBlank()) {
-            
+
             return
         }
         viewModelScope.launch {
@@ -301,16 +292,7 @@ class AuthViewModel : ViewModel() {
                         _authState.value = AuthSate.Error("Thiếu thông tin người dùng")
                         return@addOnCompleteListener
                     }
-                    val userModel =
-                        UserAuthModel(
-                            idauth = userId,
-                            name = name,
-                            email = email,
-                            password = password,
-                            phone = phoneNumber,
-                            url = uploadedImageUrls,
-                            role = role
-                        )
+                    val userModel = UserModel.empty()
                     FirebaseFirestore.getInstance().collection("users")
                         .document(userId)
                         .set(userModel)
@@ -341,7 +323,7 @@ class AuthViewModel : ViewModel() {
             .get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val userData = document.toObject(UserAuthModel::class.java)
+                    val userData = document.toObject(UserModel::class.java)
                     _user.value = userData
                 } else {
                     _user.value = null

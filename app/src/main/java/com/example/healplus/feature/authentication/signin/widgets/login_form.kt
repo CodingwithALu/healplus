@@ -35,8 +35,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.healplus.R
-import com.example.core_utils.utils.constants.TSizes
-import com.example.core_utils.utils.validator.ValidationUtils
+import com.example.healplus.feature.utils.constants.TSizes
+import com.example.healplus.feature.utils.validator.ValidationUtils
 
 @Composable
 fun LoginForm(

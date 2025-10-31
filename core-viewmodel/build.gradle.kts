@@ -31,6 +31,12 @@ android {
         jvmTarget = "11"
     }
 }
+
+kapt {
+    // help annotation processors tolerate generated types and improve compatibility
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
@@ -51,5 +57,8 @@ dependencies {
     // Hilt core
     implementation (libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    // Room (nếu dùng Room)
+    // coroutine
+    implementation(libs.kotlinx.coroutines.android)
+    // dataStore
+    implementation(libs.androidx.datastore.preferences)
 }

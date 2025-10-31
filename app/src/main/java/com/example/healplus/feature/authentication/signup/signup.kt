@@ -1,6 +1,4 @@
 package com.example.healplus.feature.authentication.signup
-import com.example.core_utils.common.widgets.TAvatarImage
-import com.example.core_utils.common.widgets.WidgetButtonAuth
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
@@ -55,8 +53,9 @@ import androidx.navigation.NavController
 import com.example.core.viewmodel.authviewmodel.AuthSate
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.acitivity.AdminActivity
 import com.example.healplus.acitivity.MainActivity
+import com.example.healplus.feature.common.widgets.TAvatarImage
+import com.example.healplus.feature.common.widgets.WidgetButtonAuth
 import com.example.healplus.feature.shop.managers.uploadImageToServer
 import kotlinx.coroutines.launch
 
@@ -155,7 +154,7 @@ fun CreateAccountScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
             // Up Load Image and Show
-            com.example.core_utils.common.widgets.TAvatarImage(
+           TAvatarImage(
                 uploadedImageUrls = uploadedImageUrls,
                 imagePickerLauncher = imagePickerLauncher,
                 label = R.drawable.icon_camera
@@ -262,7 +261,7 @@ fun CreateAccountScreen(
                 )
             }
             // Signup button
-            com.example.core_utils.common.widgets.WidgetButtonAuth(
+            WidgetButtonAuth(
                 authValue = authSate.value != AuthSate.Loading,
                 title = R.string.done,
             ) {

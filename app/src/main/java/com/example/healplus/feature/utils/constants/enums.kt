@@ -1,4 +1,4 @@
-package com.example.healplus.utils.constants
+package com.example.healplus.feature.utils.constants
 
 enum class ConnectionType {
     WIFI,

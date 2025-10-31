@@ -22,9 +22,9 @@
         <activity
             android:name=".acitivity.MainActivity"
             android:exported="true"/>
-        <activity
-            android:name=".acitivity.AdminActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".acitivity.AdminActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".acitivity.BaseActivity"
             android:exported="false" />

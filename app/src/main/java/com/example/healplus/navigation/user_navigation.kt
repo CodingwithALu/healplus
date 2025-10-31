@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
-import com.example.core.model.users.UserAuthModel
+import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
@@ -151,7 +151,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                 backStackEntry ->
             val jsonItem = backStackEntry.arguments?.getString("userData")
 
-            val item = Gson().fromJson(jsonItem, UserAuthModel::class.java)
+            val item = Gson().fromJson(jsonItem, UserModel::class.java)
             UpdateProfileScreen(item, navController)
         }
     }

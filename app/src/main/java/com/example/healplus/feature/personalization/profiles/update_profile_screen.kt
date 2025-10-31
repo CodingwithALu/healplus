@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.model.users.UserAuthModel
+import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.authviewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.core_utils.common.styles.TSpacerStyle
@@ -42,9 +42,9 @@ import com.example.core_utils.common.widgets.rememberImagePickerLauncher
 
 @Composable
 fun UpdateProfileScreen(
-        item: UserAuthModel,
-        navController: NavController,
-        authViewModel: AuthViewModel = viewModel(),
+    item: UserModel,
+    navController: NavController,
+    authViewModel: AuthViewModel = viewModel(),
 ) {
     var fullName by remember { mutableStateOf(item.name) }
     val email by remember { mutableStateOf(item.email) }
