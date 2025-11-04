@@ -59,12 +59,12 @@ import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthSate
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
-import com.example.core.viewmodel.homeViewmodel
+import com.example.core.viewmodel.AuthSate
+import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.HomeViewmodel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.widgets.texts.TSectionHeading
+import com.example.healplus.feature.common.widgets.texts.TSectionHeading
 import com.example.healplus.feature.shop.home.widgets.CategoryList
 import com.example.healplus.feature.shop.home.widgets.DrugStoreInfoScreen
 import com.example.healplus.feature.shop.home.widgets.ListItems
@@ -84,8 +84,8 @@ import kotlin.random.Random
 fun HomeScreen(
     navController: NavController,
     authViewModel: AuthViewModel = viewModel(),
-    viewModel: ApiCallViewModel = viewModel(),
-    homeViewmodel: homeViewmodel = viewModel()
+    viewModel: OrderViewModel = viewModel(),
+    homeViewmodel: HomeViewmodel = viewModel()
 ) {
     val banners = remember { mutableStateListOf<BannersModel>() }
     val categories = remember { mutableStateListOf<CategoryModel>() }
@@ -205,7 +205,7 @@ fun HomeScreen(
                                 .fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            com.example.core_utils.common.widgets.texts.TSectionHeading(R.string.recommended)
+                            TSectionHeading(R.string.recommended)
                             ListItems(recommended, navController)
                             Spacer(modifier = Modifier.height(16.dp))
                         }
@@ -285,7 +285,7 @@ fun IngredientScreen(
                 ),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            com.example.core_utils.common.widgets.texts.TSectionHeading(
+            TSectionHeading(
                 R.string.prominment_category,
                 showSubtitle = false
             )
@@ -445,7 +445,6 @@ fun UserView(viewModel: AuthViewModel, navController: NavController) {
                     .padding(horizontal = 10.dp)
             ){
                 InfoRow(value = userData.name)
-                InfoRow(value = userData.phone)
             }
         }
     }

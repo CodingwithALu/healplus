@@ -66,8 +66,6 @@ class LoginViewModel @Inject constructor(
                 val userId = current.idUser
                 // save preference (suspend)
                 userPreferencesRepository.saveStatePreferences(rememberMe, userId)
-                // update local state
-                isRemembered = rememberMe
             }.onFailure {
                 _message.value = it.message ?: "Đăng nhập thất bại"
             }

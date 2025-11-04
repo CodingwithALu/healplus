@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class homeViewmodel: ViewModel() {
+class HomeViewmodel: ViewModel() {
     private val _banner = MutableLiveData<List<BannersModel>>()
     val banners: LiveData<List<BannersModel>> = _banner
     fun loadBanners() {

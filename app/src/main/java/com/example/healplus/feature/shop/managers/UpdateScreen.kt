@@ -51,9 +51,9 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.TAppBar
 import com.example.healplus.ui.theme.inversePrimaryDark
 import com.example.healplus.ui.theme.tertiaryDarkHighContrast
 import kotlinx.coroutines.launch
@@ -62,15 +62,15 @@ import kotlinx.coroutines.launch
 @Composable
 fun UpdateDeleteCategory(
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ){
     val categories = remember { mutableStateListOf<CategoryModel>() }
     val snackbarHostState = remember { SnackbarHostState() }
     var selectedIndex by remember { mutableStateOf(-1) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(categories) {
-        apiCallViewModel.loadCategory()
-        apiCallViewModel.categories.observeForever{
+        viewModel.loadCategory()
+        viewModel.categories.observeForever{
             categories.clear()
             categories.addAll(it)
         }
@@ -115,7 +115,7 @@ fun UpdateDeleteCategory(
                     navController.navigate("edit_category/${categories[index].idc}/${categories[index].title}")
                 },
                 onItemDeleteClick = {
-                    apiCallViewModel.deleteCategory(categories[index].idc){response ->
+                    viewModel.deleteCategory(categories[index].idc){ response ->
                     }
                     scope.launch {
                         snackbarHostState.showSnackbar("Đã xóa thành công!")
@@ -188,7 +188,7 @@ fun CategoryItemAdd(
 @Composable
 fun EditCategoryScreen(
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel,
+    viewModel: OrderViewModel,
     idc: String,
     oldTitle: String) {
     var title by remember { mutableStateOf(oldTitle) }
@@ -197,7 +197,7 @@ fun EditCategoryScreen(
 
     Scaffold(
         topBar = {
-            com.example.core_utils.common.widgets.TAppBar(
+            TAppBar(
                 title = R.string.edit_Category,
                 onClick = { navController.popBackStack() }
             )
@@ -239,7 +239,7 @@ fun EditCategoryScreen(
                 Button(
                     onClick = {
                         if (title.isNotEmpty()) {
-                            apiCallViewModel.updateCategory(idc, title) { response ->
+                            viewModel.updateCategory(idc, title) { response ->
                                 scope.launch {
                                     snackbarHostState.showSnackbar(response.message)
                                 }
@@ -266,15 +266,15 @@ fun EditCategoryScreen(
 @Composable
 fun UpdateDeleteIngredient(
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ){
     val ingredients = remember { mutableStateListOf<IngredientsModel>() }
     val snackbarHostState = remember { SnackbarHostState() }
     var selectedIndex by remember { mutableStateOf(-1) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(ingredients) {
-        apiCallViewModel.loadIngredients()
-        apiCallViewModel.ingredient.observeForever{
+        viewModel.loadIngredients()
+        viewModel.ingredient.observeForever{
             ingredients.clear()
             ingredients.addAll(it)
         }
@@ -320,7 +320,7 @@ fun UpdateDeleteIngredient(
                     navController.navigate("edit_ingredient/${ingredients[index]}}")
                 },
                 onItemDeleteClick = {
-                    apiCallViewModel.deleteCategory(ingredients[index].idc){response ->
+                    viewModel.deleteCategory(ingredients[index].idc){ response ->
                     }
                     scope.launch {
                         snackbarHostState.showSnackbar("Đã xóa thành công!")

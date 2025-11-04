@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.core_utils.utils.constants.TSizes
+import com.example.healplus.feature.utils.constants.TSizes
 
 /**
  * A circular loader widget with customizable foreground and background colors.

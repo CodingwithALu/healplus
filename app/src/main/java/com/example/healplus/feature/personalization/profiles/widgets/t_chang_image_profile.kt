@@ -1,3 +1,4 @@
+
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -7,12 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.healplus.R
-import com.example.core_utils.common.styles.TSpacerStyle
-import com.example.core_utils.common.widgets.TAvatarImage
+import com.example.healplus.feature.common.styles.TSpacerStyle
+import com.example.healplus.feature.common.widgets.TAvatarImage
 
 @Composable
 fun ChangImageProfile(
@@ -22,10 +21,10 @@ fun ChangImageProfile(
 ) {
     Box(contentAlignment = Alignment.Center) {
         Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-            com.example.core_utils.common.widgets.TAvatarImage(
+            TAvatarImage(
                 uploadedImageUrls = urlimg
             )
-            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
+            TSpacerStyle(4.dp)
             Text(
                 text = title,
                 color = Color.Blue,

@@ -1,14 +1,13 @@
 package com.example.healplus.feature.shop.category
 import android.net.Uri
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +20,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,6 +38,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,20 +54,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.healplus.R
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.google.accompanist.flowlayout.FlowRow
-import kotlin.random.Random
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
+import com.example.healplus.R
 import com.example.healplus.ui.theme.errorDarkHighContrast
 import com.example.healplus.ui.theme.inverseOnSurfaceLight
 import com.example.healplus.ui.theme.inverseOnSurfaceLightMediumContrast
@@ -77,16 +69,18 @@ import com.example.healplus.ui.theme.onPrimaryLightMediumContrast
 import com.example.healplus.ui.theme.onTertiaryLightHighContrast
 import com.example.healplus.ui.theme.primaryDark
 import com.example.healplus.ui.theme.surfaceBrightLight
+import com.google.accompanist.flowlayout.FlowRow
 import com.google.gson.Gson
 import java.text.NumberFormat
 import java.util.Locale
+import kotlin.random.Random
 
 
 @Composable
 fun CategoryScreen(
     id: String,
     title: String,
-    viewModel: ApiCallViewModel,
+    viewModel: OrderViewModel,
     navController: NavController
 ) {
     val category by viewModel.categories.observeAsState(emptyList())

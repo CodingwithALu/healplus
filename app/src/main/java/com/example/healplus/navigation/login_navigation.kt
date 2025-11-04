@@ -4,7 +4,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.feature.authentication.onboarding.LottieLoadingAnimation
 import com.example.healplus.feature.authentication.onboarding.OnboardingScreen
 import com.example.healplus.feature.authentication.signin.SignInScreen
@@ -16,6 +16,6 @@ fun LoginNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
         composable("introApp") { LottieLoadingAnimation(modifier, navController, authViewModel) }
         composable("onboarding") { OnboardingScreen(navController) }
         composable("signup") { CreateAccountScreen(navController, authViewModel) }
-        composable("login") { SignInScreen() }
+        composable("login") { SignInScreen(navController) }
     }
 }

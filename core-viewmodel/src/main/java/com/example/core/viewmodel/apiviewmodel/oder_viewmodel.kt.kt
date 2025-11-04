@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.core.model.Oder.Order
 import com.example.core.model.api.ApiResponse
-import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
@@ -21,19 +20,20 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class ApiCallViewModel : ViewModel() {
+class OrderViewModel : ViewModel() {
     private val _category = MutableLiveData<MutableList<CategoryModel>>()
     private val _ingredient = MutableLiveData<MutableList<IngredientsModel>>()
     private val _recommended = MutableLiveData<MutableList<ProductsModel>>()
     private val _element = MutableLiveData<MutableList<ElementsModel>>()
+    // order
+    private val _orders = MutableLiveData<MutableList<Order>>()
+    val orders: LiveData<MutableList<Order>> = _orders
 
     val categories: LiveData<MutableList<CategoryModel>> = _category
     val ingredient: LiveData<MutableList<IngredientsModel>> = _ingredient
     val recommended: LiveData<MutableList<ProductsModel>> = _recommended
     val element: LiveData<MutableList<ElementsModel>> = _element
     private var currentCall: Call<List<ProductsModel>>? = null
-    private val _orders = MutableLiveData<MutableList<Order>>()
-    val orders: LiveData<MutableList<Order>> = _orders
     private val _revenueWeek = MutableLiveData<List<RevenueData>>(emptyList())
     val revenueWeek: LiveData<List<RevenueData>> = _revenueWeek
     private val _revenueMonth = MutableLiveData<List<RevenueData>>(emptyList())
@@ -55,7 +55,7 @@ class ApiCallViewModel : ViewModel() {
         _isDataEmptyAfterLoad.value = false
     }
 
-    fun revenueYear(year: Int) {
+    suspend fun revenueYear(year: Int) {
         RetrofitClient.instance.revenueYear(year).enqueue(object : Callback<RevenueResponse> {
             override fun onResponse(
                 call: Call<RevenueResponse>,

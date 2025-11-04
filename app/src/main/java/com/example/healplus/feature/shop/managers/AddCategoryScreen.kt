@@ -28,20 +28,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddCategoryScreen(navController: NavController, apiCallViewModel: ApiCallViewModel) {
+fun AddCategoryScreen(navController: NavController, viewModel: OrderViewModel) {
     var title by remember { mutableStateOf("") }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
-            com.example.core_utils.common.widgets.TAppBar(
+            TAppBar(
                 title = R.string.add_category,
                 onClick = { navController.popBackStack() }
             )
@@ -87,7 +87,7 @@ fun AddCategoryScreen(navController: NavController, apiCallViewModel: ApiCallVie
                     Button(
                         onClick = {
                             if (title.isNotEmpty()) {
-                                apiCallViewModel.addCategory(title) { response ->
+                                viewModel.addCategory(title) { response ->
                                     scope.launch {
                                         snackbarHostState.showSnackbar(response.message)
                                     }
@@ -114,10 +114,10 @@ fun AddCategoryScreen(navController: NavController, apiCallViewModel: ApiCallVie
     }
 }
 @Composable
-fun AddIngredientsScreen(navController: NavController, apiCallViewModel: ApiCallViewModel) {
+fun AddIngredientsScreen(navController: NavController, viewModel: OrderViewModel) {
     Scaffold(
         topBar = {
-            com.example.core_utils.common.widgets.TAppBar(
+            TAppBar(
                 title = R.string.add_category,
                 onClick = { navController.popBackStack() }
             )

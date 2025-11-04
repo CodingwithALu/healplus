@@ -49,7 +49,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.core.model.revenue.DetailedOrder
 import com.example.core.model.revenue.RevenueData
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -69,31 +69,31 @@ import java.time.temporal.TemporalAdjusters
 
 @Composable
 fun MonthlyRevenueBarChart(navController: NavController) {
-    val apiCallViewModel = remember { ApiCallViewModel() }
+    val viewModel = remember { OrderViewModel() }
     var selectedFilter by remember { mutableStateOf("Doanh thu tháng") }
     var currentMonthYear by remember { mutableStateOf(YearMonth.now()) }
     var currentWeekStartDate by remember {
         mutableStateOf(LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)))
     }
-    val weeklyRevenueData by apiCallViewModel.revenueWeek.observeAsState(initial = emptyList())
-    val monthlyRevenueData by apiCallViewModel.revenueMonth.observeAsState(initial = emptyList())
-    val yearlyRevenueData by apiCallViewModel.revenueYear.observeAsState(initial = emptyList())
-    val historyWeek by apiCallViewModel.historyWeek.observeAsState(initial = emptyList())
-    val historyMonth by apiCallViewModel.historyMonth.observeAsState(initial = emptyList())
-    val historyYear by apiCallViewModel.historyYear.observeAsState(initial = emptyList())
-    val isDataEmptyAfterLoad by apiCallViewModel.isDataEmptyAfterLoad.observeAsState(initial = true)
+    val weeklyRevenueData by viewModel.revenueWeek.observeAsState(initial = emptyList())
+    val monthlyRevenueData by viewModel.revenueMonth.observeAsState(initial = emptyList())
+    val yearlyRevenueData by viewModel.revenueYear.observeAsState(initial = emptyList())
+    val historyWeek by viewModel.historyWeek.observeAsState(initial = emptyList())
+    val historyMonth by viewModel.historyMonth.observeAsState(initial = emptyList())
+    val historyYear by viewModel.historyYear.observeAsState(initial = emptyList())
+    val isDataEmptyAfterLoad by viewModel.isDataEmptyAfterLoad.observeAsState(initial = true)
     var showNoDataMessage by remember { mutableStateOf(false) }
     Log.d("RevenueBarChart", "Recomposing RevenueBarChart : $currentWeekStartDate")
     LaunchedEffect(selectedFilter, currentMonthYear, currentWeekStartDate) {
-        apiCallViewModel.clearRevenueData()
+        viewModel.clearRevenueData()
         showNoDataMessage = false
         when (selectedFilter) {
-            "Doanh thu tuần" -> apiCallViewModel.revenueWeek(currentWeekStartDate)
-            "Doanh thu tháng" -> apiCallViewModel.revenueMonth(
+            "Doanh thu tuần" -> viewModel.revenueWeek(currentWeekStartDate)
+            "Doanh thu tháng" -> viewModel.revenueMonth(
                 currentMonthYear.monthValue,
                 currentMonthYear.year
             )
-            "Doanh thu năm" -> apiCallViewModel.revenueYear(currentMonthYear.year)
+            "Doanh thu năm" -> viewModel.revenueYear(currentMonthYear.year)
         }
     }
     LaunchedEffect(isDataEmptyAfterLoad) {

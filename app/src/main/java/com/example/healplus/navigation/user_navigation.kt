@@ -11,8 +11,8 @@ import androidx.navigation.navArgument
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
 import com.example.core.model.users.UserModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
 import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
@@ -124,7 +124,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                     Log.e("Navigation123", "Error: Missing categoryid or categorytitle")
                     return@composable
                 }
-                val viewModel: ApiCallViewModel = viewModel()
+                val viewModel: OrderViewModel = viewModel()
                 CategoryScreen(
                     title = categorytitle,
                     id = categoryid,
@@ -134,7 +134,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
             }
         }
         composable("search"){
-            val viewModel: ApiCallViewModel = viewModel()
+            val viewModel: OrderViewModel = viewModel()
             SearchScreen(
                 viewModel = viewModel,
                 navController = navController

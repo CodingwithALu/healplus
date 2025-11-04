@@ -57,7 +57,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.products.ProductsModel
 import com.example.core.tinydb.helper.ChangeNumberItemsListener
 import com.example.core.tinydb.helper.ManagmentCart
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
 import com.google.gson.Gson
 import java.text.NumberFormat

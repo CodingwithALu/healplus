@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.model.address.AddressModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,14 +62,6 @@ fun AddressScreen(navController: NavController,
                     value = user.name,
                     onValueChange = { },
                     label = { Text("Họ và tên") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                OutlinedTextField(
-                    value = user.phone,
-                    onValueChange = { },
-                    label = { Text("Số điện thoại") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -134,7 +126,6 @@ fun AddressScreen(navController: NavController,
                     onClick = {
                         val newAddress = AddressModel(
                             user.name,
-                            user.phone,
                             user.email,
                             province,
                             addressDetail,

@@ -1,16 +1,16 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.gms.google.services)
-    id("org.jetbrains.kotlin.kapt")
-    alias(libs.plugins.hilt.android.gradle.plugin)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.dagger.android)
 }
-
 android {
     namespace = "com.example.healplus"
     compileSdk = 36
-
     defaultConfig {
         applicationId = "com.example.healplus"
         minSdk = 29
@@ -20,7 +20,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -34,8 +33,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
     buildFeatures {
         compose = true
@@ -44,11 +45,11 @@ android {
         baseline = file("lint-baseline.xml")
     }
 }
-
 dependencies {
     implementation(project(":core-viewmodel"))
     implementation(project(":core-model"))
     implementation(project(":core-data"))
+    implementation(project(":core-network"))
     implementation(libs.androidx.core.ktx)
     implementation (libs.mpandroidchart)
     implementation(libs.accompanist.flowlayout)

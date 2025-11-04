@@ -1,4 +1,4 @@
-package com.example.core.viewmodel.authviewmodel
+package com.example.core.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.model.chat.Message
 import com.example.core.model.users.UserModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,7 +30,6 @@ class AuthViewModel : ViewModel() {
     private var chatRoomId: String? = null
     private val adminId = "Gg7Fu0RguISyjEy7POHO3aSn71F2"
     private var adminChatRooms: List<String> = emptyList()
-    val apiCallViewModel: ApiCallViewModel = ApiCallViewModel()
 
     init {
         checkAuthSate()
@@ -338,7 +336,6 @@ class AuthViewModel : ViewModel() {
         name: String? = null,
         email: String? = null,
         gender: String? = null,
-        phone: String? = null,
         dateBirth: String? = null,
         uploadedImageUrl: String? = null,
         role: String? = null,
@@ -365,7 +362,6 @@ class AuthViewModel : ViewModel() {
                 val updates = mutableMapOf<String, Any>()
                 if (name != null) updates["name"] = name
                 if (gender != null) updates["gender"] = gender
-                if (phone != null) updates["phone"] = phone
                 if (dateBirth != null) updates["dateBirth"] = dateBirth
                 if (uploadedImageUrl != null) updates["url"] = uploadedImageUrl
                 if (role != null) updates["role"] = role

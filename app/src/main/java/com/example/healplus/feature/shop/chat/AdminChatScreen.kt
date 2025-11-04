@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 
 @Composable
 fun AdminChatScreen(

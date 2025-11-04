@@ -56,7 +56,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.Oder.Order
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import com.google.gson.Gson
 import java.text.NumberFormat
@@ -66,14 +66,14 @@ import java.util.Locale
 fun OderManagers(
     navController: NavController
 ) {
-    val apiCallViewModel = remember { ApiCallViewModel() }
-    val allOrders by apiCallViewModel.orders.observeAsState(initial = emptyList())
+    val viewModel = remember { OrderViewModel() }
+    val allOrders by viewModel.orders.observeAsState(initial = emptyList())
     var selectedStatus by remember { mutableStateOf<String?>("Tất cả") }
     LaunchedEffect(selectedStatus) {
         if (selectedStatus == "Tất cả" || selectedStatus == null) {
-            apiCallViewModel.loadOder()
+            viewModel.loadOder()
         } else {
-            apiCallViewModel.loadOderStatus(selectedStatus.toString())
+            viewModel.loadOderStatus(selectedStatus.toString())
         }
     }
     Scaffold(
@@ -117,7 +117,7 @@ fun OderManagers(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(allOrders, key = { order -> order.id }) { order ->
-                        OrderItemCard(navController, order, apiCallViewModel)
+                        OrderItemCard(navController, order, viewModel)
                     }
                 }
             }
@@ -161,7 +161,7 @@ fun StatusFilterChip(
 @Composable
 fun OrderItemCard(
     navController: NavController, order: Order,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ) {
     var expanded by remember { mutableStateOf(false) }
     var status1 by remember { mutableStateOf(order.status ?: "Đang chờ xử lí") }
@@ -229,7 +229,7 @@ fun OrderItemCard(
                             DropdownMenuItem(
                                 text = { Text(status) },
                                 onClick = {
-                                    apiCallViewModel.updateOrderStatus(order.id, status)
+                                    viewModel.updateOrderStatus(order.id, status)
                                     status1 = status
                                     expanded = false
                                 }

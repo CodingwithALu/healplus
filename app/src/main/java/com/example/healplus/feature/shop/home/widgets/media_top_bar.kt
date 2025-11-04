@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.core.model.categories.CategoryModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.shop.home.Notification1
 import com.example.healplus.feature.shop.home.UserView

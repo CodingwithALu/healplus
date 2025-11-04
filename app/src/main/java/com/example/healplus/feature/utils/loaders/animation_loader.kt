@@ -23,7 +23,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.core_utils.utils.constants.TSizes
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
 fun AnimationLoaderWidget(

@@ -12,8 +12,8 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(
-    private val auth: FirebaseAuth,
-    private val db: FirebaseFirestore
+    private val db: FirebaseFirestore,
+    private val auth: FirebaseAuth
 ) {
     // password and email
     suspend fun signInWithEmailPassword(email: String, password: String): Result<AuthResult> = runCatching{

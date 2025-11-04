@@ -1,7 +1,6 @@
 package com.example.healplus.feature.authentication.onboarding
 
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,11 +21,8 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.core.viewmodel.authviewmodel.AuthSate
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.acitivity.AdminActivity
-import com.example.healplus.acitivity.MainActivity
 import kotlinx.coroutines.delay
 
 @Composable
@@ -36,17 +32,17 @@ fun LottieLoadingAnimation(modifier: Modifier= Modifier, navController: NavContr
     var showSecondAnimation by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val authSate = authViewModel.authSate.observeAsState()
-    LaunchedEffect(authSate.value) {
-        delay(2000)
-        if (authSate.value is AuthSate.Admin) {
-            val intent = Intent(context, AdminActivity::class.java)
-            context.startActivity(intent)
-        }
-        if (authSate.value is AuthSate.User) {
-            val intent1 = Intent(context, MainActivity::class.java)
-            context.startActivity(intent1)
-        }
-    }
+//    LaunchedEffect(authSate.value) {
+//        delay(2000)
+//        if (authSate.value is AuthSate.Admin) {
+//            val intent = Intent(context, AdminActivity::class.java)
+//            context.startActivity(intent)
+//        }
+//        if (authSate.value is AuthSate.User) {
+//            val intent1 = Intent(context, MainActivity::class.java)
+//            context.startActivity(intent1)
+//        }
+//    }
     LaunchedEffect(Unit) {
         delay(2000)
         showSecondAnimation = true

@@ -62,7 +62,7 @@ import com.example.core.model.elements.ElementsModel
 import com.example.core.model.products.Thanhphan
 import com.example.core.model.products.UnitInfo
 import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -71,7 +71,7 @@ import java.util.Calendar
 @Composable
 fun AddProductScreen(modifier: Modifier = Modifier,
                      navController: NavController,
-                     viewModel: ApiCallViewModel,
+                     viewModel: OrderViewModel,
                      apiCallAdd: ApiCallAdd) {
     var name by remember { mutableStateOf("") }
     var trademark by remember { mutableStateOf("") }

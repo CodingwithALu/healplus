@@ -1,7 +1,6 @@
 package com.example.healplus.feature.shop.managers
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,14 +63,14 @@ import com.example.core.model.admin.menuItems
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import kotlin.random.Random
 
 @Composable
 fun AddScreen(modifier: Modifier = Modifier,
               navController: NavController,
-              viewModel: ApiCallViewModel = viewModel()
+              viewModel: OrderViewModel = viewModel()
               ){
     val elements by viewModel.element.observeAsState(emptyList())
     LaunchedEffect(Unit) {

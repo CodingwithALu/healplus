@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.model.Oder.Order
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import java.text.NumberFormat
 import java.util.Locale
@@ -54,17 +54,17 @@ import java.util.Locale
 @Composable
 fun UsersOder(navController: NavController,
               authViewModel: AuthViewModel = viewModel()){
-    val apiCallViewModel = remember { ApiCallViewModel() }
+    val viewModel = remember { OrderViewModel() }
     val userId = authViewModel.getUserId().toString()
-    val allOrders by apiCallViewModel.orders.observeAsState(initial = emptyList())
+    val allOrders by viewModel.orders.observeAsState(initial = emptyList())
     var selectedStatus by remember { mutableStateOf<String?>("Tất cả") }
     Log.d("UsersOderDebug", "Initial userId: $userId")
     LaunchedEffect(selectedStatus) {
         Log.d("UsersOderDebug", "LaunchedEffect triggered: userId = $userId, selectedStatus = $selectedStatus")
         if (selectedStatus == "Tất cả"){
-            apiCallViewModel.getOderByUser(userId)
+            viewModel.getOderByUser(userId)
         }else{
-            apiCallViewModel.getOderByUserStatus(userId, selectedStatus.toString())
+            viewModel.getOderByUserStatus(userId, selectedStatus.toString())
         }
     }
     Scaffold(

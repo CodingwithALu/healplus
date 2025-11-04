@@ -41,15 +41,15 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
 fun EditIngredientScreen(
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel,
+    viewModel: OrderViewModel,
     item: IngredientsModel
 ) {
     var title by remember { mutableStateOf(item.title) }
@@ -76,8 +76,8 @@ fun EditIngredientScreen(
     }
     var expanded by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
-        apiCallViewModel.loadCategory()
-        apiCallViewModel.categories.observeForever {
+        viewModel.loadCategory()
+        viewModel.categories.observeForever {
             categoryList.clear()
             categoryList.addAll(it)
         }
@@ -85,7 +85,7 @@ fun EditIngredientScreen(
     Log.d("YourScreen", "Selected Image URI: $selectedImageUri")
     Scaffold(
         topBar = {
-            com.example.core_utils.common.widgets.TAppBar(
+            TAppBar(
                 title = R.string.edit_Category,
                 onClick = { navController.popBackStack() }
             )
@@ -166,7 +166,7 @@ fun EditIngredientScreen(
                 Button(
                     onClick = {
                         if (title.isNotEmpty()) {
-                            apiCallViewModel.updateIngredient(item.iding, title, uploadedImageUrl.toString(), selectedIngredientId) { response ->
+                            viewModel.updateIngredient(item.iding, title, uploadedImageUrl.toString(), selectedIngredientId) { response ->
                                 scope.launch {
                                     snackbarHostState.showSnackbar(response.message)
                                 }

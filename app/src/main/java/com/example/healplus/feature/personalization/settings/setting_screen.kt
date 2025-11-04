@@ -1,8 +1,4 @@
 package com.example.healplus.feature.personalization.settings
-import com.example.healplus.feature.personalization.settings.widgets.SettingsItem
-import com.example.healplus.feature.personalization.settings.widgets.TDeleteAccountButton
-import com.example.healplus.feature.personalization.settings.widgets.TSectionTitle
-import com.example.core_utils.common.widgets.TButtonLogOut
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,10 +19,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.healplus.acitivity.LoginActivity
-import com.example.core_utils.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.TButtonLogOut
+import com.example.healplus.feature.personalization.settings.widgets.SettingsItem
+import com.example.healplus.feature.personalization.settings.widgets.TDeleteAccountButton
+import com.example.healplus.feature.personalization.settings.widgets.TSectionTitle
 
 @Composable
 fun SettingScreen(
@@ -36,7 +36,7 @@ fun SettingScreen(
     val context = LocalContext.current
     Scaffold (
         topBar = {
-            com.example.core_utils.common.widgets.TAppBar(
+            TAppBar(
                 title = R.string.settings,
                 onClick = { navController.popBackStack() },
             )
@@ -95,7 +95,7 @@ fun SettingScreen(
                  }
              ) }
              item {
-                 com.example.core_utils.common.widgets.TButtonLogOut(
+                 TButtonLogOut(
                      title = R.string.logout,
                      onClick = {
                          authViewModel.signOut()

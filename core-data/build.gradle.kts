@@ -1,8 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 }
-
 android {
     namespace = "com.example.core.tinydb"
     compileSdk = 36
@@ -26,19 +27,16 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-        // Thêm các tùy chọn lint
-//        compilerArgs = listOf("-Xlint:deprecation", "-Xlint:unchecked") // Sửa lỗi ở đây
     }
-    // Thêm khối này để cấu hình trực tiếp tác vụ JavaCompile
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:unchecked"))
     }
-    kotlinOptions {
-        jvmTarget = "11"
-        freeCompilerArgs = freeCompilerArgs + "-Xlint:deprecation" + "-Xlint:unchecked"
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
 }
-
 dependencies {
     implementation(project(":core-model"))
     implementation(libs.androidx.core.ktx)

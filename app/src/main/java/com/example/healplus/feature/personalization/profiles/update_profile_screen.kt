@@ -33,12 +33,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.model.users.UserModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.styles.TSpacerStyle
-import com.example.core_utils.common.widgets.TAppBar
-import com.example.core_utils.common.widgets.rememberDatePickerDialog
-import com.example.core_utils.common.widgets.rememberImagePickerLauncher
+import com.example.healplus.feature.common.styles.TSpacerStyle
+import com.example.healplus.feature.common.widgets.TAppBar
+import com.example.healplus.feature.common.widgets.rememberDatePickerDialog
+import com.example.healplus.feature.common.widgets.rememberImagePickerLauncher
 
 @Composable
 fun UpdateProfileScreen(
@@ -49,21 +49,20 @@ fun UpdateProfileScreen(
     var fullName by remember { mutableStateOf(item.name) }
     val email by remember { mutableStateOf(item.email) }
     var gender by remember { mutableStateOf(item.gender) }
-    val phoneNumber by remember { mutableStateOf(item.phone) }
     var urlimg by remember { mutableStateOf(item.url) }
     var birthDate by remember { mutableStateOf(item.dateBirth) }
     var showDatePicker by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val datePicker = com.example.core_utils.common.widgets.rememberDatePickerDialog { date ->
+    val datePicker = rememberDatePickerDialog { date ->
         birthDate = date
     }
     val imagePickerLauncher =
-        com.example.core_utils.common.widgets.rememberImagePickerLauncher { url ->
+        rememberImagePickerLauncher { url ->
             urlimg = url
         }
     Scaffold(
             topBar = {
-                com.example.core_utils.common.widgets.TAppBar(
+                TAppBar(
                     title = R.string.account,
                     onClick = { navController.popBackStack() }
                 )
@@ -79,14 +78,14 @@ fun UpdateProfileScreen(
                 urlimg = urlimg,
                 imagePickerLauncher = imagePickerLauncher,
                 title = "Chọn ảnh đại diện")
-            com.example.core_utils.common.styles.TSpacerStyle(16.dp)
+            TSpacerStyle(16.dp)
             OutlinedTextField(
                     value = fullName,
                     onValueChange = { fullName = it },
                     label = { Text("Họ và tên") },
                     modifier = Modifier.fillMaxWidth()
             )
-            com.example.core_utils.common.styles.TSpacerStyle(16.dp)
+            TSpacerStyle(16.dp)
             Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
@@ -109,13 +108,6 @@ fun UpdateProfileScreen(
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                    value = phoneNumber,
-                    onValueChange = {},
-                    label = { Text("Số điện thoại") },
-                    readOnly = true,
-                    modifier = Modifier.fillMaxWidth()
-            )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
                     value = birthDate,
@@ -139,7 +131,6 @@ fun UpdateProfileScreen(
                                 name = fullName,
                                 email = email,
                                 gender = gender,
-                                phone = phoneNumber,
                                 uploadedImageUrl = urlimg,
                                 dateBirth = birthDate,
                                 onComplete = { success, message ->

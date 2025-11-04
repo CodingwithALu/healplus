@@ -19,7 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.core.model.bottomapp.NavItemModel
 import com.example.core.tinydb.helper.ManagmentCart
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
 import com.example.healplus.navigation.MyAppNavigation
 import com.example.healplus.ui.theme.AppTheme
@@ -30,7 +30,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val authViewModel: AuthViewModel by viewModels()
-
         setContent {
             AppTheme {
                 Scaffold(

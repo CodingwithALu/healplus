@@ -1,6 +1,5 @@
 package com.example.healplus.feature.authentication.signup
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -28,7 +27,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -50,10 +48,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import com.example.core.viewmodel.authviewmodel.AuthSate
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthSate
+import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.acitivity.MainActivity
 import com.example.healplus.feature.common.widgets.TAvatarImage
 import com.example.healplus.feature.common.widgets.WidgetButtonAuth
 import com.example.healplus.feature.shop.managers.uploadImageToServer
@@ -91,17 +88,17 @@ fun CreateAccountScreen(
         }
     }
     val authSate = authViewModel.authSate.observeAsState()
-    LaunchedEffect(authSate.value) {
-        if (authSate.value is AuthSate.Admin) {
-            val intent = Intent(context, AdminActivity::class.java)
-            context.startActivity(intent)
-        }
-        if (authSate.value is AuthSate.User) {
-            val intent1 = Intent(context, MainActivity::class.java)
-            context.startActivity(intent1)
-        }
-
-    }
+//    LaunchedEffect(authSate.value) {
+//        if (authSate.value is AuthSate.Admin) {
+//            val intent = Intent(context, AdminActivity::class.java)
+//            context.startActivity(intent)
+//        }
+//        if (authSate.value is AuthSate.User) {
+//            val intent1 = Intent(context, MainActivity::class.java)
+//            context.startActivity(intent1)
+//        }
+//
+//    }
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()

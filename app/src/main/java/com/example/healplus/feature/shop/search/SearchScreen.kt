@@ -40,7 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.feature.shop.category.RecommendedList1
 import com.google.accompanist.flowlayout.FlowRow
 import kotlinx.coroutines.delay
@@ -48,7 +48,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SearchScreen(
     navController: NavController,
-    viewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ) {
     val product by viewModel.recommended.observeAsState(emptyList())
     var isLoading by remember { mutableStateOf(false) }

@@ -78,10 +78,10 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
 import com.example.core.tinydb.helper.ManagmentCart
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
-import com.example.core_utils.common.styles.TSpacerStyle
+import com.example.healplus.feature.common.styles.TSpacerStyle
 import com.google.gson.Gson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -93,7 +93,7 @@ fun DetailScreen(
     item: ProductsModel,
     navController: NavController,
     authViewModel: AuthViewModel = viewModel(),
-    apiCallViewModel: ApiCallViewModel = viewModel()
+    viewModel: OrderViewModel = viewModel()
 ) {
     var selectedImageUrl by remember { mutableStateOf(item.product_images.first()) }
     var model by remember { mutableStateOf(item.unit_names.first()) }
@@ -194,9 +194,9 @@ fun DetailScreen(
                 )
             }
 
-            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
-            ProductInfoView(item, navController, apiCallViewModel)
-            com.example.core_utils.common.styles.TSpacerStyle(4.dp)
+            TSpacerStyle(4.dp)
+            ProductInfoView(item, navController, viewModel)
+            TSpacerStyle(4.dp)
             ProductReviewsSection(
                 averageRating = item.rating.toFloat(),
                 totalReviews = item.review,
@@ -240,7 +240,7 @@ fun PriceText(price: Int, model: String) {
 fun ProductInfoView(
     product: ProductsModel,
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ) {
     var showProducts by rememberSaveable  { mutableStateOf(false) }
     Column(modifier = Modifier.padding(16.dp)) {
@@ -259,7 +259,7 @@ fun ProductInfoView(
                 fontSize = 14.sp,
                 modifier = Modifier.clickable {
                     navController.navigate("productDetail/${Uri.encode(Gson().toJson(product))}")
-                    apiCallViewModel.upDateReview(product.idp)
+                    viewModel.upDateReview(product.idp)
                 }
             )
         }
@@ -280,7 +280,7 @@ fun ProductInfoView(
                 ProductInfoItem(stringResource(R.string.expiry), product.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), product.ingredient)
                 ProductInfoItem(stringResource(R.string.description), product.description)
-                SeeAllButton(product, navController, apiCallViewModel)
+                SeeAllButton(product, navController, viewModel)
             }
         }
         BouncingIconButton(showProducts = showProducts) {
@@ -319,14 +319,14 @@ fun BouncingIconButton(showProducts: Boolean, onToggle: () -> Unit) {
 fun SeeAllButton(
     item: ProductsModel,
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: OrderViewModel
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 navController.navigate("productDetail/${Uri.encode(Gson().toJson(item))}")
-                apiCallViewModel.upDateReview(item.idp)
+                viewModel.upDateReview(item.idp)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {

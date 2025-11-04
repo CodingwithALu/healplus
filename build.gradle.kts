@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -6,5 +5,10 @@ plugins {
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.kapt) apply false
-    alias (libs.plugins.hilt.android.gradle.plugin) apply false
+    alias (libs.plugins.hilt.dagger.android) apply false
+}
+buildscript {
+    dependencies {
+        classpath (libs.hilt.android.gradle.plugin)
+    }
 }
