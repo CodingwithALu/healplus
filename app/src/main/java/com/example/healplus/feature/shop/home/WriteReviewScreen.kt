@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Backup
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -40,11 +41,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
+import com.example.core.model.products.ReviewItem
 import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.ReviewViewModel
+import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
 import com.example.healplus.R
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -59,7 +63,8 @@ fun WriteReviewScreen(
     apiCallAdd: ApiCallAdd = viewModel(),
     authViewModel: AuthViewModel = viewModel(),
 ) {
-    var rating by remember { mutableStateOf(0) }
+    val viewModel: ReviewViewModel = hiltViewModel()
+    var rating by remember { mutableIntStateOf(0) }
     var reviewTitle by remember { mutableStateOf("") }
     var reviewComment by remember { mutableStateOf("") }
     var isLoading by remember { mutableStateOf(false) }
@@ -88,7 +93,7 @@ fun WriteReviewScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
+                            imageVector = Icons.Filled.Backup,
                             contentDescription = stringResource(R.string.back_button_desc)
                         )
                     }
@@ -145,14 +150,14 @@ fun WriteReviewScreen(
                         ).show()
                         return@Button
                     }
-                    if (reviewComment.length < 20) {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.comment_too_short_toast, 20),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@Button
-                    }
+//                    if (reviewComment.length < 20) {
+//                        Toast.makeText(
+//                            context,
+//                            text = context.getString(R.string.comment_too_short_toast, 20),
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        return@Button
+//                    }
                     coroutineScope.launch {
                         isLoading = true
                         try {
@@ -167,15 +172,14 @@ fun WriteReviewScreen(
                                 Locale.getDefault()
                             )
                             val currentDateAndTime = sdf.format(Date())
-
-                            apiCallAdd.addReview(
+                            val review = ReviewItem(
                                 reviewerName = reviewerNameToSubmit,
                                 rating = rating.toFloat(),
                                 comment = reviewComment,
                                 date = currentDateAndTime,
-                                profileImageUrl = imageUrlToSubmit,
-                                idp = productId
+                                profileImageUrl = imageUrlToSubmit
                             )
+                            viewModel.createReview(review, productId)
                         } catch (e: Exception) {
                             Log.e("WriteReviewScreen", "Error fetching user data: ${e.message}", e)
                             Toast.makeText(

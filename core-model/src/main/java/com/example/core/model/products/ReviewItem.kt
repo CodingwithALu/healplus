@@ -17,7 +17,6 @@ data class ReviewItem(
         date = parcel.readString() ?: "",
         profileImageUrl = parcel.readString()
     )
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(reviewerName)
         parcel.writeFloat(rating)
@@ -35,5 +34,19 @@ data class ReviewItem(
         override fun newArray(size: Int): Array<ReviewItem?> {
             return arrayOfNulls(size)
         }
+        fun empty(): ReviewItem = ReviewItem(
+            reviewerName = "",
+            rating = 0f,
+            comment = "",
+            date = "",
+            profileImageUrl = null
+        )
     }
+    fun toJsonMap(): Map<String, Any?> = mapOf(
+        "reviewerName" to reviewerName,
+        "rating" to rating,
+        "comment" to comment,
+        "date" to date,
+        "profileImageUrl" to profileImageUrl
+    )
 }

@@ -6,13 +6,23 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.core.model.Oder.Order
+import com.example.core.model.products.ProductsModel
 import com.example.core.network.retrofitclients.RetrofitClient
+import com.example.core.repository.OrderRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import javax.inject.Inject
 
-class OrderViewModel1: ViewModel (){
+@HiltViewModel
+class OrderViewModel @Inject constructor(
+    private val orderRepository: OrderRepository
+): ViewModel (){
     private val _orders = MutableLiveData<MutableList<Order>>()
     val orders: LiveData<MutableList<Order>> = _orders
     private var isLoading by mutableStateOf(false)
@@ -35,5 +45,15 @@ class OrderViewModel1: ViewModel (){
             }
 
         })
+    }
+    // create Order
+    fun createOrder(order: Order, dateTime: LocalDate, items: List<ProductsModel>){
+        viewModelScope.launch {
+            orderRepository.createOrder(
+                order,
+                dateTime,
+                items
+            )
+        }
     }
 }

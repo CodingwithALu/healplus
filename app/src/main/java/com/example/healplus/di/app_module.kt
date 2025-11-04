@@ -1,4 +1,6 @@
+
 import com.example.core.network.apis.ApiService
+import com.example.core.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +15,11 @@ object AppModule {
     @Singleton
     fun provideApiServices(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+    // add Products
+    @Provides
+    @Singleton
+    fun provideProductRepository(apiService: ApiService): ProductRepository {
+        return ProductRepository(apiService)
     }
 }

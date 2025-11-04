@@ -25,4 +25,18 @@ data class UserModel(
             role = ""
         )
     }
+    fun toJsonMap(): Map<String, Any?>{
+        return mapOf(
+            "id" to idUser,
+            "name" to name,
+            "email" to email,
+            "password" to password,
+            "gender" to gender,
+            "dateBirth" to dateBirth,
+            "url" to url,
+            "spot" to spot,
+            "token" to token,
+            "role" to role
+        )
+    }
 }

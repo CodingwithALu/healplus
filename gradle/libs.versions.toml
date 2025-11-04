@@ -26,6 +26,7 @@ constraintLayoutCompose = "1.1.1"
 accompanistPager = "0.36.0"
 coilCompose = "2.6.0"
 lifecycleViewmodelKtx = "2.9.4"
+materialIconsExtended = "1.7.8"
 mpandroidchart = "v3.1.0"
 okhttp = "5.2.1"
 paymentVersion = "2.1.6"
@@ -52,6 +53,7 @@ accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayo
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 
 # Moshi codegen (nếu dùng Moshi)
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }

@@ -50,7 +50,6 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("phone") phone: String,
         @Field("url") url: String,
         @Field("role") role: String
     ): ApiResponse
@@ -178,7 +177,7 @@ interface ApiService {
         @Field("description") description: String,
         @Field("quantity") quantity: String,
         @Field("ide") ide: String,
-        @Field("productiondate") productiondate: String,
+        @Field("productiondate") dateTime: String,
         @Field("congdung") congdung: String,
         @Field("cachdung") cachdung: String,
         @Field("tacdungphu") tacdungphu: String,
