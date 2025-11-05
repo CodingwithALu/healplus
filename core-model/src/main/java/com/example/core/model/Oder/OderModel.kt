@@ -2,7 +2,7 @@ package com.example.core.model.Oder
 
 import com.example.core.model.products.ProductsModel
 
-data class Order(
+data class OrderModel(
     val id: Int,
     val userId: String,
     val name: String,
@@ -17,7 +17,7 @@ data class Order(
     val items: List<ProductsModel>
 ) {
     companion object{
-        fun empty() = Order(
+        fun empty() = OrderModel(
             id = 0,
             userId = "",
             name = "",
@@ -33,7 +33,7 @@ data class Order(
         )
     }
 
-    // Optional: convert Order to a Map payload for easy upload
+    // Optional: convert OrderModel to a Map payload for easy upload
     fun toJsonMap(): Map<String, Any?> {
         return mapOf(
             "id" to id,

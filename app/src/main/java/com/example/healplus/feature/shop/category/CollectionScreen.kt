@@ -58,7 +58,6 @@ import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import com.example.healplus.ui.theme.errorDarkHighContrast
 import com.example.healplus.ui.theme.inverseOnSurfaceLight
@@ -77,7 +76,7 @@ import kotlin.random.Random
 
 
 @Composable
-fun CategoryScreen(
+fun CollectionScreen(
     id: String,
     title: String,
     viewModel: OrderViewModel,

@@ -1,5 +1,5 @@
 package com.example.core.network.apis
-import com.example.core.model.Oder.Order
+import com.example.core.model.Oder.OrderModel
 import com.example.core.model.api.ApiResponse
 import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
@@ -43,7 +43,7 @@ interface ApiService {
     @GET("getsearch.php")
     suspend fun getSearchProduct(@Query("search") search: String): List<ProductsModel>
     @GET("get_oder.php")
-    suspend fun getOder(): List<Order>
+    suspend fun getOder(): List<OrderModel>
     @FormUrlEncoded
     @POST("add_user.php")
     suspend fun addUser(
@@ -196,20 +196,20 @@ interface ApiService {
     @POST("get_oder_by_status.php")
     suspend fun getOrderStatus(
         @Field("status") status: String
-    ): List<Order>
+    ): List<OrderModel>
 
     @FormUrlEncoded
     @POST("get_oder_by_user.php")
-    suspend fun getOderByUser(
-        @Field("idauth") idauth: String
-    ): List<Order>
+    suspend fun getOrderByUser(
+        @Field("idauth") idUser: String
+    ): List<OrderModel>
 
     @FormUrlEncoded
     @POST("get_oder_by_userstatus.php")
-    suspend fun getOderByUserStatus(
+    suspend fun getOrderByStatusByUser(
         @Field("idauth") idauth: String,
         @Field("status") status: String
-    ): List<Order>
+    ): List<OrderModel>
     
     @GET("revenue_month.php")
     suspend fun revenueMonth(

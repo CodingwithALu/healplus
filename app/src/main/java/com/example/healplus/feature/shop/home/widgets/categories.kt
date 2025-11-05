@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.example.core.model.categories.CategoryModel
 
 @Composable
-fun CategoryList(categories: List<CategoryModel>, navController: NavController) {
+fun CategoryList(categories: MutableList<CategoryModel>?, navController: NavController) {
     var selectedIndex by remember { mutableStateOf(-1) }
     LazyRow(
         modifier = Modifier

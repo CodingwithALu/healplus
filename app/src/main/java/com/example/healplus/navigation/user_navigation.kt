@@ -18,7 +18,7 @@ import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
 import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
-import com.example.healplus.feature.shop.category.CategoryScreen
+import com.example.healplus.feature.shop.category.CollectionScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
 import com.example.healplus.feature.shop.home.AllReviewsScreen
 import com.example.healplus.feature.shop.home.DetailScreen
@@ -125,7 +125,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                     return@composable
                 }
                 val viewModel: OrderViewModel = viewModel()
-                CategoryScreen(
+                CollectionScreen(
                     title = categorytitle,
                     id = categoryid,
                     viewModel = viewModel,

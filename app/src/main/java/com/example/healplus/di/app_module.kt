@@ -1,5 +1,6 @@
 
 import com.example.core.network.apis.ApiService
+import com.example.core.repository.HomeRepository
 import com.example.core.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
@@ -21,5 +22,11 @@ object AppModule {
     @Singleton
     fun provideProductRepository(apiService: ApiService): ProductRepository {
         return ProductRepository(apiService)
+    }
+    // homeRepository
+    @Provides
+    @Singleton
+    fun provideHomeRepository(apiService: ApiService): HomeRepository {
+        return HomeRepository(apiService)
     }
 }

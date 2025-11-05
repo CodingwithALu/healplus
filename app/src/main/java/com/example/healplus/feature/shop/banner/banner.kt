@@ -21,7 +21,7 @@ import com.example.healplus.feature.shop.banner.widgets.DotIndicator
 import kotlinx.coroutines.delay
 
 @Composable
-fun Banners(banners: List<BannersModel>) {
+fun Banners(banners: List<BannersModel>?) {
     AutoSlidingCarousel(banners = banners)
 }
 

@@ -54,7 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.core.model.Oder.Order
+import com.example.core.model.Oder.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
@@ -160,11 +160,11 @@ fun StatusFilterChip(
 
 @Composable
 fun OrderItemCard(
-    navController: NavController, order: Order,
+    navController: NavController, orderModel: OrderModel,
     viewModel: OrderViewModel
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var status1 by remember { mutableStateOf(order.status ?: "Đang chờ xử lí") }
+    var status1 by remember { mutableStateOf(orderModel.status ?: "Đang chờ xử lí") }
     var showProducts by remember { mutableStateOf(false) }
     val statuses = listOf("Đang chờ xử lý", "Đang vận chuyển", "Đã giao hàng", "Đã hủy")
     Card(
@@ -179,31 +179,31 @@ fun OrderItemCard(
                 .padding(12.dp)
         ) {
             Text(
-                text = "Đơn hàng số ${order.id}", fontWeight = FontWeight.Bold, fontSize = 18.sp,
+                text = "Đơn hàng số ${orderModel.id}", fontWeight = FontWeight.Bold, fontSize = 18.sp,
                 textAlign = TextAlign.Center, color = Color.Red,
                 modifier = Modifier
                     .fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = order.name, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(text = orderModel.name, fontWeight = FontWeight.Bold, fontSize = 16.sp)
             Spacer(modifier = Modifier.height(4.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = order.phone, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                Text(text = orderModel.phone, fontWeight = FontWeight.Bold, fontSize = 16.sp)
                 Text(
-                    text = order.datetime.toString(),
+                    text = orderModel.datetime.toString(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
             }
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Đ/c: ${order.address}", fontSize = 14.sp, color = Color.DarkGray)
+            Text(text = "Đ/c: ${orderModel.address}", fontSize = 14.sp, color = Color.DarkGray)
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Tiền: ${NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(order.sumMoney)}",
+                text = "Tiền: ${NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(orderModel.sumMoney)}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 color = Color.Blue,
@@ -229,7 +229,7 @@ fun OrderItemCard(
                             DropdownMenuItem(
                                 text = { Text(status) },
                                 onClick = {
-                                    viewModel.updateOrderStatus(order.id, status)
+                                    viewModel.updateOrderStatus(orderModel.id, status)
                                     status1 = status
                                     expanded = false
                                 }
@@ -260,7 +260,7 @@ fun OrderItemCard(
             }
             if (showProducts) {
                 Spacer(modifier = Modifier.height(8.dp))
-                order.items.forEach { item ->
+                orderModel.items.forEach { item ->
                     ProductOrderItem(navController, item = item)
                     Spacer(modifier = Modifier.height(4.dp))
                 }

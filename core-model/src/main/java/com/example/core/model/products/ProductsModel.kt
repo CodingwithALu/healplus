@@ -137,7 +137,7 @@ data class ProductsModel(
         fun fromJson(json: String): ProductsModel {
             return Gson().fromJson(json, ProductsModel::class.java)
         }
-        // factory for an empty/default product (used by Order.empty())
+        // factory for an empty/default product (used by OrderModel.empty())
         fun empty(): ProductsModel {
             return ProductsModel()
         }

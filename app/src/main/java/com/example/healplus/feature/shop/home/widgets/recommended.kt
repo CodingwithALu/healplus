@@ -31,7 +31,7 @@ import java.util.*
 import kotlin.random.Random
 
 @Composable
-fun ListItems(items: List<ProductsModel>, navController: NavController) {
+fun ListItems(items: MutableList<ProductsModel>?, navController: NavController) {
     LazyRow (
         modifier = Modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp),

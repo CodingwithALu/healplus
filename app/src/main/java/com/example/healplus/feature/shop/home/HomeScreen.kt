@@ -39,7 +39,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -52,17 +51,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.core.model.banners.BannersModel
-import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.model.products.ProductsModel
 import com.example.core.viewmodel.AuthSate
 import com.example.core.viewmodel.AuthViewModel
 import com.example.core.viewmodel.HomeViewmodel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.texts.TSectionHeading
 import com.example.healplus.feature.shop.home.widgets.CategoryList
@@ -84,17 +80,15 @@ import kotlin.random.Random
 fun HomeScreen(
     navController: NavController,
     authViewModel: AuthViewModel = viewModel(),
-    viewModel: OrderViewModel = viewModel(),
-    homeViewmodel: HomeViewmodel = viewModel()
 ) {
-    val banners = remember { mutableStateListOf<BannersModel>() }
-    val categories = remember { mutableStateListOf<CategoryModel>() }
-    val ingredient = remember { mutableStateListOf<IngredientsModel>() }
-    val recommended = remember { mutableStateListOf<ProductsModel>() }
+    val viewModel : HomeViewmodel = hiltViewModel()
+    val banners by viewModel.banners.observeAsState()
+    val categories by viewModel.categories.observeAsState()
+    val ingredient by viewModel.ingredient.observeAsState()
+    val recommended by viewModel.recommended.observeAsState()
     var showBannerLoading by remember { mutableStateOf(true) }
     var showCategoryLoading by remember { mutableStateOf(true) }
     var showRecommendedLoading by remember { mutableStateOf(true) }
-    var showIngredient by remember { mutableStateOf(true) }
     val authSate = authViewModel.authSate.observeAsState()
 
     LaunchedEffect(authSate.value) {
@@ -103,39 +97,7 @@ fun HomeScreen(
             else -> Unit
         }
     }
-    LaunchedEffect(Unit) {
-        homeViewmodel.loadBanners()
-        homeViewmodel.banners.observeForever {
-            banners.clear()
-            banners.addAll(it)
-            showBannerLoading = false
-        }
 
-    }
-    LaunchedEffect(Unit) {
-        viewModel.loadCategory()
-        viewModel.categories.observeForever {
-            categories.clear()
-            categories.addAll(it)
-            showCategoryLoading = false
-        }
-    }
-    LaunchedEffect(Unit) {
-        viewModel.loadIngredientCount()
-        viewModel.ingredient.observeForever {
-            ingredient.clear()
-            ingredient.addAll(it)
-            showIngredient = false
-        }
-    }
-    LaunchedEffect(Unit) {
-        viewModel.loadRecommended()
-        viewModel.recommended.observeForever {
-            recommended.clear()
-            recommended.addAll(it)
-            showRecommendedLoading = false
-        }
-    }
     Scaffold(
 //        topBar = { MediumTopAppBar(
 //            navController = navController,
@@ -258,7 +220,7 @@ fun HomeScreen(
 
 @Composable
 fun IngredientScreen(
-    categoriesItems: List<IngredientsModel>,
+    categoriesItems: MutableList<IngredientsModel>?,
     navController: NavController
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -298,16 +260,16 @@ fun IngredientScreen(
                 val displayedItems = if (isExpanded)
                     categoriesItems
                 else
-                    categoriesItems.take(4)
+                    categoriesItems?.take(4)
 
-                for (i in displayedItems.indices step 2) {
+                for (i in displayedItems?.indices!!.step(2)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Box(modifier = Modifier.weight(1f)) {
                             IngredientItem(
-                                item = displayedItems[i],
+                                item = displayedItems.get(i),
                                 iSelected = selectedIndex == i,
                                 onItemClick = {
                                     selectedIndex = i
