@@ -1,4 +1,4 @@
-
+package com.example.healplus.feature.shop.banner
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun Banners(banners: List<BannersModel>?) {
-    AutoSlidingCarousel(banners = banners)
+    AutoSlidingCarousel(banners = banners!!)
 }
 
 @Composable

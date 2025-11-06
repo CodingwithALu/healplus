@@ -33,7 +33,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -47,34 +46,34 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.TAppBar
 import com.example.healplus.ui.theme.inversePrimaryDark
 import com.example.healplus.ui.theme.tertiaryDarkHighContrast
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateDeleteCategory(
     navController: NavController,
-    viewModel: OrderViewModel
 ){
+    val viewModel: CollectionViewModel = hiltViewModel()
     val categories = remember { mutableStateListOf<CategoryModel>() }
     val snackbarHostState = remember { SnackbarHostState() }
     var selectedIndex by remember { mutableStateOf(-1) }
     val scope = rememberCoroutineScope()
-    LaunchedEffect(categories) {
-        viewModel.loadCategory()
-        viewModel.categories.observeForever{
-            categories.clear()
-            categories.addAll(it)
-        }
-    }
+//    LaunchedEffect(categories) {
+//        viewModel.loadCategory()
+//        viewModel.categories.observeForever{
+//            categories.clear()
+//            categories.addAll(it)
+//        }
+//    }
     Scaffold (
         topBar = {
             TopAppBar(
@@ -115,11 +114,11 @@ fun UpdateDeleteCategory(
                     navController.navigate("edit_category/${categories[index].idc}/${categories[index].title}")
                 },
                 onItemDeleteClick = {
-                    viewModel.deleteCategory(categories[index].idc){ response ->
-                    }
-                    scope.launch {
-                        snackbarHostState.showSnackbar("Đã xóa thành công!")
-                    }
+//                    viewModel.(categories[index].idc){ response ->
+//                    }
+//                    scope.launch {
+//                        snackbarHostState.showSnackbar("Đã xóa thành công!")
+//                    }
                     navController.navigate("add")
                 }
             )
@@ -188,7 +187,7 @@ fun CategoryItemAdd(
 @Composable
 fun EditCategoryScreen(
     navController: NavController,
-    viewModel: OrderViewModel,
+    viewModel: CollectionViewModel,
     idc: String,
     oldTitle: String) {
     var title by remember { mutableStateOf(oldTitle) }
@@ -238,17 +237,17 @@ fun EditCategoryScreen(
             ) {
                 Button(
                     onClick = {
-                        if (title.isNotEmpty()) {
-                            viewModel.updateCategory(idc, title) { response ->
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(response.message)
-                                }
-                            }
-                        } else {
-                            scope.launch {
-                                snackbarHostState.showSnackbar("Cập nhật thành công!")
-                            }
-                        }
+//                        if (title.isNotEmpty()) {
+//                            viewModel.updateCategory(idc, title) { response ->
+//                                scope.launch {
+//                                    snackbarHostState.showSnackbar(response.message)
+//                                }
+//                            }
+//                        } else {
+//                            scope.launch {
+//                                snackbarHostState.showSnackbar("Cập nhật thành công!")
+//                            }
+//                        }
                     },
                     modifier = Modifier
                         .padding(top = 16.dp, bottom = 60.dp)
@@ -266,19 +265,19 @@ fun EditCategoryScreen(
 @Composable
 fun UpdateDeleteIngredient(
     navController: NavController,
-    viewModel: OrderViewModel
+    viewModel: CollectionViewModel
 ){
     val ingredients = remember { mutableStateListOf<IngredientsModel>() }
     val snackbarHostState = remember { SnackbarHostState() }
     var selectedIndex by remember { mutableStateOf(-1) }
     val scope = rememberCoroutineScope()
-    LaunchedEffect(ingredients) {
-        viewModel.loadIngredients()
-        viewModel.ingredient.observeForever{
-            ingredients.clear()
-            ingredients.addAll(it)
-        }
-    }
+//    LaunchedEffect(ingredients) {
+//        viewModel.loadIngredients()
+//        viewModel.ingredient.observeForever{
+//            ingredients.clear()
+//            ingredients.addAll(it)
+//        }
+//    }
     Scaffold (
         topBar = {
             TopAppBar(
@@ -320,11 +319,11 @@ fun UpdateDeleteIngredient(
                     navController.navigate("edit_ingredient/${ingredients[index]}}")
                 },
                 onItemDeleteClick = {
-                    viewModel.deleteCategory(ingredients[index].idc){ response ->
-                    }
-                    scope.launch {
-                        snackbarHostState.showSnackbar("Đã xóa thành công!")
-                    }
+//                    viewModel.deleteCategory(ingredients[index].idc){ response ->
+//                    }
+//                    scope.launch {
+//                        snackbarHostState.showSnackbar("Đã xóa thành công!")
+//                    }
                     navController.navigate("add")
                 }
             )

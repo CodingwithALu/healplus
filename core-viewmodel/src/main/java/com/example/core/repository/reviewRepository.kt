@@ -26,4 +26,11 @@ class ReviewRepository(
         }
         return result
     }
+    suspend fun updateReview(id: String): ApiResponse{
+        var result = ApiResponse.empty()
+        withContext(Dispatchers.IO){
+            result = api.updateReview(id)
+        }
+        return result
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.healplus.feature.shop.home
 
-import Banners
 import android.net.Uri
 import android.util.Log
 import androidx.compose.animation.animateContentSize
@@ -39,6 +38,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -61,6 +61,7 @@ import com.example.core.viewmodel.AuthViewModel
 import com.example.core.viewmodel.HomeViewmodel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.texts.TSectionHeading
+import com.example.healplus.feature.shop.banner.Banners
 import com.example.healplus.feature.shop.home.widgets.CategoryList
 import com.example.healplus.feature.shop.home.widgets.DrugStoreInfoScreen
 import com.example.healplus.feature.shop.home.widgets.ListItems
@@ -98,14 +99,7 @@ fun HomeScreen(
         }
     }
 
-    Scaffold(
-//        topBar = { MediumTopAppBar(
-//            navController = navController,
-//            categories = categories,
-//            showCategoryLoading = showCategoryLoading,
-//            viewModel = authViewModel
-//        ) }
-    ) { paddingValues ->
+    Scaffold { paddingValues ->
         ConstraintLayout(
             modifier = Modifier
                 .padding(paddingValues)
@@ -148,7 +142,7 @@ fun HomeScreen(
                     } else {
                         Column {
                             Spacer(modifier = Modifier.height(16.dp))
-                            CategoryList(categories, navController)
+                            CategoryList(categories!!, navController)
                         }
                     }
                 }
@@ -168,7 +162,7 @@ fun HomeScreen(
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             TSectionHeading(R.string.recommended)
-                            ListItems(recommended, navController)
+                            ListItems(recommended!!, navController)
                             Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
@@ -224,7 +218,7 @@ fun IngredientScreen(
     navController: NavController
 ) {
     var isExpanded by remember { mutableStateOf(false) }
-    var selectedIndex by remember { mutableStateOf(-1) }
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     Card(
         modifier = Modifier
@@ -269,12 +263,12 @@ fun IngredientScreen(
                     ) {
                         Box(modifier = Modifier.weight(1f)) {
                             IngredientItem(
-                                item = displayedItems.get(i),
+                                item = displayedItems[i],
                                 iSelected = selectedIndex == i,
                                 onItemClick = {
                                     selectedIndex = i
                                     navController.navigate(
-                                        "category/${displayedItems[i].iding}/${displayedItems[i].title}"
+                                        "category/${displayedItems[i].idIngredient}/${displayedItems[i].title}"
                                     )
                                 }
                             )
@@ -288,7 +282,7 @@ fun IngredientScreen(
                                     onItemClick = {
                                         selectedIndex = i + 1
                                         navController.navigate(
-                                            "category/${displayedItems[i + 1].iding}/${displayedItems[i + 1].title}"
+                                            "category/${displayedItems[i + 1].idIngredient}/${displayedItems[i + 1].title}"
                                         )
                                     }
                                 )

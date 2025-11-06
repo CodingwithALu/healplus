@@ -1,4 +1,4 @@
-package com.example.healplus.feature.shop.category
+package com.example.healplus.feature.shop.collections
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,12 +52,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import com.example.healplus.ui.theme.errorDarkHighContrast
 import com.example.healplus.ui.theme.inverseOnSurfaceLight
@@ -79,13 +81,13 @@ import kotlin.random.Random
 fun CollectionScreen(
     id: String,
     title: String,
-    viewModel: OrderViewModel,
     navController: NavController
 ) {
-    val category by viewModel.categories.observeAsState(emptyList())
+    val viewModel: CollectionViewModel = hiltViewModel()
+    val category by viewModel.category.observeAsState(emptyList())
     val ingredients by viewModel.ingredient.observeAsState(emptyList())
     val element by viewModel.element.observeAsState(emptyList())
-    val product by viewModel.recommended.observeAsState(emptyList())
+    val product by viewModel.currentCall.observeAsState(emptyList())
     val isLoading by remember { mutableStateOf(false) }
     var currentDisplayState by rememberSaveable { mutableStateOf(DisplayState.INGREDIENTS_FOR_CATEGORY) }
     var titlec by remember { mutableStateOf(title) }
@@ -95,23 +97,19 @@ fun CollectionScreen(
     var iding by remember { mutableStateOf(id) }
     var idcelm by remember { mutableStateOf(id) }
     LaunchedEffect(idc) {
-        viewModel.loadIngredientByCategory(idc)
-        viewModel.loadProductByCategory(idc)
-        viewModel.loadElementByIngredient(idc)
+        viewModel.fetchIngredientAndProduct(idc)
         currentDisplayState = DisplayState.INGREDIENTS_FOR_CATEGORY
         titlec = category.find { it.idc == idc }?.title ?: title
     }
     LaunchedEffect(iding) {
-        viewModel.loadElementByIngredient(iding)
-        viewModel.loadProductByIngredient(iding)
+        viewModel.fetchElementAndProductFromIn(iding)
         currentDisplayState = DisplayState.ELEMENTS_FOR_INGREDIENT
     }
     LaunchedEffect(idcelm) {
-        viewModel.loadProductByElement(idcelm)
+        viewModel.fetchProductByElement(idcelm)
         currentDisplayState = DisplayState.PRODUCT_FOR_ELEMENT
     }
     LaunchedEffect(Unit) {
-        viewModel.loadCategory()
         currentDisplayState = DisplayState.INGREDIENTS_FOR_CATEGORY
     }
     Scaffold (
@@ -143,7 +141,7 @@ fun CollectionScreen(
                           (currentDisplayState == DisplayState.PRODUCT_FOR_ELEMENT)){
                           item {
                               val currentTitle = when (currentDisplayState) {
-                                  DisplayState.ELEMENTS_FOR_INGREDIENT -> ingredients.find { it.iding == iding }?.title ?: "Element"
+                                  DisplayState.ELEMENTS_FOR_INGREDIENT -> ingredients.find { it.idIngredient == iding }?.title ?: "Element"
                                   DisplayState.INGREDIENTS_FOR_CATEGORY -> category.find { it.idc == idc }?.title ?: "Thành phần"
                                   DisplayState.PRODUCT_FOR_ELEMENT -> element.find { it.ide == idcelm }?.title ?: "Sản phẩm"
                               }
@@ -153,7 +151,7 @@ fun CollectionScreen(
                                           currentDisplayState =
                                               DisplayState.INGREDIENTS_FOR_CATEGORY
                                           idc = category.find { it.idc == idc }?.idc ?: idc
-                                          iding = ingredients.find { it.iding == iding }?.iding ?: iding
+                                          iding = ingredients.find { it.idIngredient == iding }?.idIngredient ?: iding
                                           titlec = category.find { it.idc == idc }?.title ?: title
                                       }
                                       DisplayState.INGREDIENTS_FOR_CATEGORY -> {
@@ -373,7 +371,7 @@ fun CategoryItem12(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(3f)
-            .clickable { onItemClick(item.iding, item.title) }
+            .clickable { onItemClick(item.idIngredient, item.title) }
     ) {
         Row(
             modifier = Modifier

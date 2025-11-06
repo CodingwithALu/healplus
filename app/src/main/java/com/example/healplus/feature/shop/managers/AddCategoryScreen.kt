@@ -27,16 +27,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
+import com.example.core.model.categories.CategoryModel
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddCategoryScreen(navController: NavController, viewModel: OrderViewModel) {
+fun AddCategoryScreen(navController: NavController) {
+    val viewModel: CollectionViewModel = hiltViewModel()
     var title by remember { mutableStateOf("") }
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     Scaffold(
@@ -46,7 +49,7 @@ fun AddCategoryScreen(navController: NavController, viewModel: OrderViewModel) {
                 onClick = { navController.popBackStack() }
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState,
+        snackbarHost = { SnackbarHost(snackBarHostState,
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
@@ -87,14 +90,14 @@ fun AddCategoryScreen(navController: NavController, viewModel: OrderViewModel) {
                     Button(
                         onClick = {
                             if (title.isNotEmpty()) {
-                                viewModel.addCategory(title) { response ->
-                                    scope.launch {
-                                        snackbarHostState.showSnackbar(response.message)
-                                    }
-                                }
+                                val category = CategoryModel(
+                                    idc = "",
+                                    title = title
+                                )
+                                viewModel.createCategory(category)
                             } else {
                                 scope.launch {
-                                    snackbarHostState.showSnackbar("Vui lòng nhập tên danh mục!")
+                                    snackBarHostState.showSnackbar("Vui lòng nhập tên danh mục!")
                                 }
                             }
                         },
@@ -114,7 +117,7 @@ fun AddCategoryScreen(navController: NavController, viewModel: OrderViewModel) {
     }
 }
 @Composable
-fun AddIngredientsScreen(navController: NavController, viewModel: OrderViewModel) {
+fun AddIngredientsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TAppBar(

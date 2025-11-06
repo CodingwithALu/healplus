@@ -18,4 +18,9 @@ class ReviewViewModel @Inject constructor(
             reviewRepository.createReview(review, idp)
         }
     }
+    fun updateReview(id: String){
+        viewModelScope.launch {
+            reviewRepository.updateReview(id)
+        }
+    }
 }

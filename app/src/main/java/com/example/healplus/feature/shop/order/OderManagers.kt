@@ -52,11 +52,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.Oder.OrderModel
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
+import com.example.core.viewmodel.OrderViewModel
 import com.example.healplus.R
 import com.google.gson.Gson
 import java.text.NumberFormat
@@ -66,14 +67,14 @@ import java.util.Locale
 fun OderManagers(
     navController: NavController
 ) {
-    val viewModel = remember { OrderViewModel() }
+    val viewModel: OrderViewModel  = hiltViewModel()
     val allOrders by viewModel.orders.observeAsState(initial = emptyList())
     var selectedStatus by remember { mutableStateOf<String?>("Tất cả") }
     LaunchedEffect(selectedStatus) {
         if (selectedStatus == "Tất cả" || selectedStatus == null) {
-            viewModel.loadOder()
+            viewModel.fetchOrder()
         } else {
-            viewModel.loadOderStatus(selectedStatus.toString())
+            viewModel.fetchOrderByStatus(selectedStatus.toString())
         }
     }
     Scaffold(
@@ -229,7 +230,7 @@ fun OrderItemCard(
                             DropdownMenuItem(
                                 text = { Text(status) },
                                 onClick = {
-                                    viewModel.updateOrderStatus(orderModel.id, status)
+                                    viewModel.updateStatusForOrder(orderModel.id, status)
                                     status1 = status
                                     expanded = false
                                 }

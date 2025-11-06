@@ -23,4 +23,28 @@ class UserRepository (
         }
         return result
     }
+    // updateIdAuth
+    suspend fun updateIdAuth(email: String, idAuth: String): ApiResponse{
+        var result = ApiResponse.empty()
+        withContext(Dispatchers.IO){
+            result = api.upDateIdAuth(email, idAuth)
+        }
+        return result
+    }
+    // updateUser
+    suspend fun updateUser(user: UserModel): ApiResponse{
+        var result = ApiResponse.empty()
+        withContext(Dispatchers.IO){
+            result = api.upDateUser(
+                user.name,
+                user.email,
+                user.gender,
+                "0123456789",
+                user.url,
+                user.dateBirth,
+                user.idUser
+            )
+        }
+        return result
+    }
 }

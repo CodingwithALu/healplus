@@ -31,7 +31,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
@@ -55,7 +54,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.admin.MenuItems
@@ -63,19 +62,19 @@ import com.example.core.model.admin.menuItems
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import kotlin.random.Random
 
 @Composable
 fun AddScreen(modifier: Modifier = Modifier,
               navController: NavController,
-              viewModel: OrderViewModel = viewModel()
               ){
+    val viewModel: CollectionViewModel = hiltViewModel()
     val elements by viewModel.element.observeAsState(emptyList())
-    LaunchedEffect(Unit) {
-        viewModel.loadElement()
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.loadElement()
+//    }
 
     val categories = remember { mutableStateListOf<CategoryModel>() }
     val ingredient = remember { mutableStateListOf<IngredientsModel>() }

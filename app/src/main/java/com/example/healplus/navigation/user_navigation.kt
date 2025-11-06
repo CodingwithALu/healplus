@@ -12,21 +12,19 @@ import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
 import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.AuthViewModel
-import com.example.core.viewmodel.apiviewmodel.OrderViewModel
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
 import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
 import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
-import com.example.healplus.feature.shop.category.CollectionScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
+import com.example.healplus.feature.shop.collections.CollectionScreen
 import com.example.healplus.feature.shop.home.AllReviewsScreen
 import com.example.healplus.feature.shop.home.DetailScreen
 import com.example.healplus.feature.shop.home.HomeScreen
 import com.example.healplus.feature.shop.home.ProductDetailScreen
 import com.example.healplus.feature.shop.home.WriteReviewScreen
 import com.example.healplus.feature.shop.order.UsersOder
-import com.example.healplus.feature.shop.search.SearchScreen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URLDecoder
@@ -124,22 +122,19 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                     Log.e("Navigation123", "Error: Missing categoryid or categorytitle")
                     return@composable
                 }
-                val viewModel: OrderViewModel = viewModel()
                 CollectionScreen(
                     title = categorytitle,
                     id = categoryid,
-                    viewModel = viewModel,
                     navController = navController
                 )
             }
         }
-        composable("search"){
-            val viewModel: OrderViewModel = viewModel()
-            SearchScreen(
-                viewModel = viewModel,
-                navController = navController
-            )
-        }
+//        composable("search"){
+//            SearchScreen(
+//                viewModel = viewModel,
+//                navController = navController
+//            )
+//        }
         composable("profile"){
             val viewModel: AuthViewModel = viewModel()
             ProfileScreen(

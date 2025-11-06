@@ -4,7 +4,16 @@ import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -24,14 +33,22 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.products.ProductsModel
 import com.example.healplus.R
-import com.example.healplus.ui.theme.*
+import com.example.healplus.ui.theme.errorDarkHighContrast
+import com.example.healplus.ui.theme.inverseOnSurfaceLight
+import com.example.healplus.ui.theme.inverseOnSurfaceLightMediumContrast
+import com.example.healplus.ui.theme.inversePrimaryLight
+import com.example.healplus.ui.theme.inversePrimaryLightHighContrast
+import com.example.healplus.ui.theme.onPrimaryLightMediumContrast
+import com.example.healplus.ui.theme.onTertiaryLightHighContrast
+import com.example.healplus.ui.theme.primaryDark
+import com.example.healplus.ui.theme.surfaceBrightLight
 import com.google.gson.Gson
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 import kotlin.random.Random
 
 @Composable
-fun ListItems(items: MutableList<ProductsModel>?, navController: NavController) {
+fun ListItems(items: MutableList<ProductsModel>, navController: NavController) {
     LazyRow (
         modifier = Modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp),

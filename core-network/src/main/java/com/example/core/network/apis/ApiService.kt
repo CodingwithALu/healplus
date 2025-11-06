@@ -60,7 +60,7 @@ interface ApiService {
     ): ApiResponse
     @FormUrlEncoded
     @POST("add_ingrident.php")
-    fun addIngredient(
+    suspend fun addIngredient(
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("idc") idc: String

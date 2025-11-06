@@ -43,4 +43,12 @@ class HomeRepository(
             api.getRecommendedProducts(show)
         }
     }
+    // search products
+    suspend fun searchProduct(search: String): List<ProductsModel>{
+        var result = emptyList<ProductsModel>()
+        withContext(Dispatchers.IO){
+            result = api.getSearchProduct(search)
+        }
+        return result
+    }
 }
