@@ -283,7 +283,7 @@ fun CartItems(
                     ) {
                         Row {
                             Image(
-                                painter = rememberAsyncImagePainter(item.product_images[0]),
+                                painter = rememberAsyncImagePainter(item.listImages[0]),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .size(40.dp)

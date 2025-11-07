@@ -50,14 +50,12 @@ fun MyAppNavigation(navController: NavHostController) {
                 navController
             )
         }
-        composable("success_screen_route") {
+        composable(Screen.SuccessScreen.route) {
             SuccessScreen(
                 image = "https://mybucket-01laulu2k3.s3.us-east-1.amazonaws.com/json/72462-check-register.json",
                 title = "Thành công!",
                 subtitle = "Email của bạn đã được xác thực.",
-                showEmail = true,
-                onContinue = { },
-                onResendEmail = { /* Xử lý gửi lại email */ }
+                showEmail = true
             )
         }
         composable("home") {

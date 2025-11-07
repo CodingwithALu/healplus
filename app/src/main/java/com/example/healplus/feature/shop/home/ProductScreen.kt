@@ -98,8 +98,8 @@ fun DetailScreen(
 ) {
     val viewModel: OrderViewModel = hiltViewModel()
     val reviewViewModel: ReviewViewModel = hiltViewModel()
-    var selectedImageUrl by remember { mutableStateOf(item.product_images.first()) }
-    var model by remember { mutableStateOf(item.unit_names.first()) }
+    var selectedImageUrl by remember { mutableStateOf(item.listImages.first()) }
+    var model by remember { mutableStateOf(item.unitNames.first()) }
     val managmentCart = ManagmentCart(LocalContext.current, authViewModel.getUserId().toString())
     val itemCount by remember { mutableStateOf(managmentCart.getItemCount()) }
     Scaffold(
@@ -132,7 +132,7 @@ fun DetailScreen(
                 modifier = Modifier
                     .padding(vertical = 16.dp, horizontal = 16.dp)
             ) {
-                items(item.product_images) { imageUrl ->
+                items(item.listImages) { imageUrl ->
                     ImageThumbnail(
                         imageUrl = imageUrl,
                         isSelected = selectedImageUrl == imageUrl,
@@ -203,12 +203,12 @@ fun DetailScreen(
             ProductReviewsSection(
                 averageRating = item.rating.toFloat(),
                 totalReviews = item.review,
-                individualReviews = item.reviewitems,
+                individualReviews = item.reviewItems,
                 onSeeAllReviewsClick = {
                     navController.navigate(
                         "allReviews/${item.name}/${
                             URLEncoder.encode(
-                                Gson().toJson(item.reviewitems),
+                                Gson().toJson(item.reviewItems),
                                 StandardCharsets.UTF_8.toString()
                             )
                         }"
@@ -273,13 +273,13 @@ fun ProductInfoView(
             modifier = Modifier
                 .clickable { /* Xử lý sự kiện */ }
         )
-        ProductInfoItem(stringResource(R.string.categories), product.element_names)
+        ProductInfoItem(stringResource(R.string.categories), product.elements)
         AnimatedVisibility(visible = showProducts) {
             Column {
                 ProductInfoItem(stringResource(R.string.dogam_from), product.preparation)
                 ProductInfoItem(stringResource(R.string.origa), product.origin)
                 ProductInfoItem(stringResource(R.string.Manufacturer), product.manufacturer)
-                ProductInfoItem(stringResource(R.string.product), product.productiondate)
+                ProductInfoItem(stringResource(R.string.product), product.productionDate)
                 ProductInfoItem(stringResource(R.string.expiry), product.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), product.ingredient)
                 ProductInfoItem(stringResource(R.string.description), product.description)

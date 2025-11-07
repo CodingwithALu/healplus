@@ -23,9 +23,7 @@ interface ApiService {
     @GET("getIngredient.php")
     suspend fun getIngredient(): List<IngredientsModel>
     @GET("get_product_showRecomment.php")
-    fun getRecommendedProducts(
-        @Query("showRecommended") showRecommended: Int = 0
-    ): List<ProductsModel>
+    suspend fun getRecommendedProducts(): List<ProductsModel>
     @GET("getcategory.php")
     suspend fun getCategories(): List<CategoryModel>
     @GET("getelemets.php")

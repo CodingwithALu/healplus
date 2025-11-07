@@ -48,7 +48,7 @@ import java.util.Locale
 import kotlin.random.Random
 
 @Composable
-fun ListItems(items: MutableList<ProductsModel>, navController: NavController) {
+fun ListItems(items: List<ProductsModel>, navController: NavController) {
     LazyRow (
         modifier = Modifier,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -96,7 +96,7 @@ fun RecommendedList(items: List<ProductsModel>, row: Int, navController: NavCont
                 .height(280.dp)
         ) {
             AsyncImage(
-                model = items[row].product_images.firstOrNull(),
+                model = items[row].listImages.firstOrNull(),
                 contentDescription = null,
                 modifier = Modifier
                     .width(175.dp)

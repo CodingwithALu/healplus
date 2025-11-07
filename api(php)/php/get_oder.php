@@ -18,7 +18,7 @@ while ($row_order = mysqli_fetch_assoc($result_order)) {
                     INNER JOIN product ON orderdetails.idp = product.idp 
                     LEFT JOIN productimages ON product.idp = productimages.idp 
                     LEFT JOIN unitinfo ON product.idp = unitinfo.idp 
-                    LEFT JOIN thanhphan tp ON product.idp = tp.idp
+                    LEFT JOIN collections tp ON product.idp = tp.idp
                     LEFT JOIN element e ON product.ide = e.ide  -- Thêm JOIN với bảng elements
                     WHERE orderdetails.Ido = ?
                     GROUP BY product.idp, orderdetails.id";

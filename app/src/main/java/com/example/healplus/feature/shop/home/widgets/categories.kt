@@ -18,7 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -28,8 +28,8 @@ import androidx.navigation.NavController
 import com.example.core.model.categories.CategoryModel
 
 @Composable
-fun CategoryList(categories: MutableList<CategoryModel>, navController: NavController) {
-    var selectedIndex by remember { mutableStateOf(-1) }
+fun CategoryList(categories: List<CategoryModel>, navController: NavController) {
+    var selectedIndex by remember { mutableIntStateOf(-1) }
     LazyRow(
         modifier = Modifier
             .height(60.dp)

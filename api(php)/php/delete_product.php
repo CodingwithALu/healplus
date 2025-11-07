@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["idp"])) {
                 throw new Exception("Lỗi xóa ảnh sản phẩm: " . mysqli_error($conn));
             }
 
-            // Xóa dữ liệu liên quan trong bảng thanhphan
-            $sqlDeleteThanhPhan = "DELETE FROM thanhphan WHERE idp = '$idp'";
+            // Xóa dữ liệu liên quan trong bảng collections
+            $sqlDeleteThanhPhan = "DELETE FROM collections WHERE idp = '$idp'";
             if (!mysqli_query($conn, $sqlDeleteThanhPhan)) {
                 throw new Exception("Lỗi xóa thành phần sản phẩm: " . mysqli_error($conn));
             }

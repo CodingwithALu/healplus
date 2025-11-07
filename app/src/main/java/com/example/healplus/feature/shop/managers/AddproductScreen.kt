@@ -57,7 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.elements.ElementsModel
-import com.example.core.model.products.Thanhphan
+import com.example.core.model.products.Collections
 import com.example.core.model.products.UnitInfo
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -86,7 +86,7 @@ fun AddProductScreen(modifier: Modifier = Modifier,
     var cachdung by remember { mutableStateOf("") }
     var tacdungphu by remember { mutableStateOf("") }
     var baoquan by remember { mutableStateOf("") }
-    var thanhphan by remember { mutableStateOf<List<Thanhphan>>(emptyList()) }
+    var collections by remember { mutableStateOf<List<Collections>>(emptyList()) }
     var unitInfo by remember { mutableStateOf<List<UnitInfo>>(emptyList()) }
     var uploadedImageUrls by remember { mutableStateOf<List<String>>(emptyList()) }
     val context = LocalContext.current
@@ -304,8 +304,8 @@ fun AddProductScreen(modifier: Modifier = Modifier,
                 }
                 item {
                     ThanhPhanInput(
-                        thanhphanList = thanhphan,
-                        onThanhPhanChange = { thanhphan = it }
+                        collectionsList = collections,
+                        onThanhPhanChange = { collections = it }
                     )
                 }
                 item {
@@ -659,11 +659,11 @@ fun ImageListFromUrls(imageUrls: List<String>) {
 }
 @Composable
 fun ThanhPhanInput(
-    thanhphanList: List<Thanhphan>,
-    onThanhPhanChange: (List<Thanhphan>) -> Unit
+    collectionsList: List<Collections>,
+    onThanhPhanChange: (List<Collections>) -> Unit
 ) {
     var showDialog by remember { mutableStateOf(false) }
-    var newThanhPhan by remember { mutableStateOf(Thanhphan("", "")) }
+    var newThanhPhan by remember { mutableStateOf(Collections("", "")) }
 
     Card (
         modifier = Modifier
@@ -684,20 +684,20 @@ fun ThanhPhanInput(
             Column (
                 modifier = Modifier.fillMaxWidth()
             ){
-                thanhphanList.forEach { tp ->
+                collectionsList.forEach { tp ->
                     ThanhPhanItem(tp) {
-                        onThanhPhanChange(thanhphanList.filter { it != tp })
+                        onThanhPhanChange(collectionsList.filter { it != tp })
                     }
                 }
             }
             if (showDialog) {
                 ThanhPhanDialog(
-                    thanhphan = newThanhPhan,
+                    collections = newThanhPhan,
                     onThanhPhanChange = { newThanhPhan = it },
                     onDismiss = { showDialog = false },
                     onSave = {
-                        onThanhPhanChange(thanhphanList + newThanhPhan)
-                        newThanhPhan = Thanhphan("", "")
+                        onThanhPhanChange(collectionsList + newThanhPhan)
+                        newThanhPhan = Collections("", "")
                         showDialog = false
                     }
                 )
@@ -707,7 +707,7 @@ fun ThanhPhanInput(
 }
 
 @Composable
-fun ThanhPhanItem(thanhphan: Thanhphan, onDelete: () -> Unit) {
+fun ThanhPhanItem(collections: Collections, onDelete: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -720,11 +720,11 @@ fun ThanhPhanItem(thanhphan: Thanhphan, onDelete: () -> Unit) {
             .padding(horizontal = 40.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically) {
-            Text(text = thanhphan.title, style = MaterialTheme.typography.bodyLarge)
+            Text(text = collections.title, style = MaterialTheme.typography.bodyLarge)
             Spacer(modifier = Modifier.width(8.dp))
             VerticalDivider()
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = thanhphan.body, style = MaterialTheme.typography.bodyMedium)
+            Text(text = collections.body, style = MaterialTheme.typography.bodyMedium)
         }
         IconButton(onClick = onDelete) {
             Icon(Icons.Default.Close, contentDescription = "Xóa")
@@ -746,8 +746,8 @@ fun VerticalDivider() {
 }
 @Composable
 fun ThanhPhanDialog(
-    thanhphan: Thanhphan,
-    onThanhPhanChange: (Thanhphan) -> Unit,
+    collections: Collections,
+    onThanhPhanChange: (Collections) -> Unit,
     onDismiss: () -> Unit,
     onSave: () -> Unit
 ) {
@@ -757,15 +757,15 @@ fun ThanhPhanDialog(
         text = {
             Column {
                 TextField(
-                    value = thanhphan.title,
-                    onValueChange = { onThanhPhanChange(thanhphan.copy(title = it)) },
+                    value = collections.title,
+                    onValueChange = { onThanhPhanChange(collections.copy(title = it)) },
                     label = { Text("Tên Thành Phần") },
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
-                    value = thanhphan.body,
-                    onValueChange = { onThanhPhanChange(thanhphan.copy(body = it)) },
+                    value = collections.body,
+                    onValueChange = { onThanhPhanChange(collections.copy(body = it)) },
                     label = { Text("Mô Tả") },
                     modifier = Modifier.fillMaxWidth()
                 )

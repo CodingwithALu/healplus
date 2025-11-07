@@ -92,17 +92,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['idp'], $_POST['name'],
                 }
             }
         }
-        if (isset($_POST['thanhphan'])) {
-            $thanhphan = json_decode($_POST['thanhphan'], true);
-            if (is_array($thanhphan)) {
-                $sqlDeleteThanhPhan = "DELETE FROM thanhphan WHERE idp = '$idp'";
+        if (isset($_POST['collections'])) {
+            $collections = json_decode($_POST['collections'], true);
+            if (is_array($collections)) {
+                $sqlDeleteThanhPhan = "DELETE FROM collections WHERE idp = '$idp'";
                 if (!mysqli_query($conn, $sqlDeleteThanhPhan)) {
                     throw new Exception("Lỗi xóa thành phần cũ: " . mysqli_error($conn));
                 }
-                foreach ($thanhphan as $tp) {
+                foreach ($collections as $tp) {
                     $title = mysqli_real_escape_string($conn, $tp['title']);
                     $body = mysqli_real_escape_string($conn, $tp['body']);
-                    $queryThanhPhan = "INSERT INTO thanhphan (idp, title, body) VALUES ('$idp', '$title', '$body')";
+                    $queryThanhPhan = "INSERT INTO collections (idp, title, body) VALUES ('$idp', '$title', '$body')";
                     if (!mysqli_query($conn, $queryThanhPhan)) {
                         throw new Exception("Lỗi thêm thành phần mới: " . mysqli_error($conn));
                     }

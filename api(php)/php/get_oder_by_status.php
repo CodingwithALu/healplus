@@ -19,7 +19,7 @@ while ($row_order = mysqli_fetch_assoc($result_order)) {
                     INNER JOIN product p ON od.idp = p.idp
                     LEFT JOIN productimages pi ON p.idp = pi.idp
                     LEFT JOIN unitinfo u ON p.idp = u.idp
-                    LEFT JOIN thanhphan tp ON p.idp = tp.idp
+                    LEFT JOIN collections tp ON p.idp = tp.idp
                     LEFT JOIN Element e ON p.ide = e.ide  -- Join bảng Element
                     WHERE od.Ido = ?
                     GROUP BY p.idp"; // Group theo idp để gom nhóm thông tin sản phẩm

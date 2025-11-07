@@ -53,18 +53,18 @@ fun ProductDetailScreen(
                 )
             }
             item {
-                ProductInfoItem(stringResource(R.string.categories), item.element_names)
+                ProductInfoItem(stringResource(R.string.categories), item.elements)
                 ProductInfoItem(stringResource(R.string.dogam_from), item.preparation)
                 ProductInfoItem(stringResource(R.string.origa), item.origin)
                 ProductInfoItem(stringResource(R.string.Manufacturer), item.manufacturer)
-                ProductInfoItem(stringResource(R.string.product), item.productiondate)
+                ProductInfoItem(stringResource(R.string.product), item.productionDate)
                 ProductInfoItem(stringResource(R.string.expiry), item.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), item.ingredient)
                 ProductInfoItem(stringResource(R.string.description), item.description)
-                ProductInfoItem(stringResource(R.string.cachdung), item.cachdung)
-                ProductInfoItem(stringResource(R.string.congdung), item.congdung)
-                ProductInfoItem(stringResource(R.string.tacdungphu), item.tacdungphu)
-                ProductInfoItem(stringResource(R.string.baoquan), item.baoquan)
+                ProductInfoItem(stringResource(R.string.cachdung), item.toUse)
+                ProductInfoItem(stringResource(R.string.congdung), item.uses)
+                ProductInfoItem(stringResource(R.string.tacdungphu), item.sideEffects)
+                ProductInfoItem(stringResource(R.string.baoquan), item.preserver)
             }
         }
     }

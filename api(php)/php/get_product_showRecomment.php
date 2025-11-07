@@ -14,7 +14,7 @@ $sql = "SELECT p.*,
         FROM product p
         LEFT JOIN productimages pi ON p.idp = pi.idp
         LEFT JOIN unitinfo u ON p.idp = u.idp
-        LEFT JOIN thanhphan tp ON p.idp = tp.idp
+        LEFT JOIN collections tp ON p.idp = tp.idp
         LEFT JOIN element e ON p.ide = e.ide
         GROUP BY p.idp
         ORDER BY p.review DESC

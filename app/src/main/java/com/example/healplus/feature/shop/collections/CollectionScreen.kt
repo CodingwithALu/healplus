@@ -441,7 +441,7 @@ fun RecommendedList1(items: ProductsModel, navController: NavController) {
         .height(280.dp)
     ){
         AsyncImage(
-            model = items.product_images.firstOrNull(),
+            model = items.listImages.firstOrNull(),
             contentDescription = null,
             modifier = Modifier
                 .width(175.dp)

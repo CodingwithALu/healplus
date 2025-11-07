@@ -18,25 +18,27 @@ import javax.inject.Inject
 class VerifyEmailViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val auth: FirebaseAuth
-): ViewModel(){
+) : ViewModel() {
     private val _uiEvent = MutableStateFlow<UiEvent?>(null)
     val uiEvent: StateFlow<UiEvent?> = _uiEvent
     private var timerJob: Job? = null
+
     init {
         setTimerForAutoRedirect()
     }
-    fun sendEmailVerification(){
+
+    fun sendEmailVerification() {
         viewModelScope.launch {
             try {
-                async {
-                    authRepository.sendEmailVerification()
-                }.await()
-            } catch(e: Exception){
+                authRepository.sendEmailVerification()
+            } catch (e: Exception) {
                 throw IllegalArgumentException(e.message)
             }
         }
     }
+
     fun setTimerForAutoRedirect() {
+        auth.currentUser?.reload()
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
             while (isActive) {
@@ -60,6 +62,7 @@ class VerifyEmailViewModel @Inject constructor(
     }
 
     fun checkEmailVerificationStatus() {
+        auth.currentUser?.reload()
         viewModelScope.launch {
             val user = auth.currentUser
             if (user?.isEmailVerified == true) {
@@ -67,11 +70,13 @@ class VerifyEmailViewModel @Inject constructor(
             }
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         timerJob?.cancel()
     }
 }
+
 sealed class UiEvent {
     data class ShowSuccessSnackBar(val title: String, val message: String) : UiEvent()
     data class ShowErrorSnackBar(val title: String, val message: String) : UiEvent()

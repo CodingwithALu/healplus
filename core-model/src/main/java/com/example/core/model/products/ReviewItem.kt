@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ReviewItem(
-    val reviewerName: String,
-    val rating: Float,
-    val comment: String,
-    val date: String,
+    val reviewerName: String = "",
+    val rating: Float = 0f,
+    val comment: String = "",
+    val date: String = "",
     val profileImageUrl: String? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(

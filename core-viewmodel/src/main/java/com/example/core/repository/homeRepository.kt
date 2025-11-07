@@ -38,9 +38,9 @@ class HomeRepository(
         }
     }
     // fetch Recommended
-    suspend fun fetchRecommended(show: Int = 1): List<ProductsModel>{
+    suspend fun fetchRecommended(): List<ProductsModel>{
         return withContext(Dispatchers.IO){
-            api.getRecommendedProducts(show)
+            api.getRecommendedProducts()
         }
     }
     // search products

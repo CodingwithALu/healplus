@@ -71,7 +71,7 @@ fun LoginForm(
                 }
             }
             is EmailVerifyEvent.RedirectToUserEmpty -> {
-                navController.navigate("${Screen.VerifyEmail.route}/${email}")
+                navController.navigate("${Screen.VerifyEmail.route}/${email.toString()}")
             } else -> {}
         }
     }

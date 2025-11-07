@@ -33,9 +33,7 @@ fun SuccessScreen(
     image: String,
     title: String,
     subtitle: String,
-    showEmail: Boolean = true,
-    onContinue: () -> Unit,
-    onResendEmail: (() -> Unit)? = null,
+    showEmail: Boolean = true
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val lottieComposition by rememberLottieComposition(LottieCompositionSpec.Asset(image))
@@ -81,7 +79,9 @@ fun SuccessScreen(
 
         // Continue Button
         Button(
-            onClick = onContinue,
+            onClick = {
+
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Continue")
@@ -92,7 +92,7 @@ fun SuccessScreen(
         // Resend Email Button
         if (showEmail) {
             TextButton(
-                onClick = { onResendEmail?.invoke() },
+                onClick = {  },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Resend email")

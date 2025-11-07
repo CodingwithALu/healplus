@@ -34,13 +34,13 @@ class ProductRepository(
                 quantity = product.quantity.toString(),
                 ide = product.ide,
                 dateTime = dateTime.toString(),
-                congdung = product.congdung,
-                cachdung = product.cachdung,
-                tacdungphu = product.tacdungphu,
-                baoquan = product.baoquan,
-                productImages = gson.toJson(product.product_images),
+                congdung = product.uses,
+                cachdung = product.toUse,
+                tacdungphu = product.sideEffects,
+                baoquan = product.preserver,
+                productImages = gson.toJson(product.listImages),
                 thanhphan = gson.toJson(product.ingredients),
-                unitNames = gson.toJson(product.unit_names)
+                unitNames = gson.toJson(product.unitNames)
             )
             delay(1000L)
         }

@@ -20,8 +20,9 @@ class AuthRepository @Inject constructor(
 ) {
     private var _emailVerify = MutableStateFlow<EmailVerifyEvent?>(null)
     val emailVerify: StateFlow<EmailVerifyEvent?> = _emailVerify
-    private val user = auth.currentUser
-    fun screenRedirect() {
+    suspend fun screenRedirect() {
+        auth.currentUser?.reload()
+        val user = auth.currentUser
         if (user != null) {
             if (user.isEmailVerified) {
                 _emailVerify.value = EmailVerifyEvent.RedirectToUserEmpty
@@ -38,20 +39,23 @@ class AuthRepository @Inject constructor(
     // signIn password and email
     suspend fun signInWithEmailPassword(email: String, password: String) {
         return withContext(Dispatchers.IO) {
+            auth.currentUser?.reload()
             auth.signInWithEmailAndPassword(email, password).await()
         }
     }
     // verify email
-    suspend fun sendEmailVerification(){
-        return withContext(Dispatchers.IO){
+    suspend fun sendEmailVerification() {
+        return withContext(Dispatchers.IO) {
+            auth.currentUser?.reload()
             auth.currentUser?.sendEmailVerification()
         }
     }
     // SignUp
-    suspend fun createUser(name: String, email: String, password: String): ApiResponse{
+    suspend fun createUser(name: String, email: String, password: String): ApiResponse {
         return withContext(Dispatchers.IO) {
             try {
                 val creteAuth = auth.createUserWithEmailAndPassword(email, password).await()
+                auth.currentUser?.reload()
                 val userId = creteAuth.user?.uid ?: throw Exception("User ID is null")
                 val userModel = UserModel(
                     id = userId,
@@ -70,7 +74,7 @@ class AuthRepository @Inject constructor(
             }
         }
     }
-    suspend fun createUserForDataBase(userModel: UserModel): ApiResponse{
+    suspend fun createUserForDataBase(userModel: UserModel): ApiResponse {
         return withContext(Dispatchers.IO) {
             api.createUser(
                 userModel.id,

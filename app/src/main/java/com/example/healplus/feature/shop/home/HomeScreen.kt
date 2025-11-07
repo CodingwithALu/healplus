@@ -35,7 +35,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
@@ -50,20 +50,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.AuthSate
 import com.example.core.viewmodel.AuthViewModel
 import com.example.core.viewmodel.HomeViewmodel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.texts.TSectionHeading
 import com.example.healplus.feature.shop.banner.Banners
 import com.example.healplus.feature.shop.home.widgets.CategoryList
-import com.example.healplus.feature.shop.home.widgets.DrugStoreInfoScreen
 import com.example.healplus.feature.shop.home.widgets.ListItems
 import com.example.healplus.ui.theme.errorDarkHighContrast
 import com.example.healplus.ui.theme.inverseOnSurfaceLight
@@ -74,49 +70,38 @@ import com.example.healplus.ui.theme.onPrimaryLightMediumContrast
 import com.example.healplus.ui.theme.onTertiaryLightHighContrast
 import com.example.healplus.ui.theme.primaryDark
 import com.example.healplus.ui.theme.surfaceBrightLight
+import com.example.wallify.navigation.BottomAppBarr
 import com.skydoves.landscapist.glide.GlideImage
 import kotlin.random.Random
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    authViewModel: AuthViewModel = viewModel(),
 ) {
     val viewModel : HomeViewmodel = hiltViewModel()
-    val banners by viewModel.banners.observeAsState()
-    val categories by viewModel.categories.observeAsState()
-    val ingredient by viewModel.ingredient.observeAsState()
-    val recommended by viewModel.recommended.observeAsState()
-    var showBannerLoading by remember { mutableStateOf(true) }
-    var showCategoryLoading by remember { mutableStateOf(true) }
-    var showRecommendedLoading by remember { mutableStateOf(true) }
-    val authSate = authViewModel.authSate.observeAsState()
-
-    LaunchedEffect(authSate.value) {
-        when (authSate.value) {
-            is AuthSate.Unauthenticated -> navController.navigate("login")
-            else -> Unit
+    val banners by viewModel.banners.collectAsState()
+    val categories by viewModel.categories.collectAsState()
+    val ingredient by viewModel.ingredient.collectAsState()
+    val recommended by viewModel.recommended.collectAsState()
+    val isLoading = viewModel.isLoading
+    Scaffold(
+        bottomBar = {
+            BottomAppBarr(
+                showBar = true,
+                navController = navController
+            )
         }
-    }
-
-    Scaffold { paddingValues ->
-        ConstraintLayout(
-            modifier = Modifier
-                .padding(paddingValues)
-        ) {
-            val (scrollList) = createRefs()
+    ) { paddingValues ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .constrainAs(scrollList) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        end.linkTo(parent.end)
-                        start.linkTo(parent.start)
-                    }
+                    .padding(paddingValues)
             ) {
+                stickyHeader {
+
+                }
                 item {
-                    if (showBannerLoading) {
+                    if (isLoading) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -130,91 +115,37 @@ fun HomeScreen(
                     }
                 }
                 item {
-                    if (showCategoryLoading) {
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                        }
-                    } else {
                         Column {
                             Spacer(modifier = Modifier.height(16.dp))
-                            CategoryList(categories!!, navController)
+                            CategoryList(categories, navController)
                         }
-                    }
                 }
                 item {
-                    if (showRecommendedLoading) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(200.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                        }
-                    } else {
                         Column (
                             modifier = Modifier
                                 .fillMaxWidth(),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             TSectionHeading(R.string.recommended)
-                            ListItems(recommended!!, navController)
+                            ListItems(recommended, navController)
                             Spacer(modifier = Modifier.height(16.dp))
                         }
-                    }
                 }
                 item {
-                    if (showCategoryLoading) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                        }
-                    } else {
                         Column(
                             modifier = Modifier,
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             IngredientScreen(ingredient, navController)
                         }
-                    }
-                }
-                item {
-                    if (showRecommendedLoading) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(200.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                        }
-                    }else {
-                        DrugStoreInfoScreen()
-                    }
-                }
-                item {
-                    Spacer(
-                        modifier = Modifier
-                            .padding(paddingValues)
-                    )
                 }
             }
         }
-
-    }
-
-
 }
 
 @Composable
 fun IngredientScreen(
-    categoriesItems: MutableList<IngredientsModel>?,
+    categoriesItems: List<IngredientsModel>,
     navController: NavController
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -254,9 +185,9 @@ fun IngredientScreen(
                 val displayedItems = if (isExpanded)
                     categoriesItems
                 else
-                    categoriesItems?.take(4)
+                    categoriesItems.take(4)
 
-                for (i in displayedItems?.indices!!.step(2)) {
+                for (i in displayedItems.indices!!.step(2)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
