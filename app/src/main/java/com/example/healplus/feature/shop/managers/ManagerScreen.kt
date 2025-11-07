@@ -1,7 +1,6 @@
 package com.example.healplus.feature.shop.managers
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
@@ -41,14 +39,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.admin.MenuItems
@@ -56,19 +62,19 @@ import com.example.core.model.admin.menuItems
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import kotlin.random.Random
 
 @Composable
 fun AddScreen(modifier: Modifier = Modifier,
               navController: NavController,
-              viewModel: ApiCallViewModel = viewModel()
               ){
+    val viewModel: CollectionViewModel = hiltViewModel()
     val elements by viewModel.element.observeAsState(emptyList())
-    LaunchedEffect(Unit) {
-        viewModel.loadElement()
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.loadElement()
+//    }
 
     val categories = remember { mutableStateListOf<CategoryModel>() }
     val ingredient = remember { mutableStateListOf<IngredientsModel>() }
@@ -215,11 +221,22 @@ fun ManagersAppBarr(
                             navController.navigate(item.title.lowercase())
                         },
                         leadingIcon = {
-                            Image(
-                                painter = rememberAsyncImagePainter(model = item.url),
-                                contentDescription = item.title,
-                                modifier = Modifier.size(40.dp)
-                            )
+                            val semantics =
+                                    Modifier.semantics {
+                                        contentDescription = item.title
+                                        role = Role.Image
+                                    }
+                            Layout(
+                                Modifier.size(40.dp)
+                                    .then(semantics)
+                                    .clipToBounds()
+                                    .paint(
+                                        painter = rememberAsyncImagePainter(model = item.url),
+                                        contentScale = ContentScale.Fit
+                                    )
+                            ) { _, constraints ->
+                                layout(constraints.minWidth, constraints.minHeight) {}
+                            }
                         }
                     )
                 }

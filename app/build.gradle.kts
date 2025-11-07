@@ -1,24 +1,25 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.dagger.android)
 }
-
 android {
     namespace = "com.example.healplus"
-    compileSdk = 35
-
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.example.healplus"
-        minSdk = 26
+        minSdk = 29
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -32,22 +33,26 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
     buildFeatures {
         compose = true
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
-
 dependencies {
     implementation(project(":core-viewmodel"))
     implementation(project(":core-model"))
-    implementation(project(":core-room"))
+    implementation(project(":core-data"))
+    implementation(project(":core-network"))
     implementation(libs.androidx.core.ktx)
     implementation (libs.mpandroidchart)
-    //noinspection UseTomlInstead
-    implementation("com.google.accompanist:accompanist-flowlayout:0.31.1-alpha")
+    implementation(libs.accompanist.flowlayout)
     implementation(libs.glide)
     implementation(libs.landscapist.glide)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -84,5 +89,12 @@ dependencies {
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
     implementation(libs.androidx.compose.material3)
-
+    implementation(libs.androidx.material.icons.extended)
+    // Hilt core
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+    //app check
+    implementation(libs.firebase.appcheck)
+    implementation(libs.firebase.appcheck.playintegrity)
 }

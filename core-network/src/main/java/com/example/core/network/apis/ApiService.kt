@@ -1,5 +1,5 @@
 package com.example.core.network.apis
-import com.example.core.model.Oder.Order
+import com.example.core.model.Oder.OrderModel
 import com.example.core.model.api.ApiResponse
 import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
@@ -7,7 +7,6 @@ import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.revenue.RevenueResponse
-import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -18,111 +17,108 @@ import java.time.LocalDate
 interface ApiService {
     // Todo -- Get DATA
     @GET("get_ingredient_count.php")
-    fun getIngredientCount(): Call<List<IngredientsModel>>
+    suspend fun getIngredientCount(): List<IngredientsModel>
     @GET("getbanner.php")
-    fun getBanners(): Call<List<BannersModel>>
+    suspend fun getBanners(): List<BannersModel>
     @GET("getIngredient.php")
-    fun getIngredient(): Call<List<IngredientsModel>>
+    suspend fun getIngredient(): List<IngredientsModel>
     @GET("get_product_showRecomment.php")
     fun getRecommendedProducts(
         @Query("showRecommended") showRecommended: Int = 0
-    ): Call<List<ProductsModel>>
+    ): List<ProductsModel>
     @GET("getcategory.php")
-    fun getCategories(): Call<List<CategoryModel>>
+    suspend fun getCategories(): List<CategoryModel>
     @GET("getelemets.php")
-    fun getElement(): Call<List<ElementsModel>>
+    suspend fun getElement(): List<ElementsModel>
     @GET("get_products_by_category.php")
-    fun getProductsByCategory(@Query("idc") idc: String): Call<List<ProductsModel>>
+    suspend fun getProductsByCategory(@Query("idc") idc: String): List<ProductsModel>
     @GET("get_products_by_ingredient.php")
-    fun getProductsByIngredient(@Query("iding") iding: String): Call<List<ProductsModel>>
+    suspend fun getProductsByIngredient(@Query("iding") iding: String): List<ProductsModel>
     @GET("get_products_by_element.php")
-    fun getProductsByElement(@Query("ide") ide: String): Call<List<ProductsModel>>
+    suspend fun getProductsByElement(@Query("ide") ide: String): List<ProductsModel>
     @GET("get_ingredient_by_category.php")
-    fun getIngredientByCategory(@Query("idc") idc: String): Call<List<IngredientsModel>>
+    suspend fun getIngredientByCategory(@Query("idc") idc: String): List<IngredientsModel>
     @GET("get_elements_by_ingredient.php")
-    fun getElementByIngredient(@Query("iding") iding: String): Call<List<ElementsModel>>
+    suspend fun getElementByIngredient(@Query("iding") iding: String): List<ElementsModel>
     @GET("getsearch.php")
-    fun getSearchProduct(@Query("search") search: String): Call<List<ProductsModel>>
+    suspend fun getSearchProduct(@Query("search") search: String): List<ProductsModel>
     @GET("get_oder.php")
-    fun getOder(): Call<List<Order>>
+    suspend fun getOder(): List<OrderModel>
     @FormUrlEncoded
-    @POST("add_user.php")
-    fun addUser(
+    @POST("create_user.php")
+    suspend fun createUser(
+        @Field("id") id: String,
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("phone") phone: String,
-        @Field("url") url: String,
-        @Field("role") role: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("add_category.php")
-    fun addCategory(
+    suspend fun addCategory(
         @Field("title") title: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("add_ingrident.php")
-    fun addIngredient(
+    suspend fun addIngredient(
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("idc") idc: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("add_element.php")
-    fun addElement(
+    suspend fun addElement(
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("quantity") quantity: String,
         @Field("iding") iding: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_category.php")
-    fun updateCategory(
+    suspend fun updateCategory(
         @Field("idc") idc: String,
         @Field("title") title: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_review.php")
-    fun updateReview(
+    suspend fun updateReview(
         @Field("idp") idc: String,
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_ingredient.php")
-    fun updateIngredient(
+    suspend fun updateIngredient(
         @Field("iding") iding: String,
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("idc") idc: String,
-    ): Call<ApiResponse>
+    ): ApiResponse
 
     @FormUrlEncoded
     @POST("update_element.php")
-    fun updateElement(
+    suspend fun updateElement(
         @Field("ide") ide: String,
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("quantity") quantity: String,
         @Field("iding") iding: String,
-    ): Call<ApiResponse>
-
+    ): ApiResponse
     @FormUrlEncoded
     @POST("delete_category.php")
-    fun deleteCategory(
+    suspend fun deleteCategory(
         @Field("idc") idc: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("deldelete_ingredient.php")
-    fun deleteIngnredient(
+    suspend fun deleteIngnredient(
         @Field("iding") iding: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_element.php")
-    fun deleteElement(
+    suspend fun deleteElement(
         @Field("ide") ide: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("oder.php")
-    fun addOder(
+    suspend fun addOder(
         @Field("name") name: String,
         @Field("phone") phone: String,
         @Field("email") email: String,
@@ -134,20 +130,20 @@ interface ApiService {
         @Field("sumMoney") sumMoney: Float,
         @Field("status") status: String,
         @Field("detail") detail: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("add_review.php")
-    fun addReview(
+    suspend fun addReview(
         @Field("reviewerName") reviewerName: String,
         @Field("rating") rating: Float,
         @Field("comment") comment: String,
         @Field("date") date: String,
         @Field("profileImageUrl") profileImageUrl: String,
         @Field("idp") idp: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_user.php")
-    fun upDateUser(
+    suspend fun upDateUser(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("gender") gender: String,
@@ -155,16 +151,16 @@ interface ApiService {
         @Field("url") url: String,
         @Field("dateBirth") dateBirth: String,
         @Field("idauth") idauth: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_idauth.php")
-    fun upDateIdAuth(
+    suspend fun upDateIdAuth(
         @Field("email") email: String,
         @Field("idauth") idauth: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("add_product.php")
-    fun addProduct(
+    suspend fun addProduct(
         @Field("name") name: String,
         @Field("trademark") trademark: String,
         @Field("rating") rating: String,
@@ -180,7 +176,7 @@ interface ApiService {
         @Field("description") description: String,
         @Field("quantity") quantity: String,
         @Field("ide") ide: String,
-        @Field("productiondate") productiondate: String,
+        @Field("productiondate") dateTime: String,
         @Field("congdung") congdung: String,
         @Field("cachdung") cachdung: String,
         @Field("tacdungphu") tacdungphu: String,
@@ -188,43 +184,43 @@ interface ApiService {
         @Field("productImages") productImages: String,
         @Field("thanhphan") thanhphan: String,
         @Field("unitNames") unitNames: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("update_oder_status.php")
-    fun updateOrderStatus(
+    suspend fun updateOrderStatus(
         @Field("id") orderId: Int,
         @Field("status") status: String
-    ): Call<ApiResponse>
+    ): ApiResponse
     @FormUrlEncoded
     @POST("get_oder_by_status.php")
-    fun getOrderStatus(
+    suspend fun getOrderStatus(
         @Field("status") status: String
-    ): Call<List<Order>>
+    ): List<OrderModel>
 
     @FormUrlEncoded
     @POST("get_oder_by_user.php")
-    fun getOderByUser(
-        @Field("idauth") idauth: String
-    ): Call<List<Order>>
+    suspend fun getOrderByUser(
+        @Field("idauth") idUser: String
+    ): List<OrderModel>
 
     @FormUrlEncoded
     @POST("get_oder_by_userstatus.php")
-    fun getOderByUserStatus(
+    suspend fun getOrderByStatusByUser(
         @Field("idauth") idauth: String,
         @Field("status") status: String
-    ): Call<List<Order>>
+    ): List<OrderModel>
     
     @GET("revenue_month.php")
-    fun revenueMonth(
+    suspend fun revenueMonth(
         @Query("month") month: Int,
         @Query("year") year: Int
-    ): Call<RevenueResponse>
+    ): RevenueResponse
     @GET("revenue_week.php")
-    fun revenueWeek(
+    suspend fun revenueWeek(
         @Query("start_date") start_date: String
-    ): Call<RevenueResponse>
+    ): RevenueResponse
     @GET("revenue_year.php")
-    fun revenueYear(
+    suspend fun revenueYear(
         @Query("year") year: Int
-    ): Call<RevenueResponse>
+    ): RevenueResponse
 }

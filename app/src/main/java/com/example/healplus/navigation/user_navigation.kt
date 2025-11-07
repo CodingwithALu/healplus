@@ -1,7 +1,7 @@
 package com.example.healplus.navigation
+import VerifyEmailScreen
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -10,35 +10,58 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
-import com.example.core.model.users.UserAuthModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.model.users.UserModel
+import com.example.core.viewmodel.AuthViewModel
+import com.example.healplus.feature.authentication.signin.SignInScreen
+import com.example.healplus.feature.authentication.signup.SignupScreen
+import com.example.healplus.feature.common.widgets.success_screen.SuccessScreen
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
+import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
-import com.example.healplus.feature.personalization.settings.UpdateProfileScreen
 import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
-import com.example.healplus.feature.shop.cart.CheckOutScreen
-import com.example.healplus.feature.shop.category.CategoryScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
+import com.example.healplus.feature.shop.collections.CollectionScreen
 import com.example.healplus.feature.shop.home.AllReviewsScreen
 import com.example.healplus.feature.shop.home.DetailScreen
-import com.example.healplus.feature.shop.home.MainActivityScreen
+import com.example.healplus.feature.shop.home.HomeScreen
 import com.example.healplus.feature.shop.home.ProductDetailScreen
 import com.example.healplus.feature.shop.home.WriteReviewScreen
 import com.example.healplus.feature.shop.order.UsersOder
-import com.example.healplus.feature.shop.search.SearchScreen
+import com.example.healplus.feature.utils.route.Screen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navController: NavHostController) {
-
-    NavHost(navController = navController, startDestination = "home") {
+fun MyAppNavigation(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = Screen.Login.route) {
+        composable (route = Screen.Login.route) {
+            SignInScreen(navController)
+        }
+        composable (route = Screen.Signup.route){
+            SignupScreen(navController)
+        }
+        composable(route = "${Screen.VerifyEmail.route}/{email}"){ backStackEntry ->
+            val email = backStackEntry.arguments?.getString("email")
+            VerifyEmailScreen(
+                email = email!!,
+                navController
+            )
+        }
+        composable("success_screen_route") {
+            SuccessScreen(
+                image = "https://mybucket-01laulu2k3.s3.us-east-1.amazonaws.com/json/72462-check-register.json",
+                title = "Thành công!",
+                subtitle = "Email của bạn đã được xác thực.",
+                showEmail = true,
+                onContinue = { },
+                onResendEmail = { /* Xử lý gửi lại email */ }
+            )
+        }
         composable("home") {
-            MainActivityScreen(
+            HomeScreen(
                 navController = navController
             )
         }
@@ -88,24 +111,24 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
             navController
             )
         }
-        composable("order_screen/{selectedProducts}/{itemTotal}/{tax}/{quantity}") { backStackEntry ->
-            val selectedProductsJson = backStackEntry.arguments?.getString("selectedProducts") ?: "[]"
-            val totalAmount = backStackEntry.arguments?.getString("itemTotal")?.toDoubleOrNull() ?: 0.0
-            val tax = backStackEntry.arguments?.getString("tax")?.toDoubleOrNull() ?: 0.0
-            val quantity = backStackEntry.arguments?.getString("quantity")?.toInt() ?: 0
-            val selectedProducts: List<ProductsModel> = Gson().fromJson(
-                URLDecoder.decode(selectedProductsJson, "UTF-8"),
-                object : TypeToken<List<ProductsModel>>() {}.type
-            )
-
-            CheckOutScreen(navController, selectedProducts, totalAmount, tax, quantity)
-        }
+//        composable("order_screen/{selectedProducts}/{itemTotal}/{tax}/{quantity}") { backStackEntry ->
+//            val selectedProductsJson = backStackEntry.arguments?.getString("selectedProducts") ?: "[]"
+//            val totalAmount = backStackEntry.arguments?.getString("itemTotal")?.toDoubleOrNull() ?: 0.0
+//            val tax = backStackEntry.arguments?.getString("tax")?.toDoubleOrNull() ?: 0.0
+//            val quantity = backStackEntry.arguments?.getString("quantity")?.toInt() ?: 0
+//            val selectedProducts: List<ProductsModel> = Gson().fromJson(
+//                URLDecoder.decode(selectedProductsJson, "UTF-8"),
+//                object : TypeToken<List<ProductsModel>>() {}.type
+//            )
+//
+//            CheckOutScreen(navController, selectedProducts, totalAmount, tax, quantity)
+//        }
         composable("address"){
             AddressScreen(navController)
         }
 
         composable("settings") {
-            SettingScreen(authViewModel = authViewModel, navController = navController)
+            SettingScreen(navController = navController)
         }
         composable(route = "category/{categoryid}/{categorytitle}",
             arguments = listOf(
@@ -125,22 +148,19 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                     Log.e("Navigation123", "Error: Missing categoryid or categorytitle")
                     return@composable
                 }
-                val viewModel: ApiCallViewModel = viewModel()
-                CategoryScreen(
+                CollectionScreen(
                     title = categorytitle,
                     id = categoryid,
-                    viewModel = viewModel,
                     navController = navController
                 )
             }
         }
-        composable("search"){
-            val viewModel: ApiCallViewModel = viewModel()
-            SearchScreen(
-                viewModel = viewModel,
-                navController = navController
-            )
-        }
+//        composable("search"){
+//            SearchScreen(
+//                viewModel = viewModel,
+//                navController = navController
+//            )
+//        }
         composable("profile"){
             val viewModel: AuthViewModel = viewModel()
             ProfileScreen(
@@ -152,7 +172,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
                 backStackEntry ->
             val jsonItem = backStackEntry.arguments?.getString("userData")
 
-            val item = Gson().fromJson(jsonItem, UserAuthModel::class.java)
+            val item = Gson().fromJson(jsonItem, UserModel::class.java)
             UpdateProfileScreen(item, navController)
         }
     }

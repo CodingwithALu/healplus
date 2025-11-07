@@ -1,14 +1,16 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.hilt.dagger.android)
 }
-
 android {
     namespace = "com.example.core.viewmodel"
-    compileSdk = 35
-
+    compileSdk = 36
     defaultConfig {
-        minSdk = 26
+        minSdk = 29
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -26,11 +28,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
@@ -42,7 +48,17 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.converter.gson)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // Hilt core
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    // coroutine
+    implementation(libs.kotlinx.coroutines.android)
+    // dataStore
+    implementation(libs.androidx.datastore.preferences)
 }

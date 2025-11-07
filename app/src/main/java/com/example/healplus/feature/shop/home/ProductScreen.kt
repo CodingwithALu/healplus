@@ -72,16 +72,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
 import com.example.core.tinydb.helper.ManagmentCart
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
+import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.OrderViewModel
+import com.example.core.viewmodel.ReviewViewModel
 import com.example.healplus.R
-import com.example.healplus.feature.personalization.settings.SpacerProduct
+import com.example.healplus.feature.common.styles.TSpacerStyle
 import com.google.gson.Gson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -92,9 +94,10 @@ import java.util.Locale
 fun DetailScreen(
     item: ProductsModel,
     navController: NavController,
-    authViewModel: AuthViewModel = viewModel(),
-    apiCallViewModel: ApiCallViewModel = viewModel()
+    authViewModel: AuthViewModel = viewModel()
 ) {
+    val viewModel: OrderViewModel = hiltViewModel()
+    val reviewViewModel: ReviewViewModel = hiltViewModel()
     var selectedImageUrl by remember { mutableStateOf(item.product_images.first()) }
     var model by remember { mutableStateOf(item.unit_names.first()) }
     val managmentCart = ManagmentCart(LocalContext.current, authViewModel.getUserId().toString())
@@ -194,9 +197,9 @@ fun DetailScreen(
                 )
             }
 
-            SpacerProduct()
-            ProductInfoView(item, navController, apiCallViewModel)
-            SpacerProduct()
+            TSpacerStyle(4.dp)
+            ProductInfoView(item, navController, reviewViewModel)
+            TSpacerStyle(4.dp)
             ProductReviewsSection(
                 averageRating = item.rating.toFloat(),
                 totalReviews = item.review,
@@ -240,7 +243,7 @@ fun PriceText(price: Int, model: String) {
 fun ProductInfoView(
     product: ProductsModel,
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: ReviewViewModel
 ) {
     var showProducts by rememberSaveable  { mutableStateOf(false) }
     Column(modifier = Modifier.padding(16.dp)) {
@@ -259,7 +262,7 @@ fun ProductInfoView(
                 fontSize = 14.sp,
                 modifier = Modifier.clickable {
                     navController.navigate("productDetail/${Uri.encode(Gson().toJson(product))}")
-                    apiCallViewModel.upDateReview(product.idp)
+                    viewModel.updateReview(product.idp)
                 }
             )
         }
@@ -280,7 +283,7 @@ fun ProductInfoView(
                 ProductInfoItem(stringResource(R.string.expiry), product.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), product.ingredient)
                 ProductInfoItem(stringResource(R.string.description), product.description)
-                SeeAllButton(product, navController, apiCallViewModel)
+                SeeAllButton(product, navController, viewModel)
             }
         }
         BouncingIconButton(showProducts = showProducts) {
@@ -319,14 +322,14 @@ fun BouncingIconButton(showProducts: Boolean, onToggle: () -> Unit) {
 fun SeeAllButton(
     item: ProductsModel,
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel
+    viewModel: ReviewViewModel
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 navController.navigate("productDetail/${Uri.encode(Gson().toJson(item))}")
-                apiCallViewModel.upDateReview(item.idp)
+                viewModel.updateReview(item.idp)
             },
         verticalAlignment = Alignment.CenterVertically
     ) {

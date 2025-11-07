@@ -1,6 +1,5 @@
 package com.example.core.model.address
 
-import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import java.io.Serializable
 

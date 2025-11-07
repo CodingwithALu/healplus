@@ -2,7 +2,6 @@ package com.example.healplus.feature.shop.managers
 
 import android.app.DatePickerDialog
 import android.net.Uri
-import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Canvas
@@ -41,7 +40,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -61,8 +59,6 @@ import coil.compose.AsyncImage
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.products.Thanhphan
 import com.example.core.model.products.UnitInfo
-import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -70,9 +66,7 @@ import java.util.Calendar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddProductScreen(modifier: Modifier = Modifier,
-                     navController: NavController,
-                     viewModel: ApiCallViewModel,
-                     apiCallAdd: ApiCallAdd) {
+                     navController: NavController) {
     var name by remember { mutableStateOf("") }
     var trademark by remember { mutableStateOf("") }
     val rating by remember { mutableStateOf(5.0) }
@@ -115,13 +109,13 @@ fun AddProductScreen(modifier: Modifier = Modifier,
         }
     }
     var expanded by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-            viewModel.loadElement()
-            viewModel.element.observeForever {
-                elementsList.clear()
-                elementsList.addAll(it)
-        }
-    }
+//    LaunchedEffect(Unit) {
+//            viewModel.loadElement()
+//            viewModel.element.observeForever {
+//                elementsList.clear()
+//                elementsList.addAll(it)
+//        }
+//    }
     Scaffold (
         topBar = {
             TopAppBar(
@@ -414,33 +408,33 @@ fun AddProductScreen(modifier: Modifier = Modifier,
                 }
             }
             Button(onClick = {
-                apiCallAdd.addProduct(
-                    name = name,
-                    trademark = trademark,
-                    rating = rating.toString(),
-                    review = review.toString(),
-                    comment = sold.toString(),
-                    price = price,
-                    expiry = expiry,
-                    preparation = preparation,
-                    specification = specification,
-                    origin = origin,
-                    manufacturer = manufacturer,
-                    ingredient = ingredient,
-                    description = description,
-                    quantity = quantity,
-                    ide = selectedElementId,
-                    productiondate = productionDate,
-                    congdung = congdung,
-                    cachdung = cachdung,
-                    tacdungphu = tacdungphu,
-                    baoquan = baoquan,
-                    productImages = uploadedImageUrls,
-                    thanhphan = thanhphan,
-                    unitNames = unitInfo
-                ){ it ->
-                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                }
+//                apiCallAdd.addProduct(
+//                    name = name,
+//                    trademark = trademark,
+//                    rating = rating.toString(),
+//                    review = review.toString(),
+//                    comment = sold.toString(),
+//                    price = price,
+//                    expiry = expiry,
+//                    preparation = preparation,
+//                    specification = specification,
+//                    origin = origin,
+//                    manufacturer = manufacturer,
+//                    ingredient = ingredient,
+//                    description = description,
+//                    quantity = quantity,
+//                    ide = selectedElementId,
+//                    productiondate = productionDate,
+//                    congdung = congdung,
+//                    cachdung = cachdung,
+//                    tacdungphu = tacdungphu,
+//                    baoquan = baoquan,
+//                    productImages = uploadedImageUrls,
+//                    thanhphan = thanhphan,
+//                    unitNames = unitInfo
+//                ){ it ->
+//                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+//                }
                 navController.navigate("point")
 
             },

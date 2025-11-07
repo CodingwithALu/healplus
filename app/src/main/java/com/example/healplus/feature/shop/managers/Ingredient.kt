@@ -24,7 +24,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -37,20 +36,22 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.ingredients.IngredientsModel
-import com.example.core.viewmodel.apiviewmodel.ApiCallViewModel
-import com.example.healplus.feature.personalization.profiles.ProfileTopAppBar
+import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
+import com.example.healplus.R
+import com.example.healplus.feature.common.widgets.TAppBar
 import kotlinx.coroutines.launch
 
 @Composable
 fun EditIngredientScreen(
     navController: NavController,
-    apiCallViewModel: ApiCallViewModel,
     item: IngredientsModel
 ) {
+    val viewModel: CollectionViewModel = hiltViewModel()
     var title by remember { mutableStateOf(item.title) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -74,16 +75,21 @@ fun EditIngredientScreen(
         }
     }
     var expanded by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-        apiCallViewModel.loadCategory()
-        apiCallViewModel.categories.observeForever {
-            categoryList.clear()
-            categoryList.addAll(it)
-        }
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.loadCategory()
+//        viewModel.categories.observeForever {
+//            categoryList.clear()
+//            categoryList.addAll(it)
+//        }
+//    }
     Log.d("YourScreen", "Selected Image URI: $selectedImageUri")
     Scaffold(
-        topBar = { ProfileTopAppBar("Chỉnh sửa danh mục", navController) },
+        topBar = {
+            TAppBar(
+                title = R.string.edit_Category,
+                onClick = { navController.popBackStack() }
+            )
+        },
         snackbarHost = { SnackbarHost(snackbarHostState,
             modifier = Modifier
                 .fillMaxSize()
@@ -160,15 +166,7 @@ fun EditIngredientScreen(
                 Button(
                     onClick = {
                         if (title.isNotEmpty()) {
-                            apiCallViewModel.updateIngredient(item.iding, title, uploadedImageUrl.toString(), selectedIngredientId) { response ->
-                                scope.launch {
-                                    snackbarHostState.showSnackbar(response.message)
-                                }
-                            }
-                        } else {
-                            scope.launch {
-                                snackbarHostState.showSnackbar("Cập nhật thành công!")
-                            }
+//                            viewModel.(item.idIngredient, title, uploadedImageUrl.toString(), selectedIngredientId)
                         }
                     },
                     modifier = Modifier

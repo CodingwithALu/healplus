@@ -103,4 +103,9 @@
     <string name="sort_reviews_desc">Sắp xếp đánh giá</string>
     <string name="failed_to_load_reviews_error">Không thể tải danh sách đánh giá: %s</string>
     <string name="no_reviews_for_this_product_yet">Sản phẩm này chưa có đánh giá nào.</string>
+    <string name="information_acconut">Thông tin tài khoản</string>
+    <string name="add_category">Thêm mới doanh mục</string>
+    <string name="edit_Category">Chỉnh sửa danh mục</string>
+    <string name="update_account">Cập nhật thoong tin tài khoản</string>
+    <string name="change_button">Thay đổi</string>
 </resources>

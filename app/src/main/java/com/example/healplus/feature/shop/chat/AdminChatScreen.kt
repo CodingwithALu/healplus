@@ -17,8 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.viewmodel.authviewmodel.AuthViewModel
-import com.example.healplus.feature.shop.cart.OderTopAppBar
+import com.example.core.viewmodel.AuthViewModel
 
 @Composable
 fun AdminChatScreen(
@@ -28,9 +27,9 @@ fun AdminChatScreen(
 ) {
     val adminChatRooms by viewModel.adminChatRoomsLiveData.observeAsState(initial = emptyList())
     Scaffold(
-        topBar = {
-            OderTopAppBar(navController)
-        }
+//        topBar = {
+//            OderTopAppBar(navController)
+//        }
     ) {paddingValues ->
         Column (
             modifier = Modifier

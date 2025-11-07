@@ -32,7 +32,6 @@ data class ProductsModel(
     var ingredients: ArrayList<IngredientDetail> = ArrayList(),
     var reviewitems: ArrayList<ReviewItem> = ArrayList(),
 ) : Parcelable {
-
     constructor(parcel: Parcel) : this(
         idp = parcel.readString() ?: "",
         name = parcel.readString() ?: "",
@@ -59,10 +58,9 @@ data class ProductsModel(
         product_images = parcel.createStringArrayList() ?: arrayListOf(),
         unit_names = parcel.createStringArrayList() ?: arrayListOf(),
         element_names = parcel.readString() ?: "",
-        ingredients = parcel.createTypedArrayList(IngredientDetail) ?: arrayListOf(),
-        reviewitems = parcel.createTypedArrayList(ReviewItem) ?: arrayListOf()
+        ingredients = parcel.createTypedArrayList(IngredientDetail.CREATOR) ?: arrayListOf(),
+        reviewitems = parcel.createTypedArrayList(ReviewItem.CREATOR) ?: arrayListOf()
     )
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(idp)
         parcel.writeString(name)
@@ -92,30 +90,62 @@ data class ProductsModel(
         parcel.writeTypedList(ingredients)
         parcel.writeTypedList(reviewitems)
     }
-
     override fun describeContents(): Int {
         return 0
     }
-
+    // Add a map-style payload maker for easier "add new object" usage
+    fun toJsonMap(): Map<String, Any?> {
+        return mapOf(
+            "idp" to idp,
+            "name" to name,
+            "trademark" to trademark,
+            "rating" to rating,
+            "review" to review,
+            "sold" to sold,
+            "price" to price,
+            "preparation" to preparation,
+            "origin" to origin,
+            "manufacturer" to manufacturer,
+            "description" to description,
+            "showRecommended" to showRecommended,
+            "ide" to ide,
+            "productiondate" to productiondate,
+            "expiry" to expiry,
+            "specification" to specification,
+            "ingredient" to ingredient,
+            "quantity" to quantity,
+            "congdung" to congdung,
+            "cachdung" to cachdung,
+            "tacdungphu" to tacdungphu,
+            "baoquan" to baoquan,
+            // lists: send as lists (or use Gson to send JSON strings if backend expects strings)
+            "productImages" to product_images,
+            "unitNames" to unit_names,
+            "elementNames" to element_names,
+            // nested objects: convert each to map
+            "ingredients" to ingredients.map { it.toJsonMap() },
+            "reviewitems" to reviewitems.map { it.toJsonMap() }
+        )
+    }
     companion object CREATOR : Parcelable.Creator<ProductsModel> {
         override fun createFromParcel(parcel: Parcel): ProductsModel {
             return ProductsModel(parcel)
         }
-
         override fun newArray(size: Int): Array<ProductsModel?> {
             return arrayOfNulls(size)
         }
-
         fun fromJson(json: String): ProductsModel {
             return Gson().fromJson(json, ProductsModel::class.java)
         }
+        // factory for an empty/default product (used by OrderModel.empty())
+        fun empty(): ProductsModel {
+            return ProductsModel()
+        }
     }
-
     fun toJson(): String {
         return Gson().toJson(this)
     }
 }
-
 data class IngredientDetail(
     val title: String = "",
     val body: String = ""
@@ -124,16 +154,20 @@ data class IngredientDetail(
         title = parcel.readString() ?: "",
         body = parcel.readString() ?: ""
     )
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(body)
     }
-
     override fun describeContents(): Int {
         return 0
     }
-
+    // map helper for nested serialization
+    fun toJsonMap(): Map<String, Any?> {
+        return mapOf(
+            "title" to title,
+            "body" to body
+        )
+    }
     companion object CREATOR : Parcelable.Creator<IngredientDetail> {
         override fun createFromParcel(parcel: Parcel): IngredientDetail {
             return IngredientDetail(parcel)

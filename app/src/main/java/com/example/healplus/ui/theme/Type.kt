@@ -4,37 +4,106 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.healplus.R
-val AppTypography = Typography()
 
-val RobotoMono = FontFamily(
-    Font(R.font.robotomono_variablefont)
-)
 val Montserrat = FontFamily(
-    Font(R.font.robotomono_variablefont),
-    Font(R.font.robotomono_variablefont, FontWeight.Bold)
+    Font(R.font.montserrat_thin, FontWeight.Thin),
+    Font(R.font.montserrat_extralight, FontWeight.ExtraLight),
+    Font(R.font.montserrat_light, FontWeight.Light),
+    Font(R.font.montserrat_regular, FontWeight.Normal),
+    Font(R.font.montserrat_medium, FontWeight.Medium),
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold),
+    Font(R.font.montserrat_bold, FontWeight.Bold),
+    Font(R.font.montserrat_extrabold, FontWeight.ExtraBold),
+    Font(R.font.montserrat_black, FontWeight.Black),
+    // Italic
+    Font(R.font.montserrat_thin_italic, FontWeight.Thin, style = FontStyle.Italic),
+    Font(R.font.montserrat_extralight_italic, FontWeight.ExtraLight, style = FontStyle.Italic),
+    Font(R.font.montserrat_light_italic, FontWeight.Light, style = FontStyle.Italic),
+    Font(R.font.montserrat_italic, FontWeight.Normal, style = FontStyle.Italic),
+    Font(R.font.montserrat_medium_italic, FontWeight.Medium, style = FontStyle.Italic),
+    Font(R.font.montserrat_semibold_italic, FontWeight.SemiBold, style = FontStyle.Italic),
+    Font(R.font.montserrat_bold_italic, FontWeight.Bold, style = FontStyle.Italic),
+    Font(R.font.montserrat_extrabold_italic, FontWeight.ExtraBold, style = FontStyle.Italic),
+    Font(R.font.montserrat_black_italic, FontWeight.Black, style = FontStyle.Italic)
 )
-val Typography1 = Typography(
+val AppTypography = Typography(
     displayLarge = TextStyle(
-        fontFamily = RobotoMono,
-        fontWeight = FontWeight.Normal,
-        fontSize = 36.sp
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Black,
+        fontSize = 48.sp,
+        letterSpacing = 0.sp
     ),
     displayMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp
+        fontSize = 36.sp,
+        letterSpacing = 0.sp
     ),
-    labelSmall = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = Montserrat,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 24.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        letterSpacing = 0.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
+    ),
+    titleSmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Normal,
         fontSize = 14.sp
+    ),
+    bodySmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Light,
+        fontSize = 12.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp
     )
 )
