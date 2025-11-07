@@ -75,7 +75,7 @@ fun UpdateProfileScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ChangImageProfile(
-                urlimg = urlimg,
+                urlimg = urlimg ?: "",
                 imagePickerLauncher = imagePickerLauncher,
                 title = "Chọn ảnh đại diện")
             TSpacerStyle(16.dp)
@@ -110,7 +110,7 @@ fun UpdateProfileScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
-                    value = birthDate,
+                    value = birthDate ?: "",
                     onValueChange = {},
                     label = { Text("Ngày sinh") },
                     trailingIcon = {

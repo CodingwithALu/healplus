@@ -19,13 +19,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.healplus.R
 import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
 fun SocialButtons(
-    onGoogleSignIn: () -> Unit,
-    onFacebookSignIn: () -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -34,7 +34,9 @@ fun SocialButtons(
     ) {
         // Google Sign In Button
         IconButton(
-            onClick = onGoogleSignIn,
+            onClick = {
+
+            },
             modifier = Modifier.size(TSizes.APP_BAR_HEIGHT)
                 .clip(CircleShape)
         ) {
@@ -61,7 +63,9 @@ fun SocialButtons(
 
         // Facebook Sign In Button
         IconButton(
-            onClick = onFacebookSignIn,
+            onClick = {
+
+            },
             modifier = Modifier.size(TSizes.APP_BAR_HEIGHT)
                 .clip(CircleShape)
         ) {

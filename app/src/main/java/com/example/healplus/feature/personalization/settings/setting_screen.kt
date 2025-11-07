@@ -1,5 +1,4 @@
 package com.example.healplus.feature.personalization.settings
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,9 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
-import com.example.healplus.acitivity.LoginActivity
 import com.example.healplus.feature.common.widgets.TAppBar
 import com.example.healplus.feature.common.widgets.TButtonLogOut
 import com.example.healplus.feature.personalization.settings.widgets.SettingsItem
@@ -31,7 +28,6 @@ import com.example.healplus.feature.personalization.settings.widgets.TSectionTit
 @Composable
 fun SettingScreen(
     navController: NavController,
-    authViewModel: AuthViewModel
 ){
     val context = LocalContext.current
     Scaffold (
@@ -98,8 +94,8 @@ fun SettingScreen(
                  TButtonLogOut(
                      title = R.string.logout,
                      onClick = {
-                         authViewModel.signOut()
-                         context.startActivity(Intent(context, LoginActivity::class.java))
+//                         authViewModel.signOut()
+//                         context.startActivity(Intent(context, LoginActivity::class.java))
                      }
                  )
              }

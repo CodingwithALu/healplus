@@ -1,7 +1,7 @@
 package com.example.healplus.navigation
+import VerifyEmailScreen
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -12,6 +12,9 @@ import com.example.core.model.products.ProductsModel
 import com.example.core.model.products.ReviewItem
 import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.AuthViewModel
+import com.example.healplus.feature.authentication.signin.SignInScreen
+import com.example.healplus.feature.authentication.signup.SignupScreen
+import com.example.healplus.feature.common.widgets.success_screen.SuccessScreen
 import com.example.healplus.feature.personalization.profiles.ProfileScreen
 import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
 import com.example.healplus.feature.personalization.settings.SettingScreen
@@ -25,15 +28,38 @@ import com.example.healplus.feature.shop.home.HomeScreen
 import com.example.healplus.feature.shop.home.ProductDetailScreen
 import com.example.healplus.feature.shop.home.WriteReviewScreen
 import com.example.healplus.feature.shop.order.UsersOder
+import com.example.healplus.feature.utils.route.Screen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navController: NavHostController) {
-
-    NavHost(navController = navController, startDestination = "home") {
+fun MyAppNavigation(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = Screen.Login.route) {
+        composable (route = Screen.Login.route) {
+            SignInScreen(navController)
+        }
+        composable (route = Screen.Signup.route){
+            SignupScreen(navController)
+        }
+        composable(route = "${Screen.VerifyEmail.route}/{email}"){ backStackEntry ->
+            val email = backStackEntry.arguments?.getString("email")
+            VerifyEmailScreen(
+                email = email!!,
+                navController
+            )
+        }
+        composable("success_screen_route") {
+            SuccessScreen(
+                image = "https://mybucket-01laulu2k3.s3.us-east-1.amazonaws.com/json/72462-check-register.json",
+                title = "Thành công!",
+                subtitle = "Email của bạn đã được xác thực.",
+                showEmail = true,
+                onContinue = { },
+                onResendEmail = { /* Xử lý gửi lại email */ }
+            )
+        }
         composable("home") {
             HomeScreen(
                 navController = navController
@@ -102,7 +128,7 @@ fun MyAppNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel,
         }
 
         composable("settings") {
-            SettingScreen(authViewModel = authViewModel, navController = navController)
+            SettingScreen(navController = navController)
         }
         composable(route = "category/{categoryid}/{categorytitle}",
             arguments = listOf(

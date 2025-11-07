@@ -45,13 +45,12 @@ interface ApiService {
     @GET("get_oder.php")
     suspend fun getOder(): List<OrderModel>
     @FormUrlEncoded
-    @POST("add_user.php")
-    suspend fun addUser(
+    @POST("create_user.php")
+    suspend fun createUser(
+        @Field("id") id: String,
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("url") url: String,
-        @Field("role") role: String
     ): ApiResponse
     @FormUrlEncoded
     @POST("add_category.php")

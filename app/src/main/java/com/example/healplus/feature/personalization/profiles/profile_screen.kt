@@ -52,8 +52,8 @@ fun ProfileScreen(viewModel: AuthViewModel, navController: NavController) {
                     )
                 }
                 TRowItemProfile(label = "Họ và tên", value = userData.name)
-                TRowItemProfile(label = "Giới tính", value = userData.gender)
-                TRowItemProfile(label = "Ngày sinh", value = userData.dateBirth)
+                TRowItemProfile(label = "Giới tính", value = userData.gender!!)
+                TRowItemProfile(label = "Ngày sinh", value = userData.dateBirth!!)
                 Spacer(modifier = Modifier.weight(1f))
                 TEditButtonApp(onClick = {
                     navController.navigate("editProfile/${Uri.encode(Gson().toJson(userData))}")

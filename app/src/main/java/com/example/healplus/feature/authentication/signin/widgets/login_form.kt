@@ -22,6 +22,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,25 +36,45 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.core.repository.EmailVerifyEvent
+import com.example.core.viewmodel.authviewmodel.LoginViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.utils.constants.TSizes
+import com.example.healplus.feature.utils.route.Screen
 import com.example.healplus.feature.utils.validator.ValidationUtils
 
 @Composable
 fun LoginForm(
-    onEmailAndPasswordSignIn: (String, String, Boolean) -> Unit,
-    onNavigateToSignup: () -> Unit,
-    onNavigateToForgetPassword: () -> Unit,
-    isLoading: Boolean = false
+    event: (String) -> Unit,
+    navController: NavController
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val viewModel: LoginViewModel = hiltViewModel()
+    val emailVerify by viewModel.emailVerify.collectAsState()
+    val user by viewModel.user.collectAsState()
+    var email by remember { mutableStateOf(user.email) }
+    var password by remember { mutableStateOf(user.password) }
     var rememberMe by remember { mutableStateOf(false) }
     var hidePassword by remember { mutableStateOf(true) }
-
     var emailError by remember { mutableStateOf<String?>(null) }
     var passwordError by remember { mutableStateOf<String?>(null) }
-
+    val isLoading = viewModel.isLoading
+    LaunchedEffect(emailVerify) {
+        when(emailVerify){
+            is EmailVerifyEvent.RedirectToSuccessScreen -> {
+                navController.navigate(Screen.Home.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            }
+            is EmailVerifyEvent.RedirectToUserEmpty -> {
+                navController.navigate("${Screen.VerifyEmail.route}/${email}")
+            } else -> {}
+        }
+    }
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -77,9 +99,7 @@ fun LoginForm(
             },
             modifier = Modifier.fillMaxWidth()
         )
-
         Spacer(modifier = Modifier.height(TSizes.MD))
-
         // Password TextField
         OutlinedTextField(
             value = password,
@@ -113,9 +133,7 @@ fun LoginForm(
             modifier = Modifier.fillMaxWidth(),
             enabled = true
         )
-
         Spacer(modifier = Modifier.height(TSizes.SM))
-
         // Remember Me & Forget Password Row
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -134,23 +152,22 @@ fun LoginForm(
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
-
             TextButton(
-                onClick = onNavigateToForgetPassword
+                onClick = {
+                    navController.navigate(Screen.ForgetPass.route)
+                }
             ) {
                 Text("Forget Password")
             }
         }
-
         Spacer(modifier = Modifier.height(TSizes.MD))
-
         // Sign In Button
         Button(
             onClick = {
                 emailError = ValidationUtils.validateEmail(email)
                 passwordError = ValidationUtils.validatePassword(password)
                 if (emailError == null && passwordError == null) {
-                    onEmailAndPasswordSignIn(email, password, rememberMe)
+                    viewModel.signIn(email, password, rememberMe)
                 }
             },
             enabled = !isLoading,
@@ -170,12 +187,12 @@ fun LoginForm(
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(TSizes.MD))
-
         // Create Account Button
         OutlinedButton(
-            onClick = onNavigateToSignup,
+            onClick = {
+                navController.navigate(Screen.Signup.route)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(TSizes.APP_BAR_HEIGHT)

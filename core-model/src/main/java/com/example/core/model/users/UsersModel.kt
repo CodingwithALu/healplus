@@ -1,19 +1,19 @@
 package com.example.core.model.users
 data class UserModel(
-    var idUser: String ,
+    var id: String,
     var name: String,
     var email: String,
     var password: String,
-    var gender: String,
-    var dateBirth: String,
-    var url: String,
+    var gender: String? = null,
+    var dateBirth: String? = null,
+    var url: String? = null,
     var spot: Int = 0,
-    var token: String,
-    val role: String?
+    var token: String? = null,
+    val role: String = ""
 ){
     companion object {
         fun empty() = UserModel(
-            idUser = "",
+            id = "",
             name = "",
             email = "",
             password = "",
@@ -27,7 +27,7 @@ data class UserModel(
     }
     fun toJsonMap(): Map<String, Any?>{
         return mapOf(
-            "id" to idUser,
+            "id" to id,
             "name" to name,
             "email" to email,
             "password" to password,

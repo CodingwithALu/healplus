@@ -32,8 +32,8 @@ object TSizes {
     val IMAGE_THUMB_SIZE: Dp = 80.dp
 
     // Default spacing between sections
-    val DEFAULT_SPACE: Dp = 24.dp
-    val SPACE_BTW_ITEMS: Dp = 16.dp
+    val DEFAULT_SPACE: Dp = 16.dp
+    val SPACE_BTW_ITEMS: Dp = 24.dp
     val SPACE_BTW_SECTIONS: Dp = 32.dp
 
     // Border radius

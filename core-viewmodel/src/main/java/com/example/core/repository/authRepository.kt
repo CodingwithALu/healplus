@@ -1,10 +1,13 @@
 package com.example.core.repository
 
+import com.example.core.model.api.ApiResponse
 import com.example.core.model.users.UserModel
-import com.google.firebase.auth.AuthResult
+import com.example.core.network.apis.ApiService
+import com.example.core.network.retrofitclients.RetrofitClient
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -12,43 +15,78 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(
-    private val db: FirebaseFirestore,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val api: ApiService = RetrofitClient.instance
 ) {
-    // password and email
-    suspend fun signInWithEmailPassword(email: String, password: String): Result<AuthResult> = runCatching{
-        withContext(Dispatchers.IO) {
-          auth.signInWithEmailAndPassword(email, password).await()
+    private var _emailVerify = MutableStateFlow<EmailVerifyEvent?>(null)
+    val emailVerify: StateFlow<EmailVerifyEvent?> = _emailVerify
+    private val user = auth.currentUser
+    fun screenRedirect() {
+        if (user != null) {
+            if (user.isEmailVerified) {
+                _emailVerify.value = EmailVerifyEvent.RedirectToUserEmpty
+            } else {
+                _emailVerify.value = EmailVerifyEvent.RedirectToSuccessScreen
+            }
+        } else {
+            _emailVerify.value = EmailVerifyEvent.ShowErrorSnackBar(
+                title = "No Account",
+                message = "Create Account. Please!"
+            )
         }
     }
-
-    suspend fun signUp(
-        name: String, email: String, password: String, url: String, role: String
-    ): Result<UserModel> = runCatching {
-        withContext(Dispatchers.IO) {
-            val result = auth.createUserWithEmailAndPassword(email, password).await()
-            val userId = result.user?.uid ?: throw Exception("User ID is null")
-            val userModel = UserModel.empty()
-            db.collection("users").document(userId).set(userModel).await()
-            userModel
+    // signIn password and email
+    suspend fun signInWithEmailPassword(email: String, password: String) {
+        return withContext(Dispatchers.IO) {
+            auth.signInWithEmailAndPassword(email, password).await()
         }
     }
-
-    suspend fun getCurrentUser(): UserModel {
+    // verify email
+    suspend fun sendEmailVerification(){
         return withContext(Dispatchers.IO){
-            val userId = auth.currentUser?.uid ?: return@withContext UserModel.empty()
-            val document = db.collection("users").document(userId).get().await()
-            document.toObject(UserModel::class.java) as UserModel
+            auth.currentUser?.sendEmailVerification()
         }
     }
-
-    suspend fun updateUser(fields: Map<String, Any?>): Result<Boolean> = runCatching {
-        val userId = auth.currentUser?.uid ?: throw Exception("User not logged in")
-        db.collection("users").document(userId).update(fields).await()
-        true
+    // SignUp
+    suspend fun createUser(name: String, email: String, password: String): ApiResponse{
+        return withContext(Dispatchers.IO) {
+            try {
+                val creteAuth = auth.createUserWithEmailAndPassword(email, password).await()
+                val userId = creteAuth.user?.uid ?: throw Exception("User ID is null")
+                val userModel = UserModel(
+                    id = userId,
+                    name = name,
+                    email = email,
+                    password = password
+                )
+                val dbResult = createUserForDataBase(userModel)
+                if (dbResult.success) {
+                    dbResult
+                } else {
+                    throw Exception("Failed to create user in database: ${dbResult.message}")
+                }
+            } catch (e: Exception) {
+                ApiResponse(false, e.message ?: "Unknown error")
+            }
+        }
     }
-
+    suspend fun createUserForDataBase(userModel: UserModel): ApiResponse{
+        return withContext(Dispatchers.IO) {
+            api.createUser(
+                userModel.id,
+                userModel.name,
+                userModel.email,
+                userModel.password
+            )
+        }
+    }
+    // Logout
     fun signOut() {
         auth.signOut()
     }
+}
+sealed class EmailVerifyEvent {
+    data class ShowErrorSnackBar(val title: String, val message: String) : EmailVerifyEvent()
+    object RedirectToSuccessScreen : EmailVerifyEvent()
+    object RedirectToUserEmpty : EmailVerifyEvent()
 }

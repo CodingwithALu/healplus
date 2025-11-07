@@ -7,7 +7,6 @@ import com.example.core.repository.OrderRepository
 import com.example.core.repository.ProductRepository
 import com.example.core.repository.RevenueRepository
 import com.example.core.repository.ReviewRepository
-import com.example.core.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,10 +63,5 @@ object AppModule {
     @Singleton
     fun provideReviewRepository(apiService: ApiService): ReviewRepository{
         return ReviewRepository(apiService)
-    }
-    @Provides
-    @Singleton
-    fun provideUserRepository(apiService: ApiService): UserRepository{
-        return UserRepository(apiService)
     }
 }

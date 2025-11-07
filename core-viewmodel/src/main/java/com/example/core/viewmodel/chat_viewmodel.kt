@@ -381,11 +381,6 @@ class AuthViewModel : ViewModel() {
             }
         }
     }
-    fun signOut() {
-        auth.signOut()
-        _authState.value = AuthSate.Unauthenticated
-    }
-
     fun getUserId(): String? {
         return auth.currentUser?.uid
     }

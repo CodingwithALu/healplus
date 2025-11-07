@@ -1,12 +1,9 @@
 package com.example.core.repository
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -15,30 +12,19 @@ import javax.inject.Singleton
 
 @Singleton
 class UserPreferencesRepository @Inject constructor(
-    private val dataStore: DataStore<Preferences>,
-    @ApplicationContext private val context: Context
+    private val dataStore: DataStore<Preferences>
 ){
-    /*
-     Ghi chú tích hợp với Hilt:
-     - DataStore được cung cấp bởi DataStoreModule (Hilt) nên Hilt inject trực tiếp
-       DataStore<Preferences> vào constructor.
-     - Repository này là @Singleton để giữ trạng thái chung.
-     - Từ ViewModel đánh dấu @HiltViewModel, Hilt sẽ inject UserPreferencesRepository
-       khi ViewModel được tạo (bằng HiltViewModelFactory).
-     - Sử dụng các key và dataStore.edit/read để lưu/đọc trạng thái đăng nhập.
-    */
-
     private companion object {
-        val IS_REMEMBER_LOGGED_IN = booleanPreferencesKey("is_remember_logged_in")
-        val USER_ID = stringPreferencesKey("user_id")
+        val EMAIL_USER = stringPreferencesKey("email_user")
+        val PASS_WORS = stringPreferencesKey("password_user")
     }
 
     // save isRemember, userId and provider (run on IO dispatcher)
-    suspend fun saveStatePreferences(isRemember: Boolean, userId: String) {
+    suspend fun saveStatePreferences(emailUser: String, passwordUser: String) {
         withContext(Dispatchers.IO) {
             dataStore.edit { preferences ->
-                preferences[IS_REMEMBER_LOGGED_IN] = isRemember
-                preferences[USER_ID] = userId
+                preferences[EMAIL_USER] = emailUser
+                preferences[PASS_WORS] = passwordUser
             }
         }
     }
@@ -48,9 +34,9 @@ class UserPreferencesRepository @Inject constructor(
         try {
             withContext(Dispatchers.IO) {
                 val pref = dataStore.data.first()
-                val isRemember = pref[IS_REMEMBER_LOGGED_IN] ?: false
-                val userId = pref[USER_ID] ?: ""
-                Result.success(StatePreferences(isRemember, userId))
+                val userId = pref[EMAIL_USER] ?: ""
+                val passwordUser = pref[PASS_WORS] ?: ""
+                Result.success(StatePreferences(userId, passwordUser))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -69,6 +55,6 @@ class UserPreferencesRepository @Inject constructor(
 }
 
 data class StatePreferences(
-    val isRememberLogged: Boolean,
-    val userId: String
+    val emailUser: String,
+    val password: String
 )
