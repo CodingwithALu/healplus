@@ -116,7 +116,7 @@ fun CartScreen(
                 }
             }
             CartSummary(
-                itemTotal = selectedItems.value.sumOf { it.price * it.quantity },
+                itemTotal = selectedItems.value.sumOf { it.unitNames.firstOrNull()?.price!! * it.quantity },
                 quantity = selectedItems.value.sumOf { it.quantity },
                 tax = tax.value,
                 onClick = { itemTotal, tax, quantity ->
@@ -232,7 +232,7 @@ fun CartSummary(itemTotal: Int, tax: Double, quantity: Int, onClick: (Int, Doubl
 
 fun calculatorCart(selectedItems: List<ProductsModel>, tax: MutableState<Double>) {
     var percentTax = 0.02
-    val totalSelected = selectedItems.sumOf { it.price * it.quantity }
+    val totalSelected = selectedItems.sumOf { it.unitNames.firstOrNull()?.price!! * it.quantity }
     tax.value = Math.round((totalSelected * percentTax) * 100) / 100.0
 }
 
@@ -245,8 +245,8 @@ fun CartItems(
     onItemChange: () -> Unit
 ) {
     val isSelected = remember { mutableStateOf(item in selectedItems) }
-    val totalPrice = item.price * item.quantity
-    val formattedPrice = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.price)
+    val totalPrice = item.unitNames.firstOrNull()?.price!! * item.quantity
+    val formattedPrice = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.unitNames.firstOrNull()?.price!!)
     val formattedTotalPrice = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(totalPrice)
     val context = LocalContext.current
     Box(modifier = Modifier
@@ -283,7 +283,7 @@ fun CartItems(
                     ) {
                         Row {
                             Image(
-                                painter = rememberAsyncImagePainter(item.listImages[0]),
+                                painter = rememberAsyncImagePainter(item.urls[0]),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .size(40.dp)

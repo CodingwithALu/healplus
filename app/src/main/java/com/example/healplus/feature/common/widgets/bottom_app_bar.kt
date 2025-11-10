@@ -1,16 +1,11 @@
-package com.example.wallify.navigation
+package com.example.healplus.feature.common.widgets
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -41,12 +36,11 @@ import com.example.healplus.feature.utils.route.routesToHideBottomBar
 
 @Composable
 fun BottomAppBarr(
-    showBar: Boolean = false,
     navController: NavController
 ) {
     val navItems = listOf(
         BottomNavItem(Screen.Home.route, icon = null, imageRes = R.drawable.home),
-        BottomNavItem(Screen.Streak.route, icon = null, imageRes = R.drawable.flash),
+        BottomNavItem(Screen.Order.route, icon = null, imageRes = R.drawable.flash),
         BottomNavItem(Screen.Collection.route, icon = null, imageRes = R.drawable.layers),
         BottomNavItem(Screen.Favorite.route, icon = null, imageRes = R.drawable.heart)
     )
@@ -59,64 +53,51 @@ fun BottomAppBarr(
         currentRoute = navController.currentBackStackEntry?.destination?.route
         selectedIndex = navItems.indexOfFirst { it.label == currentRoute }
     }
-
-    if (showBar) {
-        AnimatedVisibility(
-            visible = showBar,
-            enter = slideInVertically(
-                initialOffsetY = { it },
-                animationSpec = tween(1000)
-            ) + fadeIn(animationSpec = tween(1000)),
-            exit = slideOutVertically(
-                targetOffsetY = { it },
-                animationSpec = tween(1000)
-            ) + fadeOut(animationSpec = tween(1000)),
-        ) {
-            BottomAppBar(
-                modifier = Modifier
+    BottomAppBar(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .clip(RoundedCornerShape(TSizes.LG)),
+        containerColor = Color.Transparent,
+        tonalElevation = 0.dp
+    ) {
+        if (currentRoute !in routesToHideBottomBar) {
+            Row(
+                Modifier
                     .fillMaxWidth()
-                    .height(96.dp)
-                    .clip(RoundedCornerShape(TSizes.LG)),
-                containerColor = Color.Transparent,
-                tonalElevation = 0.dp
+                    .fillMaxHeight()
+                    .background(Color.Transparent)
+                    .align(Alignment.Top),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                if (currentRoute !in routesToHideBottomBar) {
-                    Row(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(64.dp)
-                            .background(Color.Transparent)
-                            .align (Alignment.Top),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        navItems.forEachIndexed { index, item ->
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .align(Alignment.Top)
-                                    .clickable {
-                                        selectedIndex = index
-                                        navController.navigate(item.label)
-                                    }
-                            ) {
-                                Icon(
-                                    painter = painterResource(item.imageRes),
-                                    contentDescription = item.label,
-                                    tint = if (selectedIndex == index) Color(0xFF19D44B) else Color.Gray,
-                                    modifier = Modifier.size(28.dp)
-                                )
-                                Text(
-                                    text = item.label,
-                                    color = if (selectedIndex == index) Color(0xFF19D44B) else Color.Gray,
-                                    style = MaterialTheme.typography.labelMedium
-                                )
+                navItems.forEachIndexed { index, item ->
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .weight(1f)
+                            .align(Alignment.Top)
+                            .clip(RoundedCornerShape(12.dp))
+                            .clickable {
+                                selectedIndex = index
+                                navController.navigate(item.label)
                             }
-                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(item.imageRes),
+                            contentDescription = item.label,
+                            tint = if (selectedIndex == index) Color(0xFF19D44B) else Color.Gray,
+                            modifier = Modifier.size(TSizes.ICON_MD)
+                        )
+                        Text(
+                            text = item.label,
+                            color = if (selectedIndex == index) Color(0xFF19D44B) else Color.Gray,
+                            style = MaterialTheme.typography.labelMedium
+                        )
                     }
                 }
             }
         }
     }
+
 }

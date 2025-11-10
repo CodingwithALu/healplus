@@ -5,14 +5,24 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Phone
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,27 +41,30 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.healplus.R
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
-fun DrugStoreInfoScreen() {
+fun StoreInfoScreenWidgets(
+    navController: NavController
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+            .padding(horizontal = TSizes.DEFAULT_SPACE/2),
+        verticalArrangement = Arrangement.spacedBy(TSizes.DEFAULT_SPACE/2)
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
                     .animateContentSize(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioNoBouncy,
@@ -66,13 +79,13 @@ fun DrugStoreInfoScreen() {
                 ) {
                     InfoItem(
                         modifier = Modifier.weight(1f),
-                        icon = painterResource(com.example.healplus.R.drawable.genuine),
+                        icon = painterResource(R.drawable.genuine),
                         title = "Thuốc chính hãng",
                         subtitle = "đa dạng và chuyên sâu"
                     )
                     InfoItem(
                         modifier = Modifier.weight(1f),
-                        icon = painterResource(com.example.healplus.R.drawable.return_of_investment),
+                        icon = painterResource(R.drawable.return_of_investment),
                         title = "Đổi trả trong 30 ngày",
                         subtitle = "kể từ ngày mua hàng"
                     )
@@ -84,7 +97,7 @@ fun DrugStoreInfoScreen() {
                 ) {
                     InfoItem(
                         modifier = Modifier.weight(1f),
-                        icon = painterResource(com.example.healplus.R.drawable.tag),
+                        icon = painterResource(R.drawable.tag),
                         title = "Cam kết 100%",
                         subtitle = "chất lượng sản phẩm"
                     )
@@ -105,39 +118,35 @@ fun DrugStoreInfoScreen() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(horizontal = TSizes.DEFAULT_SPACE/2),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
                     text = "Thông tin cửa hàng",
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
                 )
-
                 Text(
                     text = "© 2007 - 2024 Công ty Cổ Phần Dược Phẩm HealPlus",
+                    fontSize = 12.sp
                 )
-
                 Text(
                     text = "Số ĐKKD 0315275368 cấp ngày 17/09/2025 tại Sở Kế hoạch Đầu tư THHN",
+                    fontSize = 12.sp
                 )
-
                 HorizontalDivider()
-
                 ContactInfoItem(
                     icon = Icons.Rounded.LocationOn,
-                    content = "379-381 Xuân Thủy, P. Xuân Thủy, Q.Cầu Giấy, TP. HN"
+                    content = "379-381 Xuân Thủy, P. Xuân Thủy, Q.Cầu Giấy, TP. HN",
                 )
-
                 ContactInfoItem(
                     icon = Icons.Rounded.Phone,
                     content = "(028)73023456"
                 )
-
                 ContactInfoItem(
                     icon = Icons.Rounded.Email,
                     content = "sale@healplus.com.vn"
                 )
-
                 ContactInfoItem(
                     icon = Icons.Rounded.Person,
                     content = "Người quản lý nội dung: Lầu A Lử"
@@ -147,7 +156,7 @@ fun DrugStoreInfoScreen() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
+                .padding(vertical = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -158,7 +167,7 @@ fun DrugStoreInfoScreen() {
                 }
             Layout(
                 Modifier
-                    .size(80.dp)
+                    .size(56.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .then(semantics)
                     .clipToBounds()
@@ -192,7 +201,8 @@ private fun ContactInfoItem(
         Text(
             text = content,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontSize = 14.sp
         )
     }
 }
@@ -219,7 +229,7 @@ private fun InfoItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(TSizes.DEFAULT_SPACE/2),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -228,19 +238,22 @@ private fun InfoItem(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
-                    .size(32.dp)
-                    .padding(bottom = 8.dp)
+                    .size(26.dp)
+                    .padding(bottom = 2.dp)
             )
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                minLines = 1,
+                textAlign = TextAlign.Center,
+                fontSize = 14.sp
             )
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
+                fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

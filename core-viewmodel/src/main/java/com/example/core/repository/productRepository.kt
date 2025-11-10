@@ -24,7 +24,6 @@ class ProductRepository(
                 review = product.review.toString(),
                 sold = product.sold.toString(),
                 expiry = product.expiry,
-                price = product.price.toString(),
                 preparation = product.preparation,
                 specification = product.specification,
                 origin = product.origin,
@@ -38,7 +37,7 @@ class ProductRepository(
                 cachdung = product.toUse,
                 tacdungphu = product.sideEffects,
                 baoquan = product.preserver,
-                productImages = gson.toJson(product.listImages),
+                productImages = gson.toJson(product.urls),
                 thanhphan = gson.toJson(product.ingredients),
                 unitNames = gson.toJson(product.unitNames)
             )

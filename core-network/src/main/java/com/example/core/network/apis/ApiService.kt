@@ -165,7 +165,6 @@ interface ApiService {
         @Field("review") review: String,
         @Field("sold") sold: String,
         @Field("expiry") expiry: String,
-        @Field("price") price: String,
         @Field("preparation") preparation: String,
         @Field("specification") specification: String,
         @Field("origin") origin: String,

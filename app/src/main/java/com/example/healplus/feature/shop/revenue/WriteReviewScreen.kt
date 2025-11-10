@@ -1,4 +1,4 @@
-package com.example.healplus.feature.shop.home
+package com.example.healplus.feature.shop.revenue
 
 import android.util.Log
 import android.widget.Toast
@@ -45,7 +45,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.model.products.ReviewItem
+import com.example.core.model.products.conten.ReviewItem
 import com.example.core.viewmodel.AuthViewModel
 import com.example.core.viewmodel.ReviewViewModel
 import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
@@ -173,11 +173,11 @@ fun WriteReviewScreen(
                             )
                             val currentDateAndTime = sdf.format(Date())
                             val review = ReviewItem(
-                                reviewerName = reviewerNameToSubmit,
+                                name = reviewerNameToSubmit,
                                 rating = rating.toFloat(),
                                 comment = reviewComment,
                                 date = currentDateAndTime,
-                                profileImageUrl = imageUrlToSubmit
+                                ulr = imageUrlToSubmit
                             )
                             viewModel.createReview(review, productId)
                         } catch (e: Exception) {

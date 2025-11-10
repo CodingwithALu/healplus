@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.healplus.R
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
 fun TSectionHeading(
@@ -25,21 +25,18 @@ fun TSectionHeading(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(
-                start = 16.dp,
-                end = 16.dp,
-                top = 16.dp
-            ),
+            .padding(horizontal = TSizes.DEFAULT_SPACE/2),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = stringResource(id = title),
-            fontSize = 16.sp,
+            fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
         )
         if (showSubtitle) {
             Text(
                 text = stringResource(id = subtitle),
+                fontSize = 12.sp,
                 modifier = Modifier.clickable(
                     onClick = onClick,
                 ),

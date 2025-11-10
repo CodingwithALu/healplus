@@ -2,6 +2,9 @@ package com.example.core.model.products
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.core.model.products.conten.IngredientDetail
+import com.example.core.model.products.conten.ReviewItem
+import com.example.core.model.products.conten.UnitInfo
 import com.google.gson.Gson
 data class ProductsModel(
     val idp: String = "",
@@ -10,7 +13,6 @@ data class ProductsModel(
     var rating: Double = 0.0,
     var review: Int = 0,
     var sold: Int = 0,
-    var price: Int = 0,
     val preparation: String = "",
     val origin: String = "",
     val manufacturer: String = "",
@@ -25,8 +27,8 @@ data class ProductsModel(
     val toUse: String = "",
     val sideEffects: String = "",
     val preserver: String = "",
-    var listImages: ArrayList<String> = ArrayList(),
-    var unitNames: ArrayList<String> = ArrayList(),
+    var urls: ArrayList<String> = ArrayList(),
+    var unitNames: ArrayList<UnitInfo> = ArrayList(),
     var elements: String = "",
     var ingredients: ArrayList<IngredientDetail> = ArrayList(),
     var reviewItems: ArrayList<ReviewItem> = ArrayList(),
@@ -38,7 +40,6 @@ data class ProductsModel(
         rating = parcel.readDouble(),
         review = parcel.readInt(),
         sold = parcel.readInt(),
-        price = parcel.readInt(),
         preparation = parcel.readString() ?: "",
         origin = parcel.readString() ?: "",
         manufacturer = parcel.readString() ?: "",
@@ -53,8 +54,8 @@ data class ProductsModel(
         toUse = parcel.readString() ?: "",
         sideEffects = parcel.readString() ?: "",
         preserver = parcel.readString() ?: "",
-        listImages = parcel.createStringArrayList() ?: arrayListOf(),
-        unitNames = parcel.createStringArrayList() ?: arrayListOf(),
+        urls = parcel.createStringArrayList() ?: arrayListOf(),
+        unitNames = parcel.createTypedArrayList(UnitInfo.CREATOR) ?: arrayListOf(),
         elements = parcel.readString() ?: "",
         ingredients = parcel.createTypedArrayList(IngredientDetail.CREATOR) ?: arrayListOf(),
         reviewItems = parcel.createTypedArrayList(ReviewItem.CREATOR) ?: arrayListOf()
@@ -66,7 +67,6 @@ data class ProductsModel(
         parcel.writeDouble(rating)
         parcel.writeInt(review)
         parcel.writeInt(sold)
-        parcel.writeInt(price)
         parcel.writeString(preparation)
         parcel.writeString(origin)
         parcel.writeString(manufacturer)
@@ -81,8 +81,8 @@ data class ProductsModel(
         parcel.writeString(toUse)
         parcel.writeString(sideEffects)
         parcel.writeString(preserver)
-        parcel.writeStringList(listImages)
-        parcel.writeStringList(unitNames)
+        parcel.writeStringList(urls)
+        parcel.writeTypedList(unitNames)
         parcel.writeString(elements)
         parcel.writeTypedList(ingredients)
         parcel.writeTypedList(reviewItems)
@@ -90,7 +90,6 @@ data class ProductsModel(
     override fun describeContents(): Int {
         return 0
     }
-    // Add a map-style payload maker for easier "add new object" usage
     fun toJsonMap(): Map<String, Any?> {
         return mapOf(
             "idp" to idp,
@@ -99,7 +98,6 @@ data class ProductsModel(
             "rating" to rating,
             "review" to review,
             "sold" to sold,
-            "price" to price,
             "preparation" to preparation,
             "origin" to origin,
             "manufacturer" to manufacturer,
@@ -114,8 +112,7 @@ data class ProductsModel(
             "toUse" to toUse,
             "sideEffects" to sideEffects,
             "preserver" to preserver,
-            // lists and nested objects use keys matching your sample JSON
-            "listImages" to listImages,
+            "urls" to urls,
             "unitNames" to unitNames,
             "elements" to elements,
             "ingredients" to ingredients.map { it.toJsonMap() },
@@ -132,44 +129,11 @@ data class ProductsModel(
         fun fromJson(json: String): ProductsModel {
             return Gson().fromJson(json, ProductsModel::class.java)
         }
-        // factory for an empty/default product (used by OrderModel.empty())
         fun empty(): ProductsModel {
             return ProductsModel()
         }
     }
     fun toJson(): String {
         return Gson().toJson(this)
-    }
-}
-data class IngredientDetail(
-    val title: String = "",
-    val body: String = ""
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        title = parcel.readString() ?: "",
-        body = parcel.readString() ?: ""
-    )
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(title)
-        parcel.writeString(body)
-    }
-    override fun describeContents(): Int {
-        return 0
-    }
-    // map helper for nested serialization
-    fun toJsonMap(): Map<String, Any?> {
-        return mapOf(
-            "title" to title,
-            "body" to body
-        )
-    }
-    companion object CREATOR : Parcelable.Creator<IngredientDetail> {
-        override fun createFromParcel(parcel: Parcel): IngredientDetail {
-            return IngredientDetail(parcel)
-        }
-
-        override fun newArray(size: Int): Array<IngredientDetail?> {
-            return arrayOfNulls(size)
-        }
     }
 }

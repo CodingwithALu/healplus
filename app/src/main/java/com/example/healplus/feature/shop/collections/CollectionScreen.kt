@@ -441,7 +441,7 @@ fun RecommendedList1(items: ProductsModel, navController: NavController) {
         .height(280.dp)
     ){
         AsyncImage(
-            model = items.listImages.firstOrNull(),
+            model = items.urls.firstOrNull(),
             contentDescription = null,
             modifier = Modifier
                 .width(175.dp)
@@ -484,7 +484,7 @@ fun RecommendedList1(items: ProductsModel, navController: NavController) {
                 )
             }
             Text(
-                text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(items.price).toString(),
+                text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(items.unitNames.firstOrNull()?.price!!).toString(),
                 color = colorResource(R.color.purple_200),
                 maxLines = 1,
                 fontSize = 15.sp,

@@ -1,4 +1,4 @@
-package com.example.healplus.feature.shop.home
+package com.example.healplus.feature.shop.product.Info
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,42 +7,42 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.core.model.products.ProductsModel
-import com.example.core.tinydb.helper.ManagmentCart
 import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.R
+import com.example.healplus.feature.shop.product.widget.BottomProductBarView
+import com.example.healplus.feature.shop.product.widget.ProductInfoItem
+import com.example.healplus.feature.shop.product.widget.ProductTopAppBar
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
-fun ProductDetailScreen(
-    modifier: Modifier = Modifier,
+fun InfoProductScreen(
     item: ProductsModel,
     navController: NavController,
     authViewModel: AuthViewModel = viewModel()
 ) {
-    val managmentCart = ManagmentCart(LocalContext.current, authViewModel.getUserId().toString())
-    val itemCount = managmentCart.getItemCount()
+//    val managmentCart = ManagmentCart(LocalContext.current, authViewModel.getUserId().toString())
+//    val itemCount = managmentCart.getItemCount()
     Scaffold(
         topBar = {
-            ProductTopAppBar(navController, itemCount)
+            ProductTopAppBar(navController)
         },
         bottomBar = {
-            BottomAppBarView(onAddCartClick = {
+            BottomProductBarView(onAddCartClick = {
                 item.quantity = 1
-                managmentCart.insertFood(item)
+//                managmentCart.insertFood(item)
             }, navController)
         }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = TSizes.DEFAULT_SPACE/2),
             contentPadding = paddingValues
         ) {
             item {
@@ -61,10 +61,10 @@ fun ProductDetailScreen(
                 ProductInfoItem(stringResource(R.string.expiry), item.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), item.ingredient)
                 ProductInfoItem(stringResource(R.string.description), item.description)
-                ProductInfoItem(stringResource(R.string.cachdung), item.toUse)
-                ProductInfoItem(stringResource(R.string.congdung), item.uses)
-                ProductInfoItem(stringResource(R.string.tacdungphu), item.sideEffects)
-                ProductInfoItem(stringResource(R.string.baoquan), item.preserver)
+                ProductInfoItem(stringResource(R.string.use), item.toUse)
+                ProductInfoItem(stringResource(R.string.toUse), item.uses)
+                ProductInfoItem(stringResource(R.string.sideEffects), item.sideEffects)
+                ProductInfoItem(stringResource(R.string.preserve), item.preserver)
             }
         }
     }

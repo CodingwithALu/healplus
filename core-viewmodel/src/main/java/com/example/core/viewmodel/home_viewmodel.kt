@@ -11,10 +11,12 @@ import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,14 +42,16 @@ class HomeViewmodel @Inject constructor(
         viewModelScope.launch {
             isLoading = true
             try {
-                val result = async { homeRepository.fetchBanner() }.await()
-                val resultCate = async { homeRepository.fetchCategory() }.await()
-                val resultIngredient = async { homeRepository.fetchIngredient() }.await()
-                val resultRecomment = async { homeRepository.fetchRecommended() }.await()
-                _banner.value = result
-                _category.value = resultCate
-                _ingredient.value = resultIngredient
-                _recommended.value = resultRecomment
+                withContext(NonCancellable){
+                    val result = async { homeRepository.fetchBanner() }.await()
+                    val resultCate = async { homeRepository.fetchCategory() }.await()
+                    val resultIngredient = async { homeRepository.fetchIngredient() }.await()
+                    val resultRecomment = async { homeRepository.fetchRecommended() }.await()
+                    _banner.value = result
+                    _category.value = resultCate
+                    _ingredient.value = resultIngredient
+                    _recommended.value = resultRecomment
+                }
             } catch (e: Exception){
                 isLoading = false
             }finally {

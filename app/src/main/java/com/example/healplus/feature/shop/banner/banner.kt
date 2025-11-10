@@ -1,6 +1,7 @@
 package com.example.healplus.feature.shop.banner
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,31 +19,36 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.core.model.banners.BannersModel
 import com.example.healplus.feature.shop.banner.widgets.DotIndicator
+import com.example.healplus.feature.utils.constants.TSizes
 import kotlinx.coroutines.delay
 
 @Composable
 fun Banners(banners: List<BannersModel>?) {
-    AutoSlidingCarousel(banners = banners!!)
+    if (banners.isNullOrEmpty()) return
+    AutoSlidingCarousel(banners = banners)
 }
 
 @Composable
 fun AutoSlidingCarousel(
     banners: List<BannersModel>
 ) {
-    val paperState = rememberPagerState(pageCount = { banners.size })
-    val isDragged by paperState.interactionSource.collectIsDraggedAsState()
-    LaunchedEffect(isDragged) {
+    val pagerState = rememberPagerState(pageCount = { banners.size })
+    val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+    LaunchedEffect(isDragged, banners.size) {
+        if (banners.isEmpty()) return@LaunchedEffect
         while (!isDragged) {
             delay(6000)
-            val nextPage = (paperState.currentPage + 1) % banners.size
-            paperState.animateScrollToPage(nextPage)
+            val total = banners.size
+            if (total == 0) break
+            val nextPage = (pagerState.currentPage + 1) % total
+            pagerState.animateScrollToPage(nextPage)
         }
     }
     Column(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        HorizontalPager(state = paperState) { page ->
+        HorizontalPager(state = pagerState) { page ->
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(banners[page].url)
@@ -50,24 +56,20 @@ fun AutoSlidingCarousel(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(
-                        start = 16.dp,
-                        top = 16.dp,
-                        end = 16.dp,
-                        bottom = 8.dp
-                    )
+                    .padding(horizontal = TSizes.BORDER_RADIUS_SM)
                     .fillMaxWidth()
                     .height(150.dp)
             )
         }
+        Spacer(modifier = Modifier.height(2.dp))
         DotIndicator(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .align(Alignment.CenterHorizontally),
             totalDots = banners.size,
-            selectedIndex = paperState.currentPage,
-            dotHeight = 6.dp,
-            dotWidthOff = 8.dp,
+            selectedIndex = pagerState.currentPage,
+            dotHeight = 4.dp,
+            dotWidthOff = 4.dp,
             dotWidth = 80.dp
         )
     }

@@ -22,9 +22,9 @@
 //import com.example.healplus.feature.shop.collections.CollectionScreen
 //import com.example.healplus.feature.shop.chat.AdminChatScreen
 //import com.example.healplus.feature.shop.chat.ChatDetailScreen
-//import com.example.healplus.feature.shop.home.DetailScreen
+//import com.example.healplus.feature.shop.product.DetailScreen
 //import com.example.healplus.feature.shop.home.HomeScreen
-//import com.example.healplus.feature.shop.home.ProductDetailScreen
+//import com.example.healplus.feature.shop.product.widget.ProductDetailScreen
 //import com.example.healplus.feature.shop.managers.AddCategoryScreen
 //import com.example.healplus.feature.shop.managers.AddIngredientsScreen
 //import com.example.healplus.feature.shop.managers.AddProductScreen
