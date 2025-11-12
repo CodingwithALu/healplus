@@ -73,10 +73,10 @@ mysqli_begin_transaction($conn);
 
 try {
     $productImages = parseProductImages($_POST['productImages']);
-    $thanhphan = parseThanhPhan($_POST['thanhphan']);
+    $collections = parseThanhPhan($_POST['collections']);
     $unitNames = parseUnitInfo($_POST['unitNames']);
     error_log("Parsed productImages: " . print_r($productImages, true));
-    error_log("Parsed thanhphan: " . print_r($thanhphan, true));
+    error_log("Parsed collections: " . print_r($collections, true));
     error_log("Parsed unitNames: " . print_r($unitNames, true));
     $query = "INSERT INTO `product` (`idp`, `name`, `trademark`, `rating`, `review`, `sold`, `expiry`, 
               `price`, `preparation`, `origin`, `manufacturer`, `description`, `ide`, `productiondate`, 
@@ -106,11 +106,11 @@ try {
             }
         }
     }
-    if (!empty($thanhphan) && is_array($thanhphan)) {
-        foreach ($thanhphan as $tp) {
+    if (!empty($collections) && is_array($collections)) {
+        foreach ($collections as $tp) {
             $title = mysqli_real_escape_string($conn, $tp['title']);
             $body = mysqli_real_escape_string($conn, $tp['body']);
-            $queryThanhPhan = "INSERT INTO thanhphan (idp, title, body) VALUES ('$idp', '$title', '$body')";
+            $queryThanhPhan = "INSERT INTO collections (idp, title, body) VALUES ('$idp', '$title', '$body')";
             if (!mysqli_query($conn, $queryThanhPhan)) {
                 throw new Exception("Lỗi thêm thành phần: " . mysqli_error($conn));
             }
@@ -131,7 +131,7 @@ try {
         'message' => 'Thêm sản phẩm thành công',
         'debug' => [
             'images' => $productImages,
-            'thanhphan' => $thanhphan,
+            'collections' => $collections,
             'units' => $unitNames
         ]
 

@@ -278,7 +278,7 @@ fun ProductOrderItem(navController: NavController, item: ProductsModel) {
             .clickable { navController.navigate("detail/${Uri.encode(Gson().toJson(item))}") },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val imageUrl = item.product_images?.firstOrNull()
+        val imageUrl = item.urls?.firstOrNull()
         if (!imageUrl.isNullOrEmpty()) {
             Image(
                 painter = rememberAsyncImagePainter(imageUrl),
@@ -303,7 +303,7 @@ fun ProductOrderItem(navController: NavController, item: ProductsModel) {
         Column(modifier = Modifier.weight(1f)) {
             Text(text = item.name, fontWeight = FontWeight.Medium, fontSize = 14.sp)
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.price), fontSize = 12.sp, color = Color.DarkGray)
+            Text(text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.unitNames.firstOrNull()?.price!!), fontSize = 12.sp, color = Color.DarkGray)
         }
     }
 }

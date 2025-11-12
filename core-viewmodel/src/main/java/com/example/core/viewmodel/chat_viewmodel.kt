@@ -32,7 +32,7 @@ class AuthViewModel : ViewModel() {
     private var adminChatRooms: List<String> = emptyList()
 
     init {
-        checkAuthSate()
+//        checkAuthSate()
     }
 
     init {

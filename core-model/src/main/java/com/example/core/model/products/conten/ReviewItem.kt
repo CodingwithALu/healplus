@@ -1,28 +1,28 @@
-package com.example.core.model.products
+package com.example.core.model.products.conten
 
 import android.os.Parcel
 import android.os.Parcelable
 
 data class ReviewItem(
-    val reviewerName: String,
-    val rating: Float,
-    val comment: String,
-    val date: String,
-    val profileImageUrl: String? = null
+    val name: String = "",
+    val rating: Float = 0f,
+    val comment: String = "",
+    val date: String = "",
+    val ulr: String? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-        reviewerName = parcel.readString() ?: "",
+        name = parcel.readString() ?: "",
         rating = parcel.readFloat(),
         comment = parcel.readString() ?: "",
         date = parcel.readString() ?: "",
-        profileImageUrl = parcel.readString()
+        ulr = parcel.readString()
     )
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(reviewerName)
+        parcel.writeString(name)
         parcel.writeFloat(rating)
         parcel.writeString(comment)
         parcel.writeString(date)
-        parcel.writeString(profileImageUrl)
+        parcel.writeString(ulr)
     }
     override fun describeContents(): Int {
         return 0
@@ -35,18 +35,18 @@ data class ReviewItem(
             return arrayOfNulls(size)
         }
         fun empty(): ReviewItem = ReviewItem(
-            reviewerName = "",
+            name = "",
             rating = 0f,
             comment = "",
             date = "",
-            profileImageUrl = null
+            ulr = null
         )
     }
     fun toJsonMap(): Map<String, Any?> = mapOf(
-        "reviewerName" to reviewerName,
+        "name" to name,
         "rating" to rating,
         "comment" to comment,
         "date" to date,
-        "profileImageUrl" to profileImageUrl
+        "url" to ulr
     )
 }

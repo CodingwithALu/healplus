@@ -14,13 +14,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
-
-) : ViewModel() {
+    private val userPreferencesRepository: UserPreferencesRepository) : ViewModel() {
     private val _emailVerify = authRepository.emailVerify
     val emailVerify: StateFlow<EmailVerifyEvent?> = _emailVerify
     private val _message = MutableStateFlow("")
@@ -39,7 +36,7 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
-    // provider param indicates login type: "email", "facebook", "google"
+    // provider param
     fun signIn(email: String, password: String, rememberMe: Boolean = false) {
         viewModelScope.launch {
             isLoading = true

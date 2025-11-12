@@ -2,6 +2,9 @@ package com.example.core.model.products
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.core.model.products.conten.IngredientDetail
+import com.example.core.model.products.conten.ReviewItem
+import com.example.core.model.products.conten.UnitInfo
 import com.google.gson.Gson
 data class ProductsModel(
     val idp: String = "",
@@ -10,27 +13,25 @@ data class ProductsModel(
     var rating: Double = 0.0,
     var review: Int = 0,
     var sold: Int = 0,
-    var price: Int = 0,
     val preparation: String = "",
     val origin: String = "",
     val manufacturer: String = "",
     val description: String = "",
-    val showRecommended: Int = 0,
     val ide: String = "",
-    val productiondate: String = "",
+    val productionDate: String = "",
     val expiry: String = "",
     val specification: String = "",
     val ingredient: String = "",
     var quantity: Int = 0,
-    val congdung: String = "",
-    val cachdung: String = "",
-    val tacdungphu: String = "",
-    val baoquan: String = "",
-    var product_images: ArrayList<String> = ArrayList(),
-    var unit_names: ArrayList<String> = ArrayList(),
-    var element_names: String = "",
+    val uses: String = "",
+    val toUse: String = "",
+    val sideEffects: String = "",
+    val preserver: String = "",
+    var urls: ArrayList<String> = ArrayList(),
+    var unitNames: ArrayList<UnitInfo> = ArrayList(),
+    var elements: String = "",
     var ingredients: ArrayList<IngredientDetail> = ArrayList(),
-    var reviewitems: ArrayList<ReviewItem> = ArrayList(),
+    var reviewItems: ArrayList<ReviewItem> = ArrayList(),
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         idp = parcel.readString() ?: "",
@@ -39,27 +40,25 @@ data class ProductsModel(
         rating = parcel.readDouble(),
         review = parcel.readInt(),
         sold = parcel.readInt(),
-        price = parcel.readInt(),
         preparation = parcel.readString() ?: "",
         origin = parcel.readString() ?: "",
         manufacturer = parcel.readString() ?: "",
         description = parcel.readString() ?: "",
-        showRecommended = parcel.readInt(),
         ide = parcel.readString() ?: "",
-        productiondate = parcel.readString() ?: "",
+        productionDate = parcel.readString() ?: "",
         expiry = parcel.readString()?: "",
         specification = parcel.readString() ?: "",
         ingredient = parcel.readString() ?: "",
         quantity = parcel.readInt(),
-        congdung = parcel.readString() ?: "",
-        cachdung = parcel.readString() ?: "",
-        tacdungphu = parcel.readString() ?: "",
-        baoquan = parcel.readString() ?: "",
-        product_images = parcel.createStringArrayList() ?: arrayListOf(),
-        unit_names = parcel.createStringArrayList() ?: arrayListOf(),
-        element_names = parcel.readString() ?: "",
+        uses = parcel.readString() ?: "",
+        toUse = parcel.readString() ?: "",
+        sideEffects = parcel.readString() ?: "",
+        preserver = parcel.readString() ?: "",
+        urls = parcel.createStringArrayList() ?: arrayListOf(),
+        unitNames = parcel.createTypedArrayList(UnitInfo.CREATOR) ?: arrayListOf(),
+        elements = parcel.readString() ?: "",
         ingredients = parcel.createTypedArrayList(IngredientDetail.CREATOR) ?: arrayListOf(),
-        reviewitems = parcel.createTypedArrayList(ReviewItem.CREATOR) ?: arrayListOf()
+        reviewItems = parcel.createTypedArrayList(ReviewItem.CREATOR) ?: arrayListOf()
     )
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(idp)
@@ -68,32 +67,29 @@ data class ProductsModel(
         parcel.writeDouble(rating)
         parcel.writeInt(review)
         parcel.writeInt(sold)
-        parcel.writeInt(price)
         parcel.writeString(preparation)
         parcel.writeString(origin)
         parcel.writeString(manufacturer)
         parcel.writeString(description)
-        parcel.writeInt(showRecommended)
         parcel.writeString(ide)
-        parcel.writeString(productiondate)
+        parcel.writeString(productionDate)
         parcel.writeString(expiry)
         parcel.writeString(specification)
         parcel.writeString(ingredient)
         parcel.writeInt(quantity)
-        parcel.writeString(congdung)
-        parcel.writeString(cachdung)
-        parcel.writeString(tacdungphu)
-        parcel.writeString(baoquan)
-        parcel.writeStringList(product_images)
-        parcel.writeStringList(unit_names)
-        parcel.writeString(element_names)
+        parcel.writeString(uses)
+        parcel.writeString(toUse)
+        parcel.writeString(sideEffects)
+        parcel.writeString(preserver)
+        parcel.writeStringList(urls)
+        parcel.writeTypedList(unitNames)
+        parcel.writeString(elements)
         parcel.writeTypedList(ingredients)
-        parcel.writeTypedList(reviewitems)
+        parcel.writeTypedList(reviewItems)
     }
     override fun describeContents(): Int {
         return 0
     }
-    // Add a map-style payload maker for easier "add new object" usage
     fun toJsonMap(): Map<String, Any?> {
         return mapOf(
             "idp" to idp,
@@ -102,29 +98,25 @@ data class ProductsModel(
             "rating" to rating,
             "review" to review,
             "sold" to sold,
-            "price" to price,
             "preparation" to preparation,
             "origin" to origin,
             "manufacturer" to manufacturer,
             "description" to description,
-            "showRecommended" to showRecommended,
             "ide" to ide,
-            "productiondate" to productiondate,
+            "productionDate" to productionDate,
             "expiry" to expiry,
             "specification" to specification,
             "ingredient" to ingredient,
             "quantity" to quantity,
-            "congdung" to congdung,
-            "cachdung" to cachdung,
-            "tacdungphu" to tacdungphu,
-            "baoquan" to baoquan,
-            // lists: send as lists (or use Gson to send JSON strings if backend expects strings)
-            "productImages" to product_images,
-            "unitNames" to unit_names,
-            "elementNames" to element_names,
-            // nested objects: convert each to map
+            "uses" to uses,
+            "toUse" to toUse,
+            "sideEffects" to sideEffects,
+            "preserver" to preserver,
+            "urls" to urls,
+            "unitNames" to unitNames,
+            "elements" to elements,
             "ingredients" to ingredients.map { it.toJsonMap() },
-            "reviewitems" to reviewitems.map { it.toJsonMap() }
+            "reviewItems" to reviewItems.map { it.toJsonMap() }
         )
     }
     companion object CREATOR : Parcelable.Creator<ProductsModel> {
@@ -137,44 +129,11 @@ data class ProductsModel(
         fun fromJson(json: String): ProductsModel {
             return Gson().fromJson(json, ProductsModel::class.java)
         }
-        // factory for an empty/default product (used by OrderModel.empty())
         fun empty(): ProductsModel {
             return ProductsModel()
         }
     }
     fun toJson(): String {
         return Gson().toJson(this)
-    }
-}
-data class IngredientDetail(
-    val title: String = "",
-    val body: String = ""
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        title = parcel.readString() ?: "",
-        body = parcel.readString() ?: ""
-    )
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(title)
-        parcel.writeString(body)
-    }
-    override fun describeContents(): Int {
-        return 0
-    }
-    // map helper for nested serialization
-    fun toJsonMap(): Map<String, Any?> {
-        return mapOf(
-            "title" to title,
-            "body" to body
-        )
-    }
-    companion object CREATOR : Parcelable.Creator<IngredientDetail> {
-        override fun createFromParcel(parcel: Parcel): IngredientDetail {
-            return IngredientDetail(parcel)
-        }
-
-        override fun newArray(size: Int): Array<IngredientDetail?> {
-            return arrayOfNulls(size)
-        }
     }
 }

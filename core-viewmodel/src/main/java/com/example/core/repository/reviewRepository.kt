@@ -1,7 +1,7 @@
 package com.example.core.repository
 
 import com.example.core.model.api.ApiResponse
-import com.example.core.model.products.ReviewItem
+import com.example.core.model.products.conten.ReviewItem
 import com.example.core.network.apis.ApiService
 import com.example.core.network.retrofitclients.RetrofitClient
 import kotlinx.coroutines.Dispatchers
@@ -15,11 +15,11 @@ class ReviewRepository(
         var result = ApiResponse.empty()
         withContext(Dispatchers.IO){
             result = api.addReview(
-                review.reviewerName,
+                review.name,
                 review.rating,
                 review.comment,
                 review.date,
-                review.profileImageUrl!!,
+                review.ulr!!,
                 idp
             )
             delay(1000L)

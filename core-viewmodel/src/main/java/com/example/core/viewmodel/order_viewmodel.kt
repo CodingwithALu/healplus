@@ -11,10 +11,12 @@ import com.example.core.model.Oder.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -35,8 +37,10 @@ class OrderViewModel @Inject constructor(
     // load order
     fun fetchOrder() {
         viewModelScope.launch {
-            val result = orderRepository.fetchOrder()
-            _orders.value = result as MutableList<OrderModel>?
+            withContext(NonCancellable){
+                val result = orderRepository.fetchOrder()
+                _orders.value = result as MutableList<OrderModel>?
+            }
         }
     }
 

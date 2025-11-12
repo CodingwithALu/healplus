@@ -74,10 +74,10 @@
     <string name="userodermanages">Đơn hàng của tôi</string>
     <string name="revenue">Doanh thu và các khoảng thanh toán khác</string>
     <string name="expiry">Hạn sử dụng</string>
-    <string name="cachdung">Cách dùng</string>
-    <string name="congdung">Công dụng</string>
-    <string name="tacdungphu">Tác dụng phụ</string>
-    <string name="baoquan">Bảo quản</string>
+    <string name="use">Cách dùng</string>
+    <string name="toUse">Công dụng</string>
+    <string name="sideEffects">Tác dụng phụ</string>
+    <string name="preserve">Bảo quản</string>
     <string name="product_reviews_title">Đánh giá sản phẩm</string>
     <string name="notable_reviews">Đánh giá nổi bật</string>
     <string name="see_all_reviews">Xem tất cả (%d) đánh giá</string>

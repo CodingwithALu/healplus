@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +36,8 @@ import com.example.healplus.feature.utils.validator.ValidationUtils
 
 @Composable
 fun SignupForm(
-    navController: NavController) {
+    navController: NavController
+) {
     val viewModel: SignupViewModel = hiltViewModel()
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -42,6 +46,7 @@ fun SignupForm(
     var passwordError by remember { mutableStateOf<String?>(null) }
     var agreeTerm by remember { mutableStateOf(false) }
     var passwordHidden by remember { mutableStateOf(true) }
+    val isLoading = viewModel.isLoading
 
     Column(modifier = Modifier.fillMaxWidth()) {
         OutlinedTextField(
@@ -105,15 +110,23 @@ fun SignupForm(
 
         Button(
             onClick = {
-                if(agreeTerm){
+                if (agreeTerm) {
                     viewModel.createUser(name = userName, email = email, password = password)
-                    navController.navigate("${Screen.VerifyEmail.route}/${email}")
+                    navController.navigate(Screen.Login.route) {
+                    }
                 }
             },
             enabled = agreeTerm,
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("Create Account")
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            } else {
+                Text("Create Account")
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.core.model.products.ProductsModel
-import com.example.core.model.products.ReviewItem
+import com.example.core.model.products.conten.ReviewItem
 import com.example.core.model.users.UserModel
 import com.example.core.viewmodel.AuthViewModel
 import com.example.healplus.feature.authentication.signin.SignInScreen
@@ -22,12 +22,12 @@ import com.example.healplus.feature.shop.cart.AddressScreen
 import com.example.healplus.feature.shop.cart.CartScreen
 import com.example.healplus.feature.shop.chat.UserChatScreen
 import com.example.healplus.feature.shop.collections.CollectionScreen
-import com.example.healplus.feature.shop.home.AllReviewsScreen
-import com.example.healplus.feature.shop.home.DetailScreen
 import com.example.healplus.feature.shop.home.HomeScreen
-import com.example.healplus.feature.shop.home.ProductDetailScreen
-import com.example.healplus.feature.shop.home.WriteReviewScreen
 import com.example.healplus.feature.shop.order.UsersOder
+import com.example.healplus.feature.shop.product.Info.InfoProductScreen
+import com.example.healplus.feature.shop.product.ProductScreen
+import com.example.healplus.feature.shop.revenue.WriteReviewScreen
+import com.example.healplus.feature.shop.review.AllReviewsScreen
 import com.example.healplus.feature.utils.route.Screen
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -36,7 +36,7 @@ import java.nio.charset.StandardCharsets
 
 @Composable
 fun MyAppNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable (route = Screen.Login.route) {
             SignInScreen(navController)
         }
@@ -50,17 +50,15 @@ fun MyAppNavigation(navController: NavHostController) {
                 navController
             )
         }
-        composable("success_screen_route") {
+        composable(Screen.SuccessScreen.route) {
             SuccessScreen(
                 image = "https://mybucket-01laulu2k3.s3.us-east-1.amazonaws.com/json/72462-check-register.json",
                 title = "Thành công!",
                 subtitle = "Email của bạn đã được xác thực.",
-                showEmail = true,
-                onContinue = { },
-                onResendEmail = { /* Xử lý gửi lại email */ }
+                showEmail = true
             )
         }
-        composable("home") {
+        composable(Screen.Home.route) {
             HomeScreen(
                 navController = navController
             )
@@ -74,27 +72,25 @@ fun MyAppNavigation(navController: NavHostController) {
         composable(route = "add"){
             UserChatScreen()
         }
-        composable("detail/{itemsModel}") {
+        composable("${Screen.Product.route}/{item}") {
                 backStackEntry ->
-            val jsonItem = backStackEntry.arguments?.getString("itemsModel")
-
+            val jsonItem = backStackEntry.arguments?.getString("item")
             val item = Gson().fromJson(jsonItem, ProductsModel::class.java)
-            DetailScreen(
+            ProductScreen(
                 item = item,
                 navController = navController
             )
         }
-        composable("productDetail/{product}") {
+        composable("${Screen.InfoProduct.route}/{item}") {
                 backStackEntry ->
-            val jsonItem = backStackEntry.arguments?.getString("product")
-
+            val jsonItem = backStackEntry.arguments?.getString("item")
             val item = Gson().fromJson(jsonItem, ProductsModel::class.java)
-            ProductDetailScreen(
+            InfoProductScreen(
                 item = item,
                 navController = navController
             )
         }
-        composable("allReviews/{productName}/{reviewItems}") { backStackEntry ->
+        composable("${Screen.Review.route}/{productName}/{reviewItems}") { backStackEntry ->
             val productName = backStackEntry.arguments?.getString("productName")?: ""
             val encodedJsonReviews = backStackEntry.arguments?.getString("reviewItems")
             val jsonReviews = URLDecoder.decode(encodedJsonReviews, StandardCharsets.UTF_8.toString())
@@ -102,7 +98,7 @@ fun MyAppNavigation(navController: NavHostController) {
             val reviewList: List<ReviewItem> = Gson().fromJson(jsonReviews, typeToken)
             AllReviewsScreen(navController, productName, reviewList)
         }
-        composable("writeReview/{productId}") { backStackEntry ->
+        composable("${Screen.WriteReview.route}/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: ""
             WriteReviewScreen(navController, productId)
         }

@@ -21,7 +21,7 @@ while ($row_order = mysqli_fetch_assoc($result_order)) {
                     LEFT JOIN element e ON product.ide = e.ide
                     LEFT JOIN productimages ON product.idp = productimages.idp 
                     LEFT JOIN unitinfo ON product.idp = unitinfo.idp 
-                    LEFT JOIN thanhphan tp ON product.idp = tp.idp
+                    LEFT JOIN collections tp ON product.idp = tp.idp
                     WHERE orderdetails.Ido = ?
                     GROUP BY product.idp";
 
