@@ -26,7 +26,6 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
@@ -64,4 +63,5 @@ object AppModule {
     fun provideReviewRepository(apiService: ApiService): ReviewRepository{
         return ReviewRepository(apiService)
     }
+
 }

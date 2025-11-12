@@ -7,6 +7,7 @@ import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.revenue.RevenueResponse
+import com.example.core.model.users.UserModel
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -18,30 +19,34 @@ interface ApiService {
     // Todo -- Get DATA
     @GET("get_ingredient_count.php")
     suspend fun getIngredientCount(): List<IngredientsModel>
-    @GET("getbanner.php")
+    @GET("fetchBanner.php")
     suspend fun getBanners(): List<BannersModel>
     @GET("getIngredient.php")
     suspend fun getIngredient(): List<IngredientsModel>
     @GET("get_product_showRecomment.php")
     suspend fun getRecommendedProducts(): List<ProductsModel>
-    @GET("getcategory.php")
+    @GET("fetchCategory.php")
     suspend fun getCategories(): List<CategoryModel>
-    @GET("getelemets.php")
+    @GET("fetchElement.php")
     suspend fun getElement(): List<ElementsModel>
-    @GET("get_products_by_category.php")
+    @GET("route/get/fetch_products_from_category.php")
     suspend fun getProductsByCategory(@Query("idc") idc: String): List<ProductsModel>
     @GET("get_products_by_ingredient.php")
-    suspend fun getProductsByIngredient(@Query("iding") iding: String): List<ProductsModel>
+    suspend fun getProductsByIngredient(@Query("id") id: String): List<ProductsModel>
     @GET("get_products_by_element.php")
-    suspend fun getProductsByElement(@Query("ide") ide: String): List<ProductsModel>
+    suspend fun getProductsByElement(@Query("id") id: String): List<ProductsModel>
     @GET("get_ingredient_by_category.php")
-    suspend fun getIngredientByCategory(@Query("idc") idc: String): List<IngredientsModel>
+    suspend fun getIngredientByCategory(@Query("id") id: String): List<IngredientsModel>
     @GET("get_elements_by_ingredient.php")
-    suspend fun getElementByIngredient(@Query("iding") iding: String): List<ElementsModel>
+    suspend fun getElementByIngredient(@Query("id") id: String): List<ElementsModel>
     @GET("getsearch.php")
     suspend fun getSearchProduct(@Query("search") search: String): List<ProductsModel>
     @GET("get_oder.php")
     suspend fun getOder(): List<OrderModel>
+
+    // user
+    @GET("route/get/fetch_user.php")
+    suspend fun fetchUserFromData(@Query("id") id: String): UserModel
     @FormUrlEncoded
     @POST("create_user.php")
     suspend fun createUser(

@@ -47,7 +47,6 @@ import com.example.healplus.feature.utils.validator.ValidationUtils
 
 @Composable
 fun LoginForm(
-    event: (String) -> Unit,
     navController: NavController
 ) {
     val viewModel: LoginViewModel = hiltViewModel()
@@ -70,8 +69,8 @@ fun LoginForm(
                     launchSingleTop = true
                 }
             }
-            is EmailVerifyEvent.RedirectToUserEmpty -> {
-                navController.navigate("${Screen.VerifyEmail.route}/${email.toString()}")
+            is EmailVerifyEvent.RedirectToVerifyScreen -> {
+                navController.navigate("${Screen.VerifyEmail.route}/${email}")
             } else -> {}
         }
     }

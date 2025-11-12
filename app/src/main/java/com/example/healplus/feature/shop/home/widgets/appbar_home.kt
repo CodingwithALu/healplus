@@ -2,7 +2,6 @@ package com.example.healplus.feature.shop.home.widgets
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -26,25 +25,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.model.users.UserModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.images.TCircularImage
 import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
 fun TAppbarHome(
+    user: UserModel,
     onAvatarClick: () -> Unit = {},
     searchClick: () -> Unit = {},
     notify: () -> Unit = {},
     showNotification: Boolean = false,
-
     ) {
-    val dark = isSystemInDarkTheme()
-    val coin = 0
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .background(Color.Transparent)
+            .background(Color.Transparent),
     ) {
         Text(
             text = stringResource(R.string.app_name),
@@ -77,45 +75,44 @@ fun TAppbarHome(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = coin.toString(),
+                        text = user.spot.toString(),
                         style = MaterialTheme.typography.labelSmall,
+                        fontSize = 12.sp
                     )
                     Image(
                         modifier = Modifier
                             .height(20.dp)
                             .width(20.dp)
                             .clickable { },
-                        painter = painterResource(id = R.drawable.bell_icon),
+                        painter = painterResource(id = R.drawable.icon_point),
                         contentDescription = "Coin",
                     )
                 }
             }
             Spacer(modifier = Modifier.weight(1f))
             Row (
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     modifier = Modifier
-                        .height(48.dp)
-                        .width(48.dp)
+                        .height(30.dp)
+                        .width(30.dp)
                         .clickable { searchClick() },
                     painter = painterResource(id = R.drawable.search_icon),
                     contentDescription = "Bell",
-                    tint = if (dark) Color.White else Color.Black
                 )
+                Spacer(modifier = Modifier.width(12.dp))
                 if (showNotification) {
                     Icon(
                         modifier = Modifier
-                            .height(20.dp)
-                            .width(20.dp)
+                            .height(30.dp)
+                            .width(30.dp)
                             .clickable { notify() },
-                        painter = painterResource(id = R.drawable.icon_point),
+                        painter = painterResource(id = R.drawable.bell_icon),
                         contentDescription = "Bell",
-                        tint = if (dark) Color.White else Color.Black
                     )
                 }
             }
-
         }
     }
 }

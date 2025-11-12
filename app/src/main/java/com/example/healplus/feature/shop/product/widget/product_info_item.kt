@@ -72,7 +72,7 @@ fun ProductInfoView(
                 ProductInfoItem(stringResource(R.string.expiry), product.expiry)
                 ProductInfoItem(stringResource(R.string.Ingredient), product.ingredient)
                 ProductInfoItem(stringResource(R.string.description), product.description)
-                SeeAllButton(product, navController, viewModel)
+                SeeAllButton(product, navController)
             }
         }
         BouncingIconButton(showProducts = showProducts) {

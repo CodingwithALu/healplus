@@ -6,12 +6,12 @@ import com.example.core.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,55 +22,27 @@ class VerifyEmailViewModel @Inject constructor(
     private val _uiEvent = MutableStateFlow<UiEvent?>(null)
     val uiEvent: StateFlow<UiEvent?> = _uiEvent
     private var timerJob: Job? = null
-
-    init {
-        setTimerForAutoRedirect()
-    }
-
     fun sendEmailVerification() {
         viewModelScope.launch {
             try {
-                authRepository.sendEmailVerification()
-            } catch (e: Exception) {
-                throw IllegalArgumentException(e.message)
-            }
-        }
-    }
-
-    fun setTimerForAutoRedirect() {
-        auth.currentUser?.reload()
-        timerJob?.cancel()
-        timerJob = viewModelScope.launch {
-            while (isActive) {
-                try {
-                    async { auth.currentUser?.reload() }.await()
-                    val user = auth.currentUser
-                    if (user?.isEmailVerified == true) {
-                        _uiEvent.value = UiEvent.RedirectToSuccessScreen
-                        break // stop timer
-                    }
-                    delay(3000)
-                } catch (e: Exception) {
-                    _uiEvent.value = UiEvent.ShowErrorSnackBar(
-                        title = "On Snap!",
-                        message = e.message ?: "Unknown Error"
-                    )
-                    break
+                withContext(NonCancellable){
+                    authRepository.sendEmailVerification()
                 }
+                _uiEvent.value = UiEvent.ShowSuccessSnackBar("Thông báo", "Đã gửi email xác thực!")
+            } catch (e: Exception) {
+                _uiEvent.value = UiEvent.ShowErrorSnackBar("Lỗi", "Gửi email thất bại: ${e.message}")
             }
         }
     }
-
     fun checkEmailVerificationStatus() {
-        auth.currentUser?.reload()
         viewModelScope.launch {
+            async { auth.currentUser?.reload() }.await()
             val user = auth.currentUser
             if (user?.isEmailVerified == true) {
                 _uiEvent.value = UiEvent.RedirectToSuccessScreen
             }
         }
     }
-
     override fun onCleared() {
         super.onCleared()
         timerJob?.cancel()

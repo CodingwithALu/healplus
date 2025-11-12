@@ -1,6 +1,5 @@
 package com.example.healplus.feature.shop.home.widgets
 
-import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,115 +14,97 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import com.example.core.model.categories.CategoryModel
-import com.example.core.viewmodel.AuthViewModel
-import com.example.healplus.R
+import com.example.core.model.users.UserModel
 import com.skydoves.landscapist.glide.GlideImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MediumTopAppBar(navController: NavController,
-                    categories: List<CategoryModel>,
-                    showCategoryLoading: Boolean,
-                    viewModel: AuthViewModel) {
+fun MediumTopAppBar(
+    navController: NavController,
+    categories: List<CategoryModel>,
+    user: UserModel
+) {
     var expanded by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-        viewModel.getCurrentUser()
-    }
-    TopAppBar(
-        title = {
-
-        },
-        navigationIcon = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { expanded = true },
-                    modifier = Modifier
-                        .size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Menu, contentDescription = null,
-                        modifier = Modifier
-                            .wrapContentWidth(Alignment.End)
-                    )
-                }
-                val semantics =
-                    Modifier.semantics {
-                        contentDescription = "logo_app"
-                        role = Role.Image
-                    }
-                Layout(
-                    Modifier
-                        .size(120.dp)
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.Start)
-                        .then(semantics)
-                        .clipToBounds()
-                        .paint(
-                            painter = painterResource(id = R.drawable.logo_group_app1),
-                            contentScale = ContentScale.Fit
-                        )
-                ) { _, constraints ->
-                    layout(constraints.minWidth, constraints.minHeight) {}
-                }
-            }
-
-        },
-        actions = {
-            IconButton(onClick = {
-                navController.navigate("search")
-            }) {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = null)
-            }
-            IconButton(onClick = {
-                navController.navigate("add")
-            }) {
-                Icon(imageVector = Icons.Filled.Notifications, contentDescription = null)
-            }
-        }
-    )
+//    TopAppBar(
+//        title = {
+//
+//        },
+//        navigationIcon = {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                IconButton(
+//                    onClick = { expanded = true },
+//                    modifier = Modifier
+//                        .size(40.dp)
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Filled.Menu, contentDescription = null,
+//                        modifier = Modifier
+//                            .wrapContentWidth(Alignment.End)
+//                    )
+//                }
+//                val semantics =
+//                    Modifier.semantics {
+//                        contentDescription = "logo_app"
+//                        role = Role.Image
+//                    }
+//                Layout(
+//                    Modifier
+//                        .size(120.dp)
+//                        .fillMaxWidth()
+//                        .wrapContentWidth(Alignment.Start)
+//                        .then(semantics)
+//                        .clipToBounds()
+//                        .paint(
+//                            painter = painterResource(id = R.drawable.logo_group_app1),
+//                            contentScale = ContentScale.Fit
+//                        )
+//                ) { _, constraints ->
+//                    layout(constraints.minWidth, constraints.minHeight) {}
+//                }
+//            }
+//
+//        },
+//        actions = {
+//            IconButton(onClick = {
+//                navController.navigate("search")
+//            }) {
+//                Icon(imageVector = Icons.Filled.Search, contentDescription = null)
+//            }
+//            IconButton(onClick = {
+//                navController.navigate("add")
+//            }) {
+//                Icon(imageVector = Icons.Filled.Notifications, contentDescription = null)
+//            }
+//        }
+//    )
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = { expanded = false },
@@ -133,42 +114,32 @@ fun MediumTopAppBar(navController: NavController,
             .fillMaxHeight()
             .offset(x = 0.dp, y = (-5).dp)
     ) {
-        if (showCategoryLoading) {
+        Column {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp),
-                contentAlignment = Alignment.Center
+                    .height(140.dp)
+                    .background(Color.Yellow)
             ) {
-                CircularProgressIndicator()
+                Column {
+                    UserView(user, navController)
+                    Notification1("Thông báo", navController)
+                }
             }
-        } else {
-            Column {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp)
-                        .background(Color.Yellow)
-                ) {
-                    Column {
-                        UserView(viewModel, navController)
-                        Notification1("Thông báo", navController)
+            categories.forEach { category ->
+                DropdownMenuItem(
+                    text = { Text(category.title) },
+                    onClick = {
+                        navController.navigate("category/${category.idc}/${category.title}")
+                        expanded = false
                     }
-                }
-                categories.forEach { category ->
-                    DropdownMenuItem(
-                        text = { Text(category.title) },
-                        onClick = {
-                            navController.navigate("category/${category.idc}/${category.title}")
-                            expanded = false
-                        }
-                    )
-                }
+                )
             }
-
         }
+
     }
 }
+
 @Composable
 fun Notification1(
     tile: String,
@@ -194,8 +165,7 @@ fun Notification1(
 }
 
 @Composable
-fun UserView(viewModel: AuthViewModel, navController: NavController) {
-    val user by viewModel.user.observeAsState()
+fun UserView(user: UserModel, navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -205,8 +175,8 @@ fun UserView(viewModel: AuthViewModel, navController: NavController) {
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        user?.let { userData ->
-            val imageUri = userData.url.let { Uri.parse(it) }
+        user.let { userData ->
+            val imageUri = userData.url.let { it?.toUri() }
             Log.d("UserProfileScreen", "localImageUrl: ${userData.url}")
             Log.d("UserProfileScreen", "Parsed imageUri: $imageUri")
             GlideImage(

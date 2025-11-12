@@ -1,4 +1,4 @@
-package com.example.healplus.feature.utils.helpers
+package com.example.core.dataStore
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -58,7 +58,6 @@ fun VerifyEmailScreen(
                 title = {},
                 actions = {
                     IconButton(onClick = {
-
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.close_small_56dp), // Replace with your clear icon resource

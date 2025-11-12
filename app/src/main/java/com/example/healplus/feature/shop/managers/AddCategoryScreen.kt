@@ -94,7 +94,7 @@ fun AddCategoryScreen(navController: NavController) {
                                     idc = "",
                                     title = title
                                 )
-                                viewModel.createCategory(category)
+//                                viewModel.createCategory(category)
                             } else {
                                 scope.launch {
                                     snackBarHostState.showSnackbar("Vui lòng nhập tên danh mục!")
