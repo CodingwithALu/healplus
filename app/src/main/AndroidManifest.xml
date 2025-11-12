@@ -22,11 +22,23 @@
         <activity
             android:name=".acitivity.MainActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.HealPlus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Thay thế "your-app-domain.com" bằng miền bạn đã cấu hình trong Firebase Console -->
+                <!-- Ví dụ: nếu URL trong ActionCodeSettings là https://your-app-domain.com/finishSignUp, thì host là your-app-domain.com -->
+                <data
+                    android:host="healplus-7eca1.firebaseapp.com"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
         <activity

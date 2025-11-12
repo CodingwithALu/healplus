@@ -96,5 +96,6 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     //app check
     implementation(libs.firebase.appcheck)
+    implementation(libs.firebase.appcheck.debug)
     implementation(libs.firebase.appcheck.playintegrity)
 }

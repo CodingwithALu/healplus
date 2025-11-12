@@ -6,8 +6,6 @@ import com.example.core.network.apis.ApiService
 import com.example.core.network.retrofitclients.RetrofitClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,44 +16,34 @@ class AuthRepository @Inject constructor(
     private val auth: FirebaseAuth,
     private val api: ApiService = RetrofitClient.instance
 ) {
-    private var _emailVerify = MutableStateFlow<EmailVerifyEvent?>(null)
-    val emailVerify: StateFlow<EmailVerifyEvent?> = _emailVerify
-    suspend fun screenRedirect() {
-        auth.currentUser?.reload()
-        val user = auth.currentUser
-        if (user != null) {
-            if (user.isEmailVerified) {
-                _emailVerify.value = EmailVerifyEvent.RedirectToUserEmpty
-            } else {
-                _emailVerify.value = EmailVerifyEvent.RedirectToSuccessScreen
-            }
-        } else {
-            _emailVerify.value = EmailVerifyEvent.ShowErrorSnackBar(
-                title = "No Account",
-                message = "Create Account. Please!"
-            )
-        }
-    }
     // signIn password and email
     suspend fun signInWithEmailPassword(email: String, password: String) {
         return withContext(Dispatchers.IO) {
-            auth.currentUser?.reload()
             auth.signInWithEmailAndPassword(email, password).await()
         }
     }
+
     // verify email
     suspend fun sendEmailVerification() {
         return withContext(Dispatchers.IO) {
-            auth.currentUser?.reload()
-            auth.currentUser?.sendEmailVerification()
+            val user = auth.currentUser
+            if (user != null) {
+                user.reload().await()
+                if (!user.isEmailVerified) {
+                    user.sendEmailVerification().await()
+                } else {
+                    throw IllegalStateException("Người dùng chưa đăng nhập.")
+                }
+            }
         }
     }
+
     // SignUp
     suspend fun createUser(name: String, email: String, password: String): ApiResponse {
         return withContext(Dispatchers.IO) {
             try {
                 val creteAuth = auth.createUserWithEmailAndPassword(email, password).await()
-                auth.currentUser?.reload()
+                auth.currentUser?.reload()?.await()
                 val userId = creteAuth.user?.uid ?: throw Exception("User ID is null")
                 val userModel = UserModel(
                     id = userId,
@@ -67,6 +55,7 @@ class AuthRepository @Inject constructor(
                 if (dbResult.success) {
                     dbResult
                 } else {
+                    auth.currentUser?.delete()?.await()
                     throw Exception("Failed to create user in database: ${dbResult.message}")
                 }
             } catch (e: Exception) {
@@ -74,6 +63,7 @@ class AuthRepository @Inject constructor(
             }
         }
     }
+
     suspend fun createUserForDataBase(userModel: UserModel): ApiResponse {
         return withContext(Dispatchers.IO) {
             api.createUser(
@@ -84,13 +74,27 @@ class AuthRepository @Inject constructor(
             )
         }
     }
+
+    // fetch user data
+    suspend fun fetchUserFromData(): UserModel {
+        return if (auth.currentUser != null) {
+            withContext(Dispatchers.IO) {
+                api.fetchUserFromData(auth.currentUser?.uid.toString())
+            }
+        } else
+            UserModel.empty()
+    }
+
     // Logout
     fun signOut() {
         auth.signOut()
     }
 }
+
 sealed class EmailVerifyEvent {
-    data class ShowErrorSnackBar(val title: String, val message: String) : EmailVerifyEvent()
+    data class ShowErrorSnackBar(val title: String, val message: String) :
+        EmailVerifyEvent()
+
     object RedirectToSuccessScreen : EmailVerifyEvent()
-    object RedirectToUserEmpty : EmailVerifyEvent()
+    object RedirectToVerifyScreen : EmailVerifyEvent()
 }

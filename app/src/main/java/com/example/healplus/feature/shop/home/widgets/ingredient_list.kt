@@ -84,7 +84,7 @@ fun IngredientList(
                                 item = displayedItems[i],
                                 onItemClick = {
                                     navController.navigate(
-                                        "category/${displayedItems[i].idIngredient}/${displayedItems[i].title}"
+                                        "category/${displayedItems[i].iding}/${displayedItems[i].title}"
                                     )
                                 }
                             )
@@ -95,7 +95,7 @@ fun IngredientList(
                                 item = displayedItems[i + 1],
                                 onItemClick = {
                                     navController.navigate(
-                                        "category/${displayedItems[i + 1].idIngredient}/${displayedItems[i + 1].title}"
+                                        "category/${displayedItems[i + 1].iding}/${displayedItems[i + 1].title}"
                                     )
                                 }
                             )
@@ -105,7 +105,7 @@ fun IngredientList(
                                 item = displayedItems[i + 2],
                                 onItemClick = {
                                     navController.navigate(
-                                        "category/${displayedItems[i + 2].idIngredient}/${displayedItems[i + 2].title}"
+                                        "category/${displayedItems[i + 2].iding}/${displayedItems[i + 2].title}"
                                     )
                                 }
                             )

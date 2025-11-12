@@ -1,3 +1,4 @@
+
 import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -17,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.ReviewViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.utils.route.Screen
 import com.google.gson.Gson
@@ -25,8 +25,7 @@ import com.google.gson.Gson
 @Composable
 fun SeeAllButton(
     item: ProductsModel,
-    navController: NavController,
-    viewModel: ReviewViewModel
+    navController: NavController
 ) {
     Row(
         modifier = Modifier

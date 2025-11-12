@@ -9,16 +9,21 @@ import com.example.core.model.users.UserModel
 import com.example.core.repository.AuthRepository
 import com.example.core.repository.EmailVerifyEvent
 import com.example.core.repository.UserPreferencesRepository
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val auth: FirebaseAuth,
     private val userPreferencesRepository: UserPreferencesRepository) : ViewModel() {
-    private val _emailVerify = authRepository.emailVerify
+    private var _emailVerify = MutableStateFlow<EmailVerifyEvent?>(null)
     val emailVerify: StateFlow<EmailVerifyEvent?> = _emailVerify
     private val _message = MutableStateFlow("")
     val message: StateFlow<String> = _message
@@ -28,7 +33,6 @@ class LoginViewModel @Inject constructor(
     var isLoading by mutableStateOf(false)
         private set
     init {
-        // load saved preferences at startup
         viewModelScope.launch {
             userPreferencesRepository.getStatePreferences().onSuccess { prefs ->
                 _user.value.email = prefs.emailUser
@@ -41,11 +45,16 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading = true
             try {
-                authRepository.signInWithEmailPassword(email, password)
+                async { authRepository.signInWithEmailPassword(email, password) }.await()
                 if (rememberMe){
-                    userPreferencesRepository.saveStatePreferences(email, password)
+                    async { userPreferencesRepository.saveStatePreferences(email, password)}.await()
                 }
-                authRepository.screenRedirect()
+                auth.currentUser?.reload()?.await()
+                if (auth.currentUser?.isEmailVerified == true) {
+                    _emailVerify.value = EmailVerifyEvent.RedirectToVerifyScreen
+                } else {
+                    _emailVerify.value = EmailVerifyEvent.RedirectToSuccessScreen
+                }
             }catch (e: Exception){
                 throw IllegalArgumentException(e.message)
             }finally {

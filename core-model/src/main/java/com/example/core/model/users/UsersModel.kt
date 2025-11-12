@@ -3,19 +3,21 @@ data class UserModel(
     var id: String,
     var name: String,
     var email: String,
+    val phone: String? = null,
     var password: String,
     var gender: String? = null,
     var dateBirth: String? = null,
     var url: String? = null,
     var spot: Int = 0,
     var token: String? = null,
-    val role: String = ""
+    val role: String = " "
 ){
     companion object {
         fun empty() = UserModel(
             id = "",
             name = "",
             email = "",
+            phone = "",
             password = "",
             gender = "",
             dateBirth = "",
@@ -30,6 +32,7 @@ data class UserModel(
             "id" to id,
             "name" to name,
             "email" to email,
+            "phone" to phone,
             "password" to password,
             "gender" to gender,
             "dateBirth" to dateBirth,

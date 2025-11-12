@@ -7,6 +7,7 @@ sealed class Screen(val route: String) {
     object VerifyEmail : Screen("verifyEmail/{email}")
     object OnBoarding : Screen("onboarding")
     object Home : Screen("Home")
+    object MediaAppBar: Screen("mediaAppBar/{category}/{user}")
     object SuccessScreen: Screen("success_screen_route")
     object Order : Screen("Order")
     object Collection : Screen("Collection")

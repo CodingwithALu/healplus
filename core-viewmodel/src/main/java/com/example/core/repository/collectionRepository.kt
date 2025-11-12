@@ -13,6 +13,8 @@ import kotlinx.coroutines.withContext
 class CollectionRepository(
     private val api: ApiService = RetrofitClient.instance
 ) {
+    // category
+
     suspend fun fetchProductByElement(ide: String): List<ProductsModel>{
         var result = emptyList<ProductsModel>()
         withContext(Dispatchers.IO){
@@ -57,7 +59,7 @@ class CollectionRepository(
         var result = ApiResponse.empty()
         withContext(Dispatchers.IO){
             result = api.updateIngredient(
-                ingredientsModel.idIngredient,
+                ingredientsModel.iding,
                 ingredientsModel.title,
                 ingredientsModel.url,
                 ingredientsModel.idc
