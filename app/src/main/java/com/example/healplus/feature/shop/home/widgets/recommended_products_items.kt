@@ -1,4 +1,6 @@
-import android.net.Uri
+package com.example.healplus.feature.shop.home.widgets
+
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,7 +41,8 @@ import com.example.healplus.ui.theme.onPrimaryLightMediumContrast
 import com.example.healplus.ui.theme.onTertiaryLightHighContrast
 import com.example.healplus.ui.theme.primaryDark
 import com.example.healplus.ui.theme.surfaceBrightLight
-import com.google.gson.Gson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.text.NumberFormat
 import java.util.Locale
 import kotlin.random.Random
@@ -56,7 +59,10 @@ fun RecommendedProductItem(item: ProductsModel, navController: NavController) {
             .width(200.dp)
             .wrapContentHeight()
             .clickable {
-                navController.navigate("${Screen.Product.route}/${Uri.encode(Gson().toJson(item))}")
+                // encode idp before navigation to avoid truncation due to special chars
+                val encodedId = URLEncoder.encode(item.idp, StandardCharsets.UTF_8.toString())
+                navController.navigate("${Screen.Product.route}/$encodedId")
+                Log.d("Product", "Check id: ${item.idp}")
             },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(
@@ -65,7 +71,6 @@ fun RecommendedProductItem(item: ProductsModel, navController: NavController) {
         colors = CardDefaults.cardColors(
             containerColor = backgroundColor1
         )
-
     ){
         Column(
             modifier = Modifier

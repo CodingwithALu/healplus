@@ -7,54 +7,53 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class UserPreferencesRepository @Inject constructor(
+class UserPreferencesRepository(
     private val dataStore: DataStore<Preferences>
-){
+) {
     private companion object {
         val EMAIL_USER = stringPreferencesKey("email_user")
         val PASS_WORS = stringPreferencesKey("password_user")
     }
-
-    // save isRemember, userId and provider (run on IO dispatcher)
     suspend fun saveStatePreferences(emailUser: String, passwordUser: String) {
         withContext(Dispatchers.IO) {
-            dataStore.edit { preferences ->
-                preferences[EMAIL_USER] = emailUser
-                preferences[PASS_WORS] = passwordUser
+            val pref = dataStore.data.first()
+            val currentEmail = pref[EMAIL_USER] ?: ""
+            val currentPassword = pref[PASS_WORS] ?: ""
+            if (currentEmail != emailUser || currentPassword != passwordUser) {
+                dataStore.edit { preferences ->
+                    preferences.clear()
+                    preferences[EMAIL_USER] = emailUser
+                    preferences[PASS_WORS] = passwordUser
+                }
             }
         }
     }
-
-    // read current saved preferences (runs on IO dispatcher)
-    suspend fun getStatePreferences(): Result<StatePreferences> =
-        try {
-            withContext(Dispatchers.IO) {
-                val pref = dataStore.data.first()
-                val userId = pref[EMAIL_USER] ?: ""
-                val passwordUser = pref[PASS_WORS] ?: ""
-                Result.success(StatePreferences(userId, passwordUser))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
+    suspend fun getStatePreferences(): StatePreferences {
+        val result = StatePreferences.empty()
+        withContext(Dispatchers.IO) {
+            val pref = dataStore.data.first()
+            result.emailUser = pref[EMAIL_USER] ?: ""
+            result.password = pref[PASS_WORS] ?: ""
         }
-    suspend fun clearPreferences(): Result<Unit> =
-        try {
-            withContext(Dispatchers.IO){
-                dataStore.edit { preferences ->
-                    preferences.clear()
-                }
+        return result
+    }
+    suspend fun clearPreferences() {
+        withContext(Dispatchers.IO) {
+            dataStore.edit { preferences ->
+                preferences.clear()
             }
-            Result.success(Unit)
-        } catch (e: Exception){
-            Result.failure(e)
         }
+    }
 }
-
 data class StatePreferences(
-    val emailUser: String,
-    val password: String
-)
+    var emailUser: String,
+    var password: String
+) {
+    companion object {
+        fun empty() = StatePreferences(
+            emailUser = "",
+            password = ""
+        )
+    }
+}

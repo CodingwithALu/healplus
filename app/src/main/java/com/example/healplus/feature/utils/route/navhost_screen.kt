@@ -2,6 +2,7 @@ package com.example.healplus.feature.utils.route
 
 sealed class Screen(val route: String) {
     object Login : Screen("login")
+    object Slash: Screen("slash")
     object ForgetPass : Screen("forget")
     object Signup : Screen("signup")
     object VerifyEmail : Screen("verifyEmail/{email}")
@@ -12,7 +13,7 @@ sealed class Screen(val route: String) {
     object Order : Screen("Order")
     object Collection : Screen("Collection")
     object Favorite : Screen("Favorite")
-    object Product : Screen("product/{item}")
+    object Product : Screen("product")
     object InfoProduct: Screen("infoProduct/{item}")
     object Review: Screen("review")
     object WriteReview: Screen("writeReview/{item}")

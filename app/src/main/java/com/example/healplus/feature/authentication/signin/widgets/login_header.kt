@@ -11,10 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.example.healplus.R
 import com.example.healplus.feature.utils.constants.TSizes
 
@@ -28,7 +30,9 @@ fun LoginHeader(){
         Image(
             painter = painterResource(id = R.drawable.logo_app),
             contentDescription = "App Logo",
-            modifier = Modifier.size(TSizes.IMAGE_THUMB_SIZE)
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .size(width = TSizes.IMAGE_THUMB_SIZE + 30.dp, height = (TSizes.IMAGE_THUMB_SIZE + 30.dp)/0.85f)
         )
         Spacer(modifier = Modifier.height(TSizes.MD))
 
@@ -41,7 +45,7 @@ fun LoginHeader(){
             ),
             textAlign = TextAlign.Start
         )
-        Spacer(modifier = Modifier.height(TSizes.SM))
+        Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE/2))
         // Subtitle
         Text(
             text = "Khám phá vo vàng lựa chọn và sự tiện lợi vượt trội.",

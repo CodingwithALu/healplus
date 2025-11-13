@@ -4,25 +4,31 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ReviewItem(
-    val name: String = "",
+    val idp: String? = "",
     val rating: Float = 0f,
     val comment: String = "",
     val date: String = "",
-    val ulr: String? = null
+    val idUser: String = "",
+    val userName: String? = "",
+    val userAvatar: String? = ""
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-        name = parcel.readString() ?: "",
+        idp = parcel.readString() ?: "",
         rating = parcel.readFloat(),
         comment = parcel.readString() ?: "",
         date = parcel.readString() ?: "",
-        ulr = parcel.readString()
+        idUser = parcel.readString() ?: "",
+        userName = parcel.readString() ?: "",
+        userAvatar = parcel.readString() ?: ""
     )
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
+        parcel.writeString(idp)
         parcel.writeFloat(rating)
         parcel.writeString(comment)
         parcel.writeString(date)
-        parcel.writeString(ulr)
+        parcel.writeString(idUser)
+        parcel.writeString(userName)
+        parcel.writeString(userAvatar)
     }
     override fun describeContents(): Int {
         return 0
@@ -35,18 +41,20 @@ data class ReviewItem(
             return arrayOfNulls(size)
         }
         fun empty(): ReviewItem = ReviewItem(
-            name = "",
+            idp = "",
             rating = 0f,
             comment = "",
             date = "",
-            ulr = null
+            idUser = "",
+            userName = "",
+            userAvatar = ""
         )
     }
     fun toJsonMap(): Map<String, Any?> = mapOf(
-        "name" to name,
+        "idp" to idp,
         "rating" to rating,
         "comment" to comment,
         "date" to date,
-        "url" to ulr
+        "id_user" to idUser
     )
 }

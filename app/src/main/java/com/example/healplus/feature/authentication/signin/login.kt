@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.healplus.R
 import com.example.healplus.feature.authentication.signin.widgets.LoginForm
@@ -30,25 +29,25 @@ fun SignInScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = TSizes.DEFAULT_SPACE)
-                .padding(top = 48.dp), // Equivalent to paddingWithAppBarHeight
+                .padding(horizontal = TSizes.DEFAULT_SPACE/2)
+                .padding(top = TSizes.DEFAULT_SPACE), // Equivalent to paddingWithAppBarHeight
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Header
             LoginHeader()
-            Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))
+            Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE))
             // Form
             LoginForm(navController = navController)
-            Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))
+            Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE))
             // Divider
             FormDivider(
                 text = stringResource(R.string.login)
             )
 
-            Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))
+            Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE))
             // Footer - Social Buttons
             SocialButtons(navController)
-            Spacer(modifier = Modifier.height(TSizes.SPACE_BTW_SECTIONS))
+            Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE))
         }
     }
 }

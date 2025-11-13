@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,19 +44,18 @@ class HomeViewmodel @Inject constructor(
     init {
         fetchInit()
     }
+
     fun fetchInit() {
         isLoading = true
         viewModelScope.launch {
             try {
-                withTimeout(20000) {
-                    withContext(NonCancellable) {
-                        // User
-                        _banner.value = homeRepository.fetchBanner()
-                        _category.value = homeRepository.fetchCategory()
-                        _user.value = authRepository.fetchUserFromData()
-                        _recommended.value = homeRepository.fetchRecommended()
-                        _ingredient.value = homeRepository.fetchIngredient()
-                    }
+                withContext(NonCancellable) {
+                    // User
+                    _banner.value = homeRepository.fetchBanner()
+                    _category.value = homeRepository.fetchCategory()
+                    _user.value = authRepository.fetchUserFromData()
+                    _recommended.value = homeRepository.fetchRecommended()
+                    _ingredient.value = homeRepository.fetchIngredient()
                 }
             } catch (e: Exception) {
                 throw IllegalArgumentException(e.message)

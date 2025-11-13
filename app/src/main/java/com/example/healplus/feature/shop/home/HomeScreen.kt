@@ -1,6 +1,5 @@
 package com.example.healplus.feature.shop.home
 
-import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,9 +30,6 @@ import com.example.healplus.feature.shop.home.widgets.StoreInfoScreenWidgets
 import com.example.healplus.feature.shop.home.widgets.TAppbarHome
 import com.example.healplus.feature.utils.constants.TSizes
 import com.example.healplus.feature.utils.route.Screen
-import com.google.gson.Gson
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 @Composable
 fun HomeScreen(
@@ -53,14 +49,7 @@ fun HomeScreen(
                     TAppbarHome(
                         user = if (user.id.isNotEmpty()) user else UserModel.empty(),
                         onAvatarClick = {
-                            navController.navigate(
-                                "${Screen.MediaAppBar.route}/${
-                                    URLEncoder.encode(
-                                        Gson().toJson(categories),
-                                        StandardCharsets.UTF_8.toString()
-                                    )
-                                }/${Uri.encode(Gson().toJson(user))}"
-                            )
+                            navController.navigate(Screen.Setting.route)
                         },
                         showNotification = true,
                         searchClick = {

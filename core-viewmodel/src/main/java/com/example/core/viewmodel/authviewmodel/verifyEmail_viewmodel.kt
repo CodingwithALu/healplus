@@ -2,6 +2,7 @@ package com.example.core.viewmodel.authviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.core.repository.AppLoginRepository
 import com.example.core.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VerifyEmailViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val appLoginRepository: AppLoginRepository
 ) : ViewModel() {
     private val _uiEvent = MutableStateFlow<UiEvent?>(null)
     val uiEvent: StateFlow<UiEvent?> = _uiEvent
@@ -40,6 +42,7 @@ class VerifyEmailViewModel @Inject constructor(
             val user = auth.currentUser
             if (user?.isEmailVerified == true) {
                 _uiEvent.value = UiEvent.RedirectToSuccessScreen
+                appLoginRepository.setFirstTimeLogin(true)
             }
         }
     }

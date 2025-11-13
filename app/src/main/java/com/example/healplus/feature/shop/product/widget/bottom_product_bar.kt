@@ -1,5 +1,6 @@
 package com.example.healplus.feature.shop.product.widget
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -28,8 +29,8 @@ fun BottomProductBarView(
 ) {
     BottomAppBar(
         modifier = Modifier.fillMaxWidth()
-            .height(56.dp),
-        containerColor = Color.White
+            .height(56.dp)
+            .background(Color.Transparent)
     ) {
         Row(
             modifier = Modifier
