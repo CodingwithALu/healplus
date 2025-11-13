@@ -11,17 +11,11 @@ import kotlinx.coroutines.withContext
 class ReviewRepository(
     private val api: ApiService = RetrofitClient.instance
 ) {
-    suspend fun createReview(review: ReviewItem, idp: String): ApiResponse {
+    suspend fun createReview(review: ReviewItem): ApiResponse {
         var result = ApiResponse.empty()
+        val reviewMap = review.toJsonMap().toMutableMap()
         withContext(Dispatchers.IO){
-            result = api.addReview(
-                review.name,
-                review.rating,
-                review.comment,
-                review.date,
-                review.ulr!!,
-                idp
-            )
+            result = api.createReview(reviewMap)
             delay(1000L)
         }
         return result

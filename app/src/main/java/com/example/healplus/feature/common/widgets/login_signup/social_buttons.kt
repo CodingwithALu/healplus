@@ -58,9 +58,7 @@ fun SocialButtons(
                 }
             }
         }
-
         Spacer(modifier =  Modifier.width(TSizes.SPACE_BTW_ITEMS))
-
         // Facebook Sign In Button
         IconButton(
             onClick = {

@@ -1,5 +1,6 @@
 package com.example.healplus.feature.authentication.signin.widgets
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -30,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -52,18 +55,23 @@ fun LoginForm(
     val viewModel: LoginViewModel = hiltViewModel()
     val emailVerify by viewModel.emailVerify.collectAsState()
     val user by viewModel.user.collectAsState()
-    var email by remember { mutableStateOf(user.email) }
-    var password by remember { mutableStateOf(user.password) }
+    Log.d("Login","check user:${user.emailUser}, ${user.password}")
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var rememberMe by remember { mutableStateOf(false) }
     var hidePassword by remember { mutableStateOf(true) }
     var emailError by remember { mutableStateOf<String?>(null) }
     var passwordError by remember { mutableStateOf<String?>(null) }
     val isLoading = viewModel.isLoading
+    LaunchedEffect(user) {
+        email = user.emailUser
+        password = user.password
+    }
     LaunchedEffect(emailVerify) {
         when(emailVerify){
             is EmailVerifyEvent.RedirectToSuccessScreen -> {
                 navController.navigate(Screen.Home.route) {
-                    popUpTo(navController.graph.startDestinationId) {
+                    popUpTo(0) {
                         inclusive = true
                     }
                     launchSingleTop = true
@@ -98,7 +106,7 @@ fun LoginForm(
             },
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(TSizes.MD))
+        Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE/2))
         // Password TextField
         OutlinedTextField(
             value = password,
@@ -132,8 +140,7 @@ fun LoginForm(
             modifier = Modifier.fillMaxWidth(),
             enabled = true
         )
-        Spacer(modifier = Modifier.height(TSizes.SM))
-        // Remember Me & Forget Password Row
+        Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE/2))
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -159,8 +166,7 @@ fun LoginForm(
                 Text("Forget Password")
             }
         }
-        Spacer(modifier = Modifier.height(TSizes.MD))
-        // Sign In Button
+        Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE/2))
         Button(
             onClick = {
                 emailError = ValidationUtils.validateEmail(email)
@@ -173,6 +179,7 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(TSizes.APP_BAR_HEIGHT)
+                .clip(RoundedCornerShape(8.dp))
         ) {
             if (isLoading) {
                 CircularProgressIndicator(
@@ -186,8 +193,7 @@ fun LoginForm(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(TSizes.MD))
-        // Create Account Button
+        Spacer(modifier = Modifier.height(TSizes.DEFAULT_SPACE/2))
         OutlinedButton(
             onClick = {
                 navController.navigate(Screen.Signup.route)
@@ -195,6 +201,7 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(TSizes.APP_BAR_HEIGHT)
+                .clip(RoundedCornerShape(8.dp))
         ) {
             Text(
                 text = stringResource(R.string.have_an_account),

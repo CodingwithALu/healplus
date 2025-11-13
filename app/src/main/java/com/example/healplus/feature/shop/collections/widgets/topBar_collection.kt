@@ -36,7 +36,7 @@ fun TopBarCollection(
         navigationIcon = {
             Box {
                 IconButton(onClick = {
-                    navController.navigate("home")
+                    navController.popBackStack()
                 }) {
                     Icon(imageVector = Icons.Filled.Home, contentDescription = null)
                 }

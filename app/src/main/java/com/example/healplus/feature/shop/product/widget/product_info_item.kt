@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.core.model.products.ProductsModel
-import com.example.core.viewmodel.ReviewViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.shop.product.widget.ProductInfoItem
 import com.example.healplus.feature.utils.route.Screen
@@ -31,8 +30,7 @@ import com.google.gson.Gson
 @Composable
 fun ProductInfoView(
     product: ProductsModel,
-    navController: NavController,
-    viewModel: ReviewViewModel
+    navController: NavController
 ) {
     var showProducts by rememberSaveable  { mutableStateOf(false) }
     Column(modifier = Modifier) {

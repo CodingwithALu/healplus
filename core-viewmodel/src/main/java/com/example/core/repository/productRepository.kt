@@ -12,6 +12,11 @@ import java.time.LocalDate
 class ProductRepository(
     private val api: ApiService = RetrofitClient.instance
 ) {
+    suspend fun fetchProductFromId(id: String): ProductsModel{
+        return withContext(Dispatchers.IO){
+            api.getProductsFromId(id)
+        }
+    }
     // add product
     suspend fun addProducts(product: ProductsModel, dateTime: LocalDate): ApiResponse {
         var result = ApiResponse.empty()

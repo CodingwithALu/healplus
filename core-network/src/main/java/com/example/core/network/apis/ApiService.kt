@@ -1,4 +1,5 @@
 package com.example.core.network.apis
+
 import com.example.core.model.Oder.OrderModel
 import com.example.core.model.api.ApiResponse
 import com.example.core.model.banners.BannersModel
@@ -9,6 +10,7 @@ import com.example.core.model.products.ProductsModel
 import com.example.core.model.revenue.RevenueResponse
 import com.example.core.model.users.UserModel
 import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -19,34 +21,50 @@ interface ApiService {
     // Todo -- Get DATA
     @GET("get_ingredient_count.php")
     suspend fun getIngredientCount(): List<IngredientsModel>
+
     @GET("fetchBanner.php")
     suspend fun getBanners(): List<BannersModel>
+
     @GET("getIngredient.php")
     suspend fun getIngredient(): List<IngredientsModel>
+
     @GET("get_product_showRecomment.php")
     suspend fun getRecommendedProducts(): List<ProductsModel>
+
     @GET("fetchCategory.php")
     suspend fun getCategories(): List<CategoryModel>
+
     @GET("fetchElement.php")
     suspend fun getElement(): List<ElementsModel>
+
+    @GET("route/get/fetch_product_by_id.php")
+    suspend fun getProductsFromId(@Query("idp") idp: String): ProductsModel
+
     @GET("route/get/fetch_products_from_category.php")
     suspend fun getProductsByCategory(@Query("idc") idc: String): List<ProductsModel>
+
     @GET("get_products_by_ingredient.php")
     suspend fun getProductsByIngredient(@Query("id") id: String): List<ProductsModel>
+
     @GET("get_products_by_element.php")
     suspend fun getProductsByElement(@Query("id") id: String): List<ProductsModel>
+
     @GET("get_ingredient_by_category.php")
     suspend fun getIngredientByCategory(@Query("id") id: String): List<IngredientsModel>
+
     @GET("get_elements_by_ingredient.php")
     suspend fun getElementByIngredient(@Query("id") id: String): List<ElementsModel>
+
     @GET("getsearch.php")
     suspend fun getSearchProduct(@Query("search") search: String): List<ProductsModel>
+
     @GET("get_oder.php")
     suspend fun getOder(): List<OrderModel>
 
     // user
     @GET("route/get/fetch_user.php")
     suspend fun fetchUserFromData(@Query("id") id: String): UserModel
+
     @FormUrlEncoded
     @POST("create_user.php")
     suspend fun createUser(
@@ -55,11 +73,13 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String,
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("add_category.php")
     suspend fun addCategory(
         @Field("title") title: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("add_ingrident.php")
     suspend fun addIngredient(
@@ -67,6 +87,7 @@ interface ApiService {
         @Field("url") url: String,
         @Field("idc") idc: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("add_element.php")
     suspend fun addElement(
@@ -75,17 +96,20 @@ interface ApiService {
         @Field("quantity") quantity: String,
         @Field("iding") iding: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_category.php")
     suspend fun updateCategory(
         @Field("idc") idc: String,
         @Field("title") title: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_review.php")
     suspend fun updateReview(
         @Field("idp") idc: String,
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_ingredient.php")
     suspend fun updateIngredient(
@@ -104,21 +128,25 @@ interface ApiService {
         @Field("quantity") quantity: String,
         @Field("iding") iding: String,
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("delete_category.php")
     suspend fun deleteCategory(
         @Field("idc") idc: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("deldelete_ingredient.php")
     suspend fun deleteIngnredient(
         @Field("iding") iding: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_element.php")
     suspend fun deleteElement(
         @Field("ide") ide: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("oder.php")
     suspend fun addOder(
@@ -134,16 +162,10 @@ interface ApiService {
         @Field("status") status: String,
         @Field("detail") detail: String
     ): ApiResponse
+
     @FormUrlEncoded
-    @POST("add_review.php")
-    suspend fun addReview(
-        @Field("reviewerName") reviewerName: String,
-        @Field("rating") rating: Float,
-        @Field("comment") comment: String,
-        @Field("date") date: String,
-        @Field("profileImageUrl") profileImageUrl: String,
-        @Field("idp") idp: String
-    ): ApiResponse
+    @POST("create_review.php")
+    suspend fun createReview(@FieldMap fields: Map<String, @JvmSuppressWildcards Any?>): ApiResponse
     @FormUrlEncoded
     @POST("update_user.php")
     suspend fun upDateUser(
@@ -155,12 +177,14 @@ interface ApiService {
         @Field("dateBirth") dateBirth: String,
         @Field("idauth") idauth: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_idauth.php")
     suspend fun upDateIdAuth(
         @Field("email") email: String,
         @Field("idauth") idauth: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("add_product.php")
     suspend fun addProduct(
@@ -187,12 +211,14 @@ interface ApiService {
         @Field("thanhphan") thanhphan: String,
         @Field("unitNames") unitNames: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("update_oder_status.php")
     suspend fun updateOrderStatus(
         @Field("id") orderId: Int,
         @Field("status") status: String
     ): ApiResponse
+
     @FormUrlEncoded
     @POST("get_oder_by_status.php")
     suspend fun getOrderStatus(
@@ -211,16 +237,18 @@ interface ApiService {
         @Field("idauth") idauth: String,
         @Field("status") status: String
     ): List<OrderModel>
-    
+
     @GET("revenue_month.php")
     suspend fun revenueMonth(
         @Query("month") month: Int,
         @Query("year") year: Int
     ): RevenueResponse
+
     @GET("revenue_week.php")
     suspend fun revenueWeek(
         @Query("start_date") start_date: String
     ): RevenueResponse
+
     @GET("revenue_year.php")
     suspend fun revenueYear(
         @Query("year") year: Int

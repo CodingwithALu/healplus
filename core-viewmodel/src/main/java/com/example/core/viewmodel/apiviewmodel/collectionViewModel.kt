@@ -17,7 +17,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @HiltViewModel
 class CollectionViewModel @Inject constructor(
     private val collectionRepository: CollectionRepository,
@@ -32,11 +31,9 @@ class CollectionViewModel @Inject constructor(
     private val _currentCall = MutableLiveData<MutableList<ProductsModel>>()
     val currentCall: LiveData<MutableList<ProductsModel>> = _currentCall
     var isLoading by mutableStateOf(false)
-
     init {
         fetchCategory()
     }
-
     //fetch category
     fun fetchCategory() {
         viewModelScope.launch {
@@ -66,7 +63,6 @@ class CollectionViewModel @Inject constructor(
             }
         }
     }
-
     fun fetchElementAndProductFromIngredient(id: String) {
         viewModelScope.launch {
             isLoading = true

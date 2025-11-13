@@ -6,17 +6,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -43,6 +43,7 @@ fun TAppbarHome(
             .fillMaxWidth()
             .height(48.dp)
             .background(Color.Transparent),
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = stringResource(R.string.app_name),
@@ -50,8 +51,7 @@ fun TAppbarHome(
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             modifier = Modifier
-                .padding(top = TSizes.XS)
-                .fillMaxSize()
+                .padding(top = TSizes.DEFAULT_SPACE/4)
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -93,23 +93,27 @@ fun TAppbarHome(
             Row (
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(
+                Image(
                     modifier = Modifier
+                        .clip(CircleShape)
                         .height(30.dp)
                         .width(30.dp)
                         .clickable { searchClick() },
                     painter = painterResource(id = R.drawable.search_icon),
                     contentDescription = "Bell",
+                    contentScale = ContentScale.Fit
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 if (showNotification) {
-                    Icon(
+                    Image(
                         modifier = Modifier
+                            .clip(CircleShape)
                             .height(30.dp)
                             .width(30.dp)
                             .clickable { notify() },
                         painter = painterResource(id = R.drawable.bell_icon),
                         contentDescription = "Bell",
+                        contentScale = ContentScale.Fit
                     )
                 }
             }

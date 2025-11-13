@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.core.model.categories.CategoryModel
 import com.example.healplus.feature.utils.constants.TSizes
+import com.example.healplus.feature.utils.route.Screen
 
 @Composable
 fun CategoryList(categories: List<CategoryModel>, navController: NavController) {
@@ -30,8 +31,7 @@ fun CategoryList(categories: List<CategoryModel>, navController: NavController) 
                 item = categories[index],
                 iSelected = selectedIndex == index,
                 onItemClick = {
-                    selectedIndex = index
-                    navController.navigate("category/${categories[index].idc}/${categories[index].title}")
+                    navController.navigate(Screen.Collection.route)
                 }
             )
         }

@@ -1,5 +1,7 @@
 package com.example.healplus.feature.shop.review
 
+import ReviewCard
+import ReviewSummary
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,11 +23,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.core.model.products.conten.ReviewItem
 import com.example.healplus.R
-import com.example.healplus.feature.shop.product.ReviewCard
-import com.example.healplus.feature.shop.product.ReviewSummary
+import com.example.healplus.feature.utils.constants.TSizes
 
 @Composable
-fun NewReviewsSection(
+fun ReviewsSection(
     averageRating: Float,
     totalReviews: Int,
     individualReviews: List<ReviewItem>,
@@ -93,6 +94,7 @@ fun NewReviewsSection(
             },
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = TSizes.DEFAULT_SPACE)
         ) {
             Text(stringResource(R.string.write_a_review))
         }

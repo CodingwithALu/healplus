@@ -17,24 +17,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.core.repository.EmailVerifyEvent
-import com.example.core.viewmodel.authviewmodel.LoginViewModel
 import com.example.healplus.feature.utils.route.Screen
 
 @Composable
@@ -45,10 +38,6 @@ fun SuccessScreen(
     showEmail: Boolean = true,
     navController: NavController
 ) {
-    val viewModel: LoginViewModel = hiltViewModel()
-    val emailVerify by viewModel.emailVerify.collectAsState()
-    val user by viewModel.user.collectAsState()
-    var email by remember { mutableStateOf(user.email) }
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val lottieComposition by rememberLottieComposition(LottieCompositionSpec.Asset(image))
     val lottieProgress by animateLottieCompositionAsState(lottieComposition)
@@ -70,54 +59,38 @@ fun SuccessScreen(
                 progress = { lottieProgress }
             )
         }
-
         Spacer(Modifier.height(24.dp))
-
         // Title
         Text(
             title,
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )
-
         Spacer(Modifier.height(24.dp))
-
         Text(
             subtitle,
             style = MaterialTheme.typography.labelMedium,
             textAlign = TextAlign.Center
         )
-
         Spacer(Modifier.height(24.dp))
-
         // Continue Button
         Button(
             onClick = {
-                when(emailVerify){
-                    is EmailVerifyEvent.RedirectToSuccessScreen -> {
-                        navController.navigate(Screen.Home.route) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                inclusive = true
-                            }
-                            launchSingleTop = true
-                        }
+                navController.navigate(Screen.Home.route) {
+                    popUpTo(0) {
+                        inclusive = true
                     }
-                    is EmailVerifyEvent.RedirectToVerifyScreen -> {
-                        navController.navigate("${Screen.VerifyEmail.route}/${email}")
-                    } else -> {}
+                    launchSingleTop = true
                 }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Continue")
         }
-
         Spacer(Modifier.height(24.dp))
-
-        // Resend Email Button
         if (showEmail) {
             TextButton(
-                onClick = {  },
+                onClick = { },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Resend email")

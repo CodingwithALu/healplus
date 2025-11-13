@@ -1,6 +1,5 @@
 package com.example.healplus.feature.shop.home.widgets
 
-import RecommendedProductItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row

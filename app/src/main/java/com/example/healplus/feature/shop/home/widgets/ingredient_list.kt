@@ -33,6 +33,7 @@ import com.example.core.model.ingredients.IngredientsModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.texts.TSectionHeading
 import com.example.healplus.feature.utils.constants.TSizes
+import com.example.healplus.feature.utils.route.Screen
 
 @Composable
 fun IngredientList(
@@ -83,20 +84,15 @@ fun IngredientList(
                             IngredientItem(
                                 item = displayedItems[i],
                                 onItemClick = {
-                                    navController.navigate(
-                                        "category/${displayedItems[i].iding}/${displayedItems[i].title}"
-                                    )
+                                    navController.navigate(Screen.Collection.route)
                                 }
                             )
                         }
-
                         Box(modifier = Modifier.weight(1f)) {
                             IngredientItem(
                                 item = displayedItems[i + 1],
                                 onItemClick = {
-                                    navController.navigate(
-                                        "category/${displayedItems[i + 1].iding}/${displayedItems[i + 1].title}"
-                                    )
+                                    navController.navigate(Screen.Collection.route)
                                 }
                             )
                         }
@@ -104,9 +100,7 @@ fun IngredientList(
                             IngredientItem(
                                 item = displayedItems[i + 2],
                                 onItemClick = {
-                                    navController.navigate(
-                                        "category/${displayedItems[i + 2].iding}/${displayedItems[i + 2].title}"
-                                    )
+                                    navController.navigate(Screen.Collection.route)
                                 }
                             )
                         }

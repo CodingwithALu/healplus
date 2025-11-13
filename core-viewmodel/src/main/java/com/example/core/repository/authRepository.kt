@@ -23,6 +23,12 @@ class AuthRepository @Inject constructor(
         }
     }
 
+    suspend fun verifyEmail(): Boolean {
+        auth.currentUser?.reload()?.await()
+        return withContext(Dispatchers.IO) {
+            auth.currentUser?.isEmailVerified == true
+        }
+    }
     // verify email
     suspend fun sendEmailVerification() {
         return withContext(Dispatchers.IO) {
@@ -32,8 +38,27 @@ class AuthRepository @Inject constructor(
                 if (!user.isEmailVerified) {
                     user.sendEmailVerification().await()
                 } else {
-                    throw IllegalStateException("Người dùng chưa đăng nhập.")
+                    throw IllegalStateException("Người dùng đã được xác thực.")
                 }
+            } else {
+                throw IllegalStateException("Người dùng chưa đăng nhập.")
+            }
+        }
+    }
+    suspend fun sendVerificationEmailIfNeeded() {
+        return withContext(Dispatchers.IO) {
+            val user = auth.currentUser
+            if (user != null) {
+                try {
+                    user.reload().await()
+                    if (!user.isEmailVerified) {
+                        user.sendEmailVerification().await()
+                    }
+                } catch (e: Exception) {
+                    throw e
+                }
+            } else {
+                // nếu không có user hiện tại, không làm gì
             }
         }
     }
@@ -88,6 +113,14 @@ class AuthRepository @Inject constructor(
     // Logout
     fun signOut() {
         auth.signOut()
+    }
+    // fetch id
+    fun fetchIdAuth(): String{
+        var result = ""
+        if(auth.currentUser != null){
+            result =  auth.currentUser?.uid.toString()
+        }
+        return result
     }
 }
 

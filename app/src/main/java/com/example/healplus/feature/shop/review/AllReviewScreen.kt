@@ -1,5 +1,6 @@
 package com.example.healplus.feature.shop.review
 
+import ReviewCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.core.model.products.conten.ReviewItem
 import com.example.healplus.R
-import com.example.healplus.feature.shop.product.ReviewCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
