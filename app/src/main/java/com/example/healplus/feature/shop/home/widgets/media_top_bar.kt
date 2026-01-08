@@ -46,7 +46,8 @@ import com.skydoves.landscapist.glide.GlideImage
 fun MediumTopAppBar(
     navController: NavController,
     categories: List<CategoryModel>,
-    user: UserModel
+    user: UserModel,
+    expanded: Boolean = false
 ) {
     var expanded by remember { mutableStateOf(false) }
 //    TopAppBar(

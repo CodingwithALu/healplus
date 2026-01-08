@@ -1,5 +1,6 @@
 package com.example.core.viewmodel.apiviewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -57,7 +58,7 @@ class CollectionViewModel @Inject constructor(
                 _ingredient.value = ingredient.await() as MutableList<IngredientsModel>
                 _currentCall.value = product.await() as MutableList<ProductsModel>
             } catch (e: Exception) {
-                throw IllegalArgumentException(e.message)
+                e.message?.let { Log.d("Result", it) }
             } finally {
                 isLoading = false
             }

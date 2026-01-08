@@ -74,13 +74,8 @@ fun ProductItemCollections(items: ProductsModel) {
                     fontSize = 12.sp
                 )
             }
-            Text(
-                text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(items.unitNames.firstOrNull()?.price!!).toString(),
-                color = colorResource(R.color.purple_200),
-                maxLines = 1,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold
-            )
+            Text(text = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+                    .format(items.unitNames.firstOrNull()?.price).toString(), color = colorResource(R.color.purple_200), maxLines = 1, fontSize = 12.sp, fontWeight = FontWeight.Bold)
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.example.core.repository
 
-import com.example.core.model.Oder.OrderModel
-import com.example.core.model.api.ApiResponse
+import com.example.core.model.api.ApiRequest
+import com.example.core.model.order.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.network.apis.ApiService
 import com.example.core.network.retrofitclients.RetrofitClient
@@ -44,15 +44,13 @@ class OrderRepository(
         return result
     }
     // add OrderModel
-    suspend fun createOrder(orderModel: OrderModel, dateTime: LocalDate, items: List<ProductsModel>): ApiResponse{
-        var result = ApiResponse.empty()
-        withContext(Dispatchers.IO){
+    suspend fun createOrder(orderModel: OrderModel, dateTime: LocalDate, items: List<ProductsModel>): ApiRequest{
             val gson = Gson()
-            result = api.addOder(
+            return api.addOder(
                 orderModel.name,
                 orderModel.phone,
                 orderModel.email,
-                orderModel.userId,
+                orderModel.idauth,
                 orderModel.address,
                 dateTime,
                 orderModel.note.toString(),
@@ -61,14 +59,20 @@ class OrderRepository(
                 orderModel.status,
                 gson.toJson(items)
             )
+    }
+    // update status for order
+    suspend fun updateStatusForOrder(orderId: Int, status: String): ApiRequest{
+        var result = ApiRequest.empty()
+        withContext(Dispatchers.IO){
+            result = api.updateOrderStatus(orderId, status)
         }
         return result
     }
-    // update status for order
-    suspend fun updateStatusForOrder(orderId: Int, status: String): ApiResponse{
-        var result = ApiResponse.empty()
+    // search
+    suspend fun searchProduct(text: String): List<ProductsModel>{
+        var result = emptyList<ProductsModel>()
         withContext(Dispatchers.IO){
-            result = api.updateOrderStatus(orderId, status)
+            result = api.getSearchProduct(text)
         }
         return result
     }

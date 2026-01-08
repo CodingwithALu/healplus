@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.core.model.categories.CategoryModel
 import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.common.widgets.TAppBar
@@ -90,10 +89,10 @@ fun AddCategoryScreen(navController: NavController) {
                     Button(
                         onClick = {
                             if (title.isNotEmpty()) {
-                                val category = CategoryModel(
-                                    idc = "",
-                                    title = title
-                                )
+//                                val category = CategoryModel(
+//                                    idc = "",
+//                                    title = title
+//                                )
 //                                viewModel.createCategory(category)
                             } else {
                                 scope.launch {

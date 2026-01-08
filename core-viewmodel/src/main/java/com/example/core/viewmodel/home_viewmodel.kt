@@ -58,7 +58,6 @@ class HomeViewmodel @Inject constructor(
                     _ingredient.value = homeRepository.fetchIngredient()
                 }
             } catch (e: Exception) {
-                throw IllegalArgumentException(e.message)
             } finally {
                 isLoading = false
             }

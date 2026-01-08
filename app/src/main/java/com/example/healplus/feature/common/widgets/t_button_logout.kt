@@ -1,12 +1,18 @@
 package com.example.healplus.feature.common.widgets
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -19,15 +25,29 @@ fun TButtonLogOut(
     onClick: () -> Unit,
     @StringRes title: Int,
     ) {
-    Text(
-        text = stringResource(title),
-        fontSize = 16.sp,
-        color = Color.Black,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {onClick()}
-            .padding(top = 24.dp),
-        textAlign = TextAlign.Center
-    )
+    Box(
+        modifier = Modifier.fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color(0xFFF5F5F5))
+            .border(
+                1.dp,
+                Color(0xFFE0E0E0),
+                RoundedCornerShape(12.dp)
+            )
+            .clickable { onClick() }
+            .padding(vertical = 14.dp),
+        contentAlignment = Alignment.Center
+    ){
+        Text(
+            text = stringResource(title),
+            fontSize = 16.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+    }
+
 }

@@ -14,7 +14,7 @@
 //import com.example.core.model.ingredients.IngredientsModel
 //import com.example.core.model.products.ProductsModel
 //import com.example.core.model.users.UserModel
-//import com.example.core.viewmodel.AuthViewModel
+//import com.example.core.viewmodel.CheckoutViewModel
 //import com.example.core.viewmodel.apiviewmodel.ApiCallAdd
 //import com.example.healplus.feature.personalization.profiles.ProfileScreen
 //import com.example.healplus.feature.personalization.profiles.UpdateProfileScreen
@@ -37,7 +37,7 @@
 //import com.google.gson.Gson
 //
 //@Composable
-//fun AdminNavigation(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navController: NavHostController) {
+//fun AdminNavigation(modifier: Modifier = Modifier, authViewModel: CheckoutViewModel, navController: NavHostController) {
 //    val apiCallAdd: ApiCallAdd = viewModel()
 //    NavHost(navController = navController, startDestination = "home") {
 //        composable("home") {

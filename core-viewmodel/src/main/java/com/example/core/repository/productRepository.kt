@@ -1,5 +1,5 @@
 package com.example.core.repository
-import com.example.core.model.api.ApiResponse
+import com.example.core.model.api.ApiRequest
 import com.example.core.model.products.ProductsModel
 import com.example.core.network.apis.ApiService
 import com.example.core.network.retrofitclients.RetrofitClient
@@ -18,8 +18,8 @@ class ProductRepository(
         }
     }
     // add product
-    suspend fun addProducts(product: ProductsModel, dateTime: LocalDate): ApiResponse {
-        var result = ApiResponse.empty()
+    suspend fun addProducts(product: ProductsModel, dateTime: LocalDate): ApiRequest {
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO) {
             val gson = Gson()
             result = api.addProduct(

@@ -40,9 +40,9 @@ fun BottomAppBarr(
 ) {
     val navItems = listOf(
         BottomNavItem(Screen.Home.route, icon = null, imageRes = R.drawable.home),
-        BottomNavItem(Screen.Order.route, icon = null, imageRes = R.drawable.flash),
+        BottomNavItem(Screen.Order.route, icon = null, imageRes = R.drawable.bold),
         BottomNavItem(Screen.Collection.route, icon = null, imageRes = R.drawable.layers),
-        BottomNavItem(Screen.Favorite.route, icon = null, imageRes = R.drawable.heart)
+        BottomNavItem(Screen.Setting.route, icon = null, imageRes = R.drawable.setting)
     )
     var selectedIndex by rememberSaveable {
         mutableIntStateOf(0)

@@ -12,9 +12,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -67,7 +68,7 @@ fun WriteReviewScreen(
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            painter = painterResource(R.drawable.back),
+                            Icons.Default.ArrowBackIosNew,
                             contentDescription = stringResource(R.string.back_button_desc)
                         )
                     }
@@ -138,17 +139,11 @@ fun WriteReviewScreen(
                         )
                         viewModel.createReview(review)
                     }
+                    navController.popBackStack()
                 },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                if (true) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text(stringResource(R.string.submit_review_button))
-                }
+                Text(stringResource(R.string.submit_review_button))
             }
         }
     }

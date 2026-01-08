@@ -4,10 +4,8 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.core.model.products.ProductsModel
-import com.google.gson.Gson
 
 class ManagmentCart(val context: Context, userId: String) {
-
     private val tinyDB = TinyDB(context)
     val CartKey = "CartList-${userId}"
     fun insertFood(item: ProductsModel) {
@@ -23,12 +21,10 @@ class ManagmentCart(val context: Context, userId: String) {
         tinyDB.putListObject(CartKey, listFood)
         Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show()
     }
-
     fun getListCart(): ArrayList<ProductsModel> {
         val listCart = tinyDB.getListObject(CartKey) ?: arrayListOf()
         return listCart
     }
-
     fun minusItem(listFood: ArrayList<ProductsModel>, position: Int, listener: ChangeNumberItemsListener) {
         if (listFood[position].quantity == 1) {
             listFood[position].quantity
@@ -38,23 +34,22 @@ class ManagmentCart(val context: Context, userId: String) {
         tinyDB.putListObject(CartKey, listFood)
         listener.onChanged()
     }
-
     fun plusItem(listFood: ArrayList<ProductsModel>, position: Int, listener: ChangeNumberItemsListener) {
         if (position !in listFood.indices) return
         listFood[position].quantity++
         tinyDB.putListObject(CartKey, listFood)
         listener.onChanged()
     }
-    fun removeItemByProduct(item: ProductsModel, listener: ChangeNumberItemsListener) {
+    fun removeItemByProduct(idp: String, listener: ChangeNumberItemsListener? = null) {
         val listFood = getListCart()
-        val index = listFood.indexOfFirst { it.idp == item.idp }
+        val index = listFood.indexOfFirst { it.idp == idp }
 
         if (index != -1) {
             listFood.removeAt(index)
             tinyDB.putListObject(CartKey, listFood)
-            listener.onChanged()
+            listener?.onChanged()
         } else {
-            Log.d("ManagmentCart", "Không tìm thấy sản phẩm để xóa: ${item.name}")
+            Log.d("ManagmentCart", "Không tìm thấy sản phẩm để xóa: ${idp}")
         }
     }
     fun resetCart() {

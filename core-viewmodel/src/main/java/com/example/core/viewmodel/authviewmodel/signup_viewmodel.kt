@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.model.api.ApiResponse
+import com.example.core.model.api.ApiRequest
 import com.example.core.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +17,8 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): ViewModel(){
-    private var _result = MutableStateFlow(ApiResponse.empty())
-    val result: StateFlow<ApiResponse> = _result
+    private var _result = MutableStateFlow(ApiRequest.empty())
+    val result: StateFlow<ApiRequest> = _result
     var isLoading by mutableStateOf(false)
         private set
 

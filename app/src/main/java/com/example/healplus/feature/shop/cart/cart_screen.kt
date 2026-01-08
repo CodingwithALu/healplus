@@ -1,4 +1,5 @@
 package com.example.healplus.feature.shop.cart
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -28,6 +29,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -35,8 +37,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -51,29 +57,53 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.products.ProductsModel
 import com.example.core.tinydb.helper.ChangeNumberItemsListener
 import com.example.core.tinydb.helper.ManagmentCart
-import com.example.core.viewmodel.AuthViewModel
+import com.example.core.viewmodel.UserViewModel
 import com.example.healplus.R
+import com.example.healplus.feature.utils.route.Screen
 import com.google.gson.Gson
 import java.text.NumberFormat
 import java.util.Locale
 
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 fun CartScreen(
-    navController: NavController,
-    authViewModel: AuthViewModel = viewModel()
+    navController: NavController
 ) {
-    val userId = authViewModel.getUserId().toString()
+    val viewModel: UserViewModel = hiltViewModel()
+    val user by viewModel.user.collectAsState()
     val context = LocalContext.current
-    val managementCart = remember { ManagmentCart(context, userId) }
-    val cartItems = remember { mutableStateOf(managementCart.getListCart() ?: arrayListOf()) }
+    Log.d("CartScreen", user.id)
+    val managementCart = remember(user.id) {
+        ManagmentCart(context, user.id)
+    }
+    val cartItems = remember { mutableStateOf(managementCart.getListCart()) }
+    LaunchedEffect(managementCart) {
+        cartItems.value = managementCart.getListCart()
+    }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                cartItems.value = managementCart.getListCart()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+    // --- end changed ---
     val selectedItems = remember { mutableStateOf(mutableSetOf<ProductsModel>()) }
-    val tax = remember { mutableStateOf(0.0) }
+    val tax = remember { mutableDoubleStateOf(0.0) }
     LaunchedEffect(selectedItems.value) {
         calculatorCart(selectedItems.value.toList(), tax)
     }
@@ -87,14 +117,21 @@ fun CartScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-
             if (cartItems.value.isEmpty()) {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .height(200.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(stringResource(id = R.string.emnitys), fontSize = 18.sp, color = Color.Gray)
+                    CircularProgressIndicator()
                 }
+//                Box(
+//                    modifier = Modifier.fillMaxSize(),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Text(stringResource(id = R.string.emnitys), fontSize = 18.sp, color = Color.Gray)
+//                }
             } else {
                 LazyColumn(
                     modifier = Modifier
@@ -102,13 +139,15 @@ fun CartScreen(
                         .padding(16.dp),
                     contentPadding = PaddingValues()
                 ) {
+                    // use the latest list from state
                     items(cartItems.value) { item ->
                         CartItems(
-                            CartItems = cartItems.value,
-                            item = item,
+                            cartItems = cartItems.value,
                             selectedItems = selectedItems.value,
-                            managementCart = managementCart
+                            managementCart = managementCart,
+                            item = item
                         ) {
+                            // refresh local state after managementCart changes
                             cartItems.value = managementCart.getListCart()
                             calculatorCart(selectedItems.value.toList(), tax)
                         }
@@ -118,14 +157,14 @@ fun CartScreen(
             CartSummary(
                 itemTotal = selectedItems.value.sumOf { it.unitNames.firstOrNull()?.price!! * it.quantity },
                 quantity = selectedItems.value.sumOf { it.quantity },
-                tax = tax.value,
+                tax = tax.doubleValue,
                 onClick = { itemTotal, tax, quantity ->
                     if (itemTotal == 0) {
                         Toast.makeText(context, "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show()
                         return@CartSummary
                     }
                     val selectedProductsJson = Uri.encode(Gson().toJson(selectedItems.value.toList()))
-                    navController.navigate("order_screen/$selectedProductsJson/$itemTotal/$tax/$quantity")
+                    navController.navigate("${Screen.CheckoutScreen.route}/$selectedProductsJson/$itemTotal/$tax/$quantity")
                 }
             )
         }
@@ -145,7 +184,7 @@ fun CartTopAppBar(navController: NavController) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = {navController.navigate("home") }) {
+            IconButton(onClick = {navController.popBackStack() }) {
                 Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = null)
             }
         }
@@ -231,14 +270,14 @@ fun CartSummary(itemTotal: Int, tax: Double, quantity: Int, onClick: (Int, Doubl
 }
 
 fun calculatorCart(selectedItems: List<ProductsModel>, tax: MutableState<Double>) {
-    var percentTax = 0.02
+    val percentTax = 0.02
     val totalSelected = selectedItems.sumOf { it.unitNames.firstOrNull()?.price!! * it.quantity }
     tax.value = Math.round((totalSelected * percentTax) * 100) / 100.0
 }
 
 @Composable
 fun CartItems(
-    CartItems: ArrayList<ProductsModel>,
+    cartItems: ArrayList<ProductsModel>,
     selectedItems: MutableSet<ProductsModel>,
     item: ProductsModel,
     managementCart: ManagmentCart,
@@ -342,8 +381,8 @@ fun CartItems(
                                 .clickable {
                                     if (isSelected.value) {
                                         managementCart.plusItem(
-                                            CartItems,
-                                            CartItems.indexOf(item),
+                                            cartItems,
+                                            cartItems.indexOf(item),
                                             object : ChangeNumberItemsListener {
                                                 override fun onChanged() {
                                                     onItemChange()
@@ -375,9 +414,9 @@ fun CartItems(
                                 }
                                 .clickable {
                                     if (isSelected.value) {
-                                        val index = CartItems.indexOf(item)
+                                        val index = cartItems.indexOf(item)
                                         Log.d("CartDebug", "Index of item: $index")
-                                        managementCart.minusItem(CartItems,
+                                        managementCart.minusItem(cartItems,
                                             index,
                                             object : ChangeNumberItemsListener {
                                                 override fun onChanged() {
@@ -419,7 +458,7 @@ fun CartItems(
                 IconButton(
                     onClick = {
                         managementCart.removeItemByProduct(
-                            item,
+                            item.idp,
                             object : ChangeNumberItemsListener {
                                 override fun onChanged() {
                                     Toast.makeText(context, "Đã xóa !", Toast.LENGTH_SHORT).show()

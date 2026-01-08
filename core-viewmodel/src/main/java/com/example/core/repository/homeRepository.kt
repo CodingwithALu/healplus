@@ -1,5 +1,6 @@
 package com.example.core.repository
 
+import android.util.Log
 import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
@@ -21,14 +22,17 @@ class HomeRepository(
     }
     // fetch category
     suspend fun fetchCategory(): List<CategoryModel> {
-        return withContext(Dispatchers.IO) {
-            api.getCategories()
+        var result = emptyList<CategoryModel>()
+        withContext(Dispatchers.IO) {
+          result =  api.getCategories().result!!
+            Log.d("Result:", result.first().toString())
         }
+        return result
     }
     // fetch IngredientCount
     suspend fun fetchIngredient(): List<IngredientsModel> {
         return withContext(Dispatchers.IO){
-            api.getIngredient()
+            api.getIngredient().result!!
         }
     }
     // fetch element
@@ -40,7 +44,7 @@ class HomeRepository(
     // fetch Recommended
     suspend fun fetchRecommended(): List<ProductsModel>{
         return withContext(Dispatchers.IO){
-            api.getRecommendedProducts()
+            api.getRecommendedProducts().result!!
         }
     }
     // search products

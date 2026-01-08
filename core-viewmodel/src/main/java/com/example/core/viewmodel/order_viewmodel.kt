@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.model.Oder.OrderModel
+import com.example.core.model.order.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,9 +29,11 @@ class OrderViewModel @Inject constructor(
     private val _message = MutableStateFlow<String>("")
     val message: StateFlow<String> = _message
     private var isLoading by mutableStateOf(false)
-
+    // search
+    private val _search = MutableLiveData<MutableList<ProductsModel>>()
+    val search: LiveData<MutableList<ProductsModel>> = _search
     init {
-        fetchOrder()
+//        fetchOrder()
     }
 
     // load order
@@ -71,14 +73,17 @@ class OrderViewModel @Inject constructor(
     // create OrderModel
     fun createOrder(orderModel: OrderModel, dateTime: LocalDate, items: List<ProductsModel>) {
         viewModelScope.launch {
-            orderRepository.createOrder(
-                orderModel,
-                dateTime,
-                items
-            )
+            try {
+                orderRepository.createOrder(
+                    orderModel,
+                    dateTime,
+                    items
+                )
+            } catch (e: Exception){
+            }
+
         }
     }
-
     // update status
     fun updateStatusForOrder(orderId: Int, status: String) {
         viewModelScope.launch {
@@ -86,6 +91,15 @@ class OrderViewModel @Inject constructor(
                 orderRepository.updateStatusForOrder(orderId, status)
             }
             _message.value = result.await().message
+        }
+    }
+    // search product
+    fun searchProduct(text: String) {
+        viewModelScope.launch {
+            val result = async {
+                orderRepository.searchProduct(text)
+            }
+            _search.value = result.await() as MutableList<ProductsModel>?
         }
     }
 }

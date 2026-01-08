@@ -1,6 +1,5 @@
 package com.example.healplus.feature.shop.home.widgets
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -62,7 +61,7 @@ fun RecommendedProductItem(item: ProductsModel, navController: NavController) {
                 // encode idp before navigation to avoid truncation due to special chars
                 val encodedId = URLEncoder.encode(item.idp, StandardCharsets.UTF_8.toString())
                 navController.navigate("${Screen.Product.route}/$encodedId")
-                Log.d("Product", "Check id: ${item.idp}")
+
             },
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(

@@ -30,6 +30,9 @@ import com.example.healplus.feature.shop.home.widgets.StoreInfoScreenWidgets
 import com.example.healplus.feature.shop.home.widgets.TAppbarHome
 import com.example.healplus.feature.utils.constants.TSizes
 import com.example.healplus.feature.utils.route.Screen
+import com.google.gson.Gson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun HomeScreen(
@@ -49,11 +52,19 @@ fun HomeScreen(
                     TAppbarHome(
                         user = if (user.id.isNotEmpty()) user else UserModel.empty(),
                         onAvatarClick = {
-                            navController.navigate(Screen.Setting.route)
+                            val gson = Gson()
+                            val userJson = URLEncoder.encode(
+                                gson.toJson(user),
+                                StandardCharsets.UTF_8.toString()
+                            )
+                            navController.navigate(
+                                "${Screen.Profile.route}/$userJson"
+                            )
                         },
                         showNotification = true,
                         searchClick = {
                             navController.navigate(Screen.Search.route)
+
                         }
                     )
                 },

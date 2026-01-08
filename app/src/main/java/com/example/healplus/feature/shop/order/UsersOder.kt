@@ -2,6 +2,7 @@ package com.example.healplus.feature.shop.order
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -26,7 +28,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,7 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.core.model.Oder.OrderModel
+import com.example.core.model.order.OrderModel
 import com.example.core.viewmodel.AuthViewModel
 import com.example.core.viewmodel.OrderViewModel
 import com.example.healplus.R
@@ -53,17 +57,16 @@ fun UsersOder(navController: NavController,
               authViewModel: AuthViewModel = viewModel()){
     val viewmodel: OrderViewModel = hiltViewModel()
     val userId = authViewModel.getUserId().toString()
-//    val allOrders by viewModel.orders.observeAsState(initial = emptyList())
+    val allOrders by viewmodel.orders.observeAsState(emptyList())
     var selectedStatus by remember { mutableStateOf<String?>("Tất cả") }
-    Log.d("UsersOderDebug", "Initial userId: $userId")
-//    LaunchedEffect(selectedStatus) {
-//        Log.d("UsersOderDebug", "LaunchedEffect triggered: userId = $userId, selectedStatus = $selectedStatus")
-//        if (selectedStatus == "Tất cả"){
-//            viewModel.fet
-//        }else{
-//            viewModel.getOderByUserStatus(userId, selectedStatus.toString())
-//        }
-//    }
+    Log.d("userID","UserID: $userId")
+    LaunchedEffect(selectedStatus) {
+        if (selectedStatus == "Tất cả"){
+            viewmodel.fetchOrderFromUser(userId)
+        }else{
+            viewmodel.fetchOrderByStatusFromUser(userId, selectedStatus.toString())
+        }
+    }
     Scaffold(
         topBar = {
             UserOderManagersTopAppBar(navController)
@@ -74,7 +77,7 @@ fun UsersOder(navController: NavController,
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            val statusesToFilter = listOf("Tất cả", "Đang chờ xử lý", "Đang vận chuyển", "Đã giao hàng", "Đã hủy")
+            val statusesToFilter = listOf("Tất cả", "Đang chờ xử lý", "Đang xử lý", "Đang vận chuyển","Đã giao hàng", "Đã hủy")
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -92,28 +95,28 @@ fun UsersOder(navController: NavController,
                     )
                 }
             }
-//            if (allOrders.isEmpty()) {
-//                Box(
-//                    modifier = Modifier.fillMaxSize(),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Text("Không có đơn hàng nào.", fontSize = 18.sp, color = Color.Gray)
-//                }
-//            } else {
-//                LazyColumn(
-//                    modifier = Modifier.fillMaxSize()
-//                ) {
-//                    items(allOrders, key = { order -> order.id }) { order ->
-//                        UserOrderItemCard(navController, order)
-//                    }
-//                }
-//            }
+            if (allOrders.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Không có đơn hàng nào.", fontSize = 18.sp, color = Color.Gray)
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(allOrders, key = { order -> order.id }) { order ->
+                        UserOrderItemCard(navController, order)
+                    }
+                }
+            }
         }
     }
 }
 @Composable
 fun UserOrderItemCard(navController: NavController, orderModel: OrderModel) {
-    val status1 by remember { mutableStateOf(orderModel.status ?: "Đang chờ xử lí") }
+    val status1 by remember { mutableStateOf(orderModel.status) }
     var showProducts by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
@@ -135,7 +138,7 @@ fun UserOrderItemCard(navController: NavController, orderModel: OrderModel) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = "Tổng tiền: ${NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(orderModel.sumMoney)}", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color(0xFF4CAF50))
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Trạng thái: ${status1}", fontSize = 14.sp, color = Color.DarkGray)
+            Text(text = "Trạng thái: $status1", fontSize = 14.sp, color = Color.DarkGray)
             Spacer(modifier = Modifier.height(8.dp))
             HorizontalDivider(thickness = 0.5.dp, color = Color.LightGray)
             Row(

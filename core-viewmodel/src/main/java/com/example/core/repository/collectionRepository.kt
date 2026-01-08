@@ -1,6 +1,6 @@
 package com.example.core.repository
 
-import com.example.core.model.api.ApiResponse
+import com.example.core.model.api.ApiRequest
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
@@ -44,8 +44,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun createIngredient(ingredientsModel: IngredientsModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun createIngredient(ingredientsModel: IngredientsModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.addIngredient(
                 ingredientsModel.title,
@@ -55,8 +55,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun updateIngredient(ingredientsModel: IngredientsModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun updateIngredient(ingredientsModel: IngredientsModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.updateIngredient(
                 ingredientsModel.iding,
@@ -75,8 +75,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun createElement(quantity: Int, elementsModel: ElementsModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun createElement(quantity: Int, elementsModel: ElementsModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.addElement(
                 elementsModel.title,
@@ -87,8 +87,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun updateElement(quantity: Int, elementsModel: ElementsModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun updateElement(quantity: Int, elementsModel: ElementsModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.updateElement(
                 elementsModel.ide,
@@ -100,16 +100,16 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun deleteElement(id: String): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun deleteElement(id: String): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.deleteElement(id)
         }
         return result
     }
     // category
-    suspend fun createCategory(categoryModel: CategoryModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun createCategory(categoryModel: CategoryModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.addCategory(
                 categoryModel.title
@@ -117,8 +117,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun updateCategories(categoryModel: CategoryModel): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun updateCategories(categoryModel: CategoryModel): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.updateCategory(
                 categoryModel.idc,
@@ -127,8 +127,8 @@ class CollectionRepository(
         }
         return result
     }
-    suspend fun deleteCategory(id: String): ApiResponse{
-        var result = ApiResponse.empty()
+    suspend fun deleteCategory(id: String): ApiRequest{
+        var result = ApiRequest.empty()
         withContext(Dispatchers.IO){
             result = api.deleteCategory(id)
         }

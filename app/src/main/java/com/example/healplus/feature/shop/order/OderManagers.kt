@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.core.model.Oder.OrderModel
+import com.example.core.model.order.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.viewmodel.OrderViewModel
 import com.example.healplus.R
@@ -303,7 +303,10 @@ fun ProductOrderItem(navController: NavController, item: ProductsModel) {
         Column(modifier = Modifier.weight(1f)) {
             Text(text = item.name, fontWeight = FontWeight.Medium, fontSize = 14.sp)
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.unitNames.firstOrNull()?.price!!), fontSize = 12.sp, color = Color.DarkGray)
+            Text(text = NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(item.unitNames.firstOrNull()?.price
+            ?.toString()
+                ?.toDoubleOrNull()
+                ?: 0.0), fontSize = 12.sp, color = Color.DarkGray)
         }
     }
 }

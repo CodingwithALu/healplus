@@ -27,7 +27,7 @@
 //import androidx.navigation.compose.currentBackStackEntryAsState
 //import androidx.navigation.compose.rememberNavController
 //import com.example.core.model.bottomapp.NavItemModel
-////import com.example.core.viewmodel.authviewmodel.AuthViewModel
+////import com.example.core.viewmodel.authviewmodel.CheckoutViewModel
 //import com.example.healplus.R
 //import com.example.healplus.navigation.AdminNavigation
 //import com.example.healplus.ui.theme.AppTheme
@@ -37,7 +37,7 @@
 //class AdminActivity : BaseActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
-////        val authViewModel: AuthViewModel by viewModels()
+////        val authViewModel: CheckoutViewModel by viewModels()
 //
 //        setContent {
 //            AppTheme {
@@ -52,7 +52,7 @@
 //    }
 //}
 //@Composable
-//fun AdminMain(modifier: Modifier = Modifier, authViewModel: AuthViewModel){
+//fun AdminMain(modifier: Modifier = Modifier, authViewModel: CheckoutViewModel){
 //    val navController = rememberNavController()
 //    val navItemList = listOf(
 //        NavItemModel.DrawableResItem(route = "home", label = stringResource(id = R.string.home),

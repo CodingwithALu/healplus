@@ -3,6 +3,7 @@ package com.example.healplus.feature.shop.collections
 import ElementList
 import IngredientListCollection
 import ProductListCollections
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,13 +24,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.core.viewmodel.apiviewmodel.CollectionViewModel
-import com.example.healplus.feature.shop.collections.effects.CollectionEffects
-import com.example.healplus.feature.shop.collections.effects.ProductEffects
 import com.example.healplus.feature.shop.collections.widgets.ButtonShow
 import com.example.healplus.feature.shop.collections.widgets.CategoryTabCollection
 import com.example.healplus.feature.shop.collections.widgets.ShowTitleIngredientCollection
@@ -129,7 +130,13 @@ fun CollectionScreen(
                     if (displayState == DisplayState.INGREDIENTS_FOR_CATEGORY && ingredients.isNotEmpty()) {
                         item {
                             if (isLoading) {
-                                CollectionEffects()
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .height(200.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                }
                             } else {
                                 IngredientListCollection(
                                     ingredients = if (showMore) ingredients else ingredients.take(PREVIEW_COUNT),
@@ -160,7 +167,14 @@ fun CollectionScreen(
                                     selectedElementId = ""
                                 }
                                 if (isLoading) {
-                                    CollectionEffects()
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .height(200.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        CircularProgressIndicator()
+                                    }
                                 } else {
                                     ElementList(
                                         element = if (showMore) element else element.take(PREVIEW_COUNT),
@@ -190,7 +204,14 @@ fun CollectionScreen(
                             }
                         }
                         if (isLoading) {
-                            ProductEffects()
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .height(200.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator()
+                            }
                         } else {
                             if (product.isNotEmpty()) {
                                 ProductListCollections(

@@ -30,7 +30,7 @@ fun TAppBar(
         navigationIcon = {
             IconButton(onClick = {onClick()}) {
                 if (showBackArrow) {
-                    Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft , contentDescription = null)
+                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft , contentDescription = null)
                 }
             }
         }

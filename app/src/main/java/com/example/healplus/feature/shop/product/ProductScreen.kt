@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -45,13 +46,14 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.core.model.products.conten.UnitInfo
+import com.example.core.tinydb.helper.ManagmentCart
 import com.example.core.viewmodel.ProductViewModel
+import com.example.core.viewmodel.UserViewModel
 import com.example.healplus.R
 import com.example.healplus.feature.shop.product.widget.BottomProductBarView
 import com.example.healplus.feature.shop.product.widget.PointItem
 import com.example.healplus.feature.shop.product.widget.PriceText
 import com.example.healplus.feature.shop.product.widget.ProductTopAppBar
-import com.example.healplus.feature.shop.product.widget.RatingBar
 import com.example.healplus.feature.shop.review.ReviewsSection
 import com.example.healplus.feature.utils.constants.TSizes
 import com.example.healplus.feature.utils.route.Screen
@@ -68,18 +70,21 @@ fun ProductScreen(
     navController: NavController,
 ) {
     val viewModel: ProductViewModel = hiltViewModel()
+    val userModel: UserViewModel = hiltViewModel()
+    val user by userModel.user.collectAsState()
     val item by viewModel.product.collectAsState()
     val isLoading = viewModel.isLoading
     var selectedImageUrl by remember { mutableStateOf("") }
     var selectedUnits by remember { mutableStateOf(UnitInfo.empty()) }
-
+    val managmentCart = ManagmentCart(LocalContext.current, user.id)
+    Log.d("ProductScreen", user.id)
+    val itemCount by remember { mutableIntStateOf(managmentCart.getItemCount()) }
     // compute formatted price only when selectedUnits.price changes
     val formattedPrice = remember(selectedUnits.price) {
         NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
             .format(selectedUnits.price ?: 0)
             .toString()
     }
-
     LaunchedEffect(id) {
         // Decode the id because navigation parameter might be URL-encoded (contains # or spaces)
         val decodedId = id?.let { URLDecoder.decode(it, StandardCharsets.UTF_8.toString()) } ?: ""
@@ -107,7 +112,7 @@ fun ProductScreen(
         bottomBar = {
             BottomProductBarView(onAddCartClick = {
                 item.quantity = 1
-//                managmentCart.insertFood(item)
+                managmentCart.insertFood(item)
             }, navController)
         })
     { paddingValues ->
@@ -223,7 +228,8 @@ fun ProductScreen(
                             )
                         },
                         onWriteReviewClick = {
-                            navController.navigate("${Screen.WriteReview.route}/${URLEncoder.encode(item.idp ?: "", StandardCharsets.UTF_8.toString())}")
+                            val encodedId = URLEncoder.encode(item.idp, StandardCharsets.UTF_8.toString())
+                            navController.navigate("${Screen.WriteReview.route}/${encodedId}")
                             Log.d("Review", "check id: ${item.idp}")
                         },
                         modifier = Modifier.fillMaxWidth()

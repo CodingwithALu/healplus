@@ -14,7 +14,7 @@ fun TSectionTitle(@StringRes title: Int) {
     Text(
         text = stringResource(id = title),
         fontSize = 20.sp,
-        color = Color.Gray,
-        modifier = Modifier.padding(start = 16.dp, top = 16.dp, bottom = 8.dp)
+        color = Color.Black,
+        modifier = Modifier.padding(start = 16.dp, top = 16.dp)
     )
 }

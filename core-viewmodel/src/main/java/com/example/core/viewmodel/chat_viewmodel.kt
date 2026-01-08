@@ -32,7 +32,7 @@ class AuthViewModel : ViewModel() {
     private var adminChatRooms: List<String> = emptyList()
 
     init {
-//        checkAuthSate()
+        checkAuthSate()
     }
 
     init {
@@ -195,10 +195,10 @@ class AuthViewModel : ViewModel() {
                     .addOnSuccessListener {
                     }
                     .addOnFailureListener { e ->
-                        Log.e("AuthViewModel", "Error sending message to room $roomId", e)
+                        Log.e("CheckoutViewModel", "Error sending message to room $roomId", e)
                     }
             } catch (e: Exception) {
-                Log.e("AuthViewModel", "An unexpected error occurred while sending message", e)
+                Log.e("CheckoutViewModel", "An unexpected error occurred while sending message", e)
             }
         }
     }
@@ -312,11 +312,11 @@ class AuthViewModel : ViewModel() {
     fun getCurrentUser() {
         val userId = auth.currentUser?.uid
         if (userId == null) {
-            Log.d("AuthViewModel", "Không có người dùng nào đang đăng nhập")
+            Log.d("CheckoutViewModel", "Không có người dùng nào đang đăng nhập")
             _user.value = null
             return
         }
-        Log.d("AuthViewModel", "Đang lấy thông tin người dùng với ID: $userId")
+        Log.d("CheckoutViewModel", "Đang lấy thông tin người dùng với ID: $userId")
         db.collection("users").document(userId)
             .get()
             .addOnSuccessListener { document ->
@@ -357,7 +357,7 @@ class AuthViewModel : ViewModel() {
                         .setDisplayName(name)
                         .build()
                     user.updateProfile(profileUpdates).await()
-                    Log.d("AuthViewModel", "Đã cập nhật profile Auth thành công.")
+                    Log.d("CheckoutViewModel", "Đã cập nhật profile Auth thành công.")
                 }
                 val updates = mutableMapOf<String, Any>()
                 if (name != null) updates["name"] = name
@@ -370,7 +370,7 @@ class AuthViewModel : ViewModel() {
                     db.collection("users").document(user.uid)
                         .update(updates)
                         .await()
-                    Log.d("AuthViewModel", "Đã cập nhật dữ liệu Firestore thành công.")
+                    Log.d("CheckoutViewModel", "Đã cập nhật dữ liệu Firestore thành công.")
                 }
                 _authState.value = AuthSate.User
                 getCurrentUser()

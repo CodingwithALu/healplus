@@ -145,8 +145,8 @@ fun DonutChart(data: List<ElementsModel>, colors: List<Color> = emptyList()) {
 
             for (i in data.indices) {
                 val item = data[i]
-                val sweep = 360f * item.percentage / 100f
-
+                val sweep = 360f  / 100f
+                // * item.percentage
                 drawArc(
                     color = colors[i],
                     startAngle = startAngle,
@@ -161,7 +161,8 @@ fun DonutChart(data: List<ElementsModel>, colors: List<Color> = emptyList()) {
                 val labelY = center.y + labelRadius * Math.sin(labelAngle)
 
                 drawContext.canvas.nativeCanvas.drawText(
-                    "${item.percentage}%",
+                    "${30}%",
+                    //percentage
                     labelX.toFloat(),
                     labelY.toFloat(),
                     Paint().apply {
@@ -272,7 +273,8 @@ fun ProductCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = data.title, fontWeight = FontWeight.Bold)
                 Text(text = "Số lượng: ${data.quantity}")
-                Text(text = "${data.percentage.toString()}%", color = Color.Gray)
+                Text(text = "${30}%", color = Color.Gray)
+                //data.percentage.toString()
             }
 
             IconButton(onClick = onEdit) {

@@ -1,11 +1,12 @@
 package com.example.core.network.apis
 
-import com.example.core.model.Oder.OrderModel
+import com.example.core.model.api.ApiRequest
 import com.example.core.model.api.ApiResponse
 import com.example.core.model.banners.BannersModel
 import com.example.core.model.categories.CategoryModel
 import com.example.core.model.elements.ElementsModel
 import com.example.core.model.ingredients.IngredientsModel
+import com.example.core.model.order.OrderModel
 import com.example.core.model.products.ProductsModel
 import com.example.core.model.revenue.RevenueResponse
 import com.example.core.model.users.UserModel
@@ -22,17 +23,17 @@ interface ApiService {
     @GET("get_ingredient_count.php")
     suspend fun getIngredientCount(): List<IngredientsModel>
 
-    @GET("fetchBanner.php")
+    @GET("client/fetchBanner.php")
     suspend fun getBanners(): List<BannersModel>
 
-    @GET("getIngredient.php")
-    suspend fun getIngredient(): List<IngredientsModel>
+    @GET("client/fetchIngredient.php")
+    suspend fun getIngredient(): ApiResponse<List<IngredientsModel>>
 
-    @GET("get_product_showRecomment.php")
-    suspend fun getRecommendedProducts(): List<ProductsModel>
+    @GET("client/get_product_showRecomment.php")
+    suspend fun getRecommendedProducts(): ApiResponse<List<ProductsModel>>
 
-    @GET("fetchCategory.php")
-    suspend fun getCategories(): List<CategoryModel>
+    @GET("client/fetchCategory.php")
+    suspend fun getCategories(): ApiResponse<List<CategoryModel>>
 
     @GET("fetchElement.php")
     suspend fun getElement(): List<ElementsModel>
@@ -72,13 +73,24 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ): ApiResponse
+    ): ApiRequest
+    @FormUrlEncoded
+    @POST("update_user.php")
+    suspend fun updateUser(
+        @Field("idauth") id: String,
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("gender") gender: String?,
+        @Field("phone") phone: String?,
+        @Field("url") url: String?,
+        @Field("dateBirth") dateBirth: String?,
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("add_category.php")
     suspend fun addCategory(
         @Field("title") title: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("add_ingrident.php")
@@ -86,7 +98,7 @@ interface ApiService {
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("idc") idc: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("add_element.php")
@@ -95,20 +107,20 @@ interface ApiService {
         @Field("url") url: String,
         @Field("quantity") quantity: String,
         @Field("iding") iding: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_category.php")
     suspend fun updateCategory(
         @Field("idc") idc: String,
         @Field("title") title: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_review.php")
     suspend fun updateReview(
         @Field("idp") idc: String,
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_ingredient.php")
@@ -117,7 +129,7 @@ interface ApiService {
         @Field("title") title: String,
         @Field("url") url: String,
         @Field("idc") idc: String,
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_element.php")
@@ -127,25 +139,25 @@ interface ApiService {
         @Field("url") url: String,
         @Field("quantity") quantity: String,
         @Field("iding") iding: String,
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("delete_category.php")
     suspend fun deleteCategory(
         @Field("idc") idc: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("deldelete_ingredient.php")
     suspend fun deleteIngnredient(
         @Field("iding") iding: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_element.php")
     suspend fun deleteElement(
         @Field("ide") ide: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("oder.php")
@@ -161,11 +173,11 @@ interface ApiService {
         @Field("sumMoney") sumMoney: Float,
         @Field("status") status: String,
         @Field("detail") detail: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("create_review.php")
-    suspend fun createReview(@FieldMap fields: Map<String, @JvmSuppressWildcards Any?>): ApiResponse
+    suspend fun createReview(@FieldMap fields: Map<String, @JvmSuppressWildcards Any?>): ApiRequest
     @FormUrlEncoded
     @POST("update_user.php")
     suspend fun upDateUser(
@@ -176,14 +188,14 @@ interface ApiService {
         @Field("url") url: String,
         @Field("dateBirth") dateBirth: String,
         @Field("idauth") idauth: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_idauth.php")
     suspend fun upDateIdAuth(
         @Field("email") email: String,
         @Field("idauth") idauth: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("add_product.php")
@@ -210,14 +222,14 @@ interface ApiService {
         @Field("productImages") productImages: String,
         @Field("thanhphan") thanhphan: String,
         @Field("unitNames") unitNames: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("update_oder_status.php")
     suspend fun updateOrderStatus(
         @Field("id") orderId: Int,
         @Field("status") status: String
-    ): ApiResponse
+    ): ApiRequest
 
     @FormUrlEncoded
     @POST("get_oder_by_status.php")

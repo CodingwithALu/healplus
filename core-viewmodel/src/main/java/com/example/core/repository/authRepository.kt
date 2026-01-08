@@ -1,6 +1,6 @@
 package com.example.core.repository
 
-import com.example.core.model.api.ApiResponse
+import com.example.core.model.api.ApiRequest
 import com.example.core.model.users.UserModel
 import com.example.core.network.apis.ApiService
 import com.example.core.network.retrofitclients.RetrofitClient
@@ -64,7 +64,7 @@ class AuthRepository @Inject constructor(
     }
 
     // SignUp
-    suspend fun createUser(name: String, email: String, password: String): ApiResponse {
+    suspend fun createUser(name: String, email: String, password: String): ApiRequest {
         return withContext(Dispatchers.IO) {
             try {
                 val creteAuth = auth.createUserWithEmailAndPassword(email, password).await()
@@ -84,12 +84,12 @@ class AuthRepository @Inject constructor(
                     throw Exception("Failed to create user in database: ${dbResult.message}")
                 }
             } catch (e: Exception) {
-                ApiResponse(false, e.message ?: "Unknown error")
+                ApiRequest(false, e.message ?: "Unknown error")
             }
         }
     }
 
-    suspend fun createUserForDataBase(userModel: UserModel): ApiResponse {
+    suspend fun createUserForDataBase(userModel: UserModel): ApiRequest {
         return withContext(Dispatchers.IO) {
             api.createUser(
                 userModel.id,
@@ -121,6 +121,19 @@ class AuthRepository @Inject constructor(
             result =  auth.currentUser?.uid.toString()
         }
         return result
+    }
+    suspend fun updateUserForDataBase(userModel: UserModel): ApiRequest {
+        return withContext(Dispatchers.IO) {
+            api.updateUser(
+                userModel.id,
+                userModel.name,
+                userModel.email,
+                userModel.gender,
+                userModel.phone,
+                userModel.url,
+                userModel.dateBirth
+            )
+        }
     }
 }
 

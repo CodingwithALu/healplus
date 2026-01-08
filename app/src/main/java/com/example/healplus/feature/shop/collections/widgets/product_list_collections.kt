@@ -1,4 +1,4 @@
-import android.net.Uri
+
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -32,7 +32,8 @@ import com.example.healplus.ui.theme.onTertiaryLightHighContrast
 import com.example.healplus.ui.theme.primaryDark
 import com.example.healplus.ui.theme.surfaceBrightLight
 import com.google.accompanist.flowlayout.FlowRow
-import com.google.gson.Gson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import kotlin.random.Random
 
 @Composable
@@ -81,13 +82,8 @@ fun ProductListCollections(
                         )
                         .clip(RoundedCornerShape(12.dp))
                         .clickable {
-                            navController.navigate(
-                                "${Screen.Product.route}/${
-                                    Uri.encode(
-                                        Gson().toJson(productItem)
-                                    )
-                                }"
-                            )
+                            val encodedId = URLEncoder.encode(productItem.idp, StandardCharsets.UTF_8.toString())
+                            navController.navigate("${Screen.Product.route}/$encodedId")
                         },
                 ) {
                     ProductItemCollections(productItem)

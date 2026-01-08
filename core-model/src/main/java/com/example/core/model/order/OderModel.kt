@@ -1,10 +1,10 @@
-package com.example.core.model.Oder
+package com.example.core.model.order
 
 import com.example.core.model.products.ProductsModel
 
 data class OrderModel(
-    val id: Int,
-    val userId: String,
+    val id: Int = 0,
+    val idauth: String,
     val name: String,
     val email: String,
     val address: String,
@@ -14,12 +14,12 @@ data class OrderModel(
     val sumMoney: Float,
     val note: String ?= null,
     val status: String,
-    val items: List<ProductsModel>
+    val items: List<ProductsModel> = listOf(ProductsModel.empty())
 ) {
     companion object{
         fun empty() = OrderModel(
             id = 0,
-            userId = "",
+            idauth = "",
             name = "",
             email = "",
             address = "",
@@ -37,7 +37,7 @@ data class OrderModel(
     fun toJsonMap(): Map<String, Any?> {
         return mapOf(
             "id" to id,
-            "userId" to userId,
+            "userId" to idauth,
             "name" to name,
             "email" to email,
             "address" to address,

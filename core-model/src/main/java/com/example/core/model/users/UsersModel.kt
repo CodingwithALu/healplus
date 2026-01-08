@@ -2,12 +2,12 @@ package com.example.core.model.users
 data class UserModel(
     var id: String,
     var name: String,
-    var email: String,
-    val phone: String? = null,
+    var email: String = "",
+    val phone: String? = "",
     var password: String,
-    var gender: String? = null,
-    var dateBirth: String? = null,
-    var url: String? = null,
+    var gender: String? = "",
+    var dateBirth: String? = "null",
+    var url: String? = "null",
     var spot: Int = 0,
     var token: String? = null,
     val role: String = " "

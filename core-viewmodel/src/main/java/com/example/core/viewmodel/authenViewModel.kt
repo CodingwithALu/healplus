@@ -15,17 +15,30 @@ import javax.inject.Inject
 class AuthViewModel1 @Inject constructor(
     private val networkManager: NetworkManager,
     private val authRepository: AuthRepository,
-    private val appLoginRepository: AppLoginRepository
+    private val appLoginRepository: AppLoginRepository,
 ) : ViewModel() {
-    private val _appLogin = MutableStateFlow<Boolean>(false)
+
+    private val _appLogin = MutableStateFlow(false)
     val appLogin: StateFlow<Boolean> = _appLogin
+
+    private val _isUpdating = MutableStateFlow(false)
+    val isUpdating: StateFlow<Boolean> = _isUpdating
+
+    private val _updateMessage = MutableStateFlow<String?>(null)
+    val updateMessage: StateFlow<String?> = _updateMessage
+
     init {
         loadAppLogin()
     }
-    fun loadAppLogin(){
+
+    fun loadAppLogin() {
         viewModelScope.launch {
             _appLogin.value = appLoginRepository.appLogin()
         }
+    }
+
+    fun consumeUpdateMessage() {
+        _updateMessage.value = null
     }
 
     fun logout() {
@@ -37,4 +50,5 @@ class AuthViewModel1 @Inject constructor(
             }
         }
     }
+
 }
